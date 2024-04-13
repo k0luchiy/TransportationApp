@@ -22,8 +22,6 @@ qt_add_qml_module(TransportationApp
     QML_FILES Main.qml
 )
 
-message("Main cmake")
-
 add_subdirectory(qml)
 add_subdirectory(src)
 add_subdirectory(tests)

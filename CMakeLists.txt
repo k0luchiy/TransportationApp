@@ -4,7 +4,11 @@ project(TransportationApp VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Test)
+#find_package(QT NAMES Qt5 Qt6 CONFIG REQUIRED COMPONENTS Quick Sql Test)
+#find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Quick Sql Test)
+
+enable_testing(true)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -18,9 +22,11 @@ qt_add_qml_module(TransportationApp
     QML_FILES Main.qml
 )
 
+message("Main cmake")
 
 add_subdirectory(qml)
 add_subdirectory(src)
+add_subdirectory(tests)
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -35,10 +41,11 @@ set_target_properties(TransportationApp PROPERTIES
 )
 
 target_link_libraries(TransportationApp
-    PRIVATE databaseLib
-    PRIVATE userModels
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Sql
+    PRIVATE Qt::Test
+    PRIVATE databaseLib
+    PRIVATE userModels
 )
 
 include(GNUInstallDirs)

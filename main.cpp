@@ -1,5 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "database.h"
+#include "usermodel.h"
+#include <QDebug>
+#include <QSqlDatabase>
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +15,20 @@ int main(int argc, char *argv[])
         &app, []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
     engine.loadFromModule("TransportationApp", "Main");
+
+    //Database* db = new Database();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");//new Database();
+    //db->addDatabase("QODBC");
+    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
+    //db->setConnectionString();
+    db.open();
+    if(!db.isOpen()){
+        qDebug() << "Db is not opened!\n";
+        //return 0;
+    }
+    UserModel userModel;
+    qDebug() << userModel.record(0);
+    qDebug() << userModel.record(0).value("UserId").toInt();
 
     return app.exec();
 }

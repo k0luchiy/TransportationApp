@@ -5,8 +5,6 @@ project(TransportationApp VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Test)
-#find_package(QT NAMES Qt5 Qt6 CONFIG REQUIRED COMPONENTS Quick Sql Test)
-#find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Quick Sql Test)
 
 enable_testing(true)
 
@@ -35,7 +33,7 @@ set_target_properties(TransportationApp PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
+    #WIN32_EXECUTABLE TRUE # to show console
 )
 
 target_link_libraries(TransportationApp

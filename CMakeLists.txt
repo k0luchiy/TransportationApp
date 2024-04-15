@@ -18,12 +18,19 @@ qt_add_qml_module(TransportationApp
     URI TransportationApp
     VERSION 1.0
     QML_FILES Main.qml
+    RESOURCES docs/config/Doxyfile
 )
 
 add_subdirectory(qml)
 add_subdirectory(src)
 add_subdirectory(tests)
+add_subdirectory(docs)
 
+
+
+#list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+#include(Doxygen)
+#Doxygen(src "docs/html")
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -40,7 +47,6 @@ target_link_libraries(TransportationApp
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Sql
     PRIVATE Qt::Test
-    PRIVATE databaseLib
     PRIVATE userModels
 )
 

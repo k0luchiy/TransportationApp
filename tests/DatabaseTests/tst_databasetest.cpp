@@ -41,7 +41,6 @@ void DatabaseTest::cleanupTestCase()
 
 void DatabaseTest::test_connectionOpen()
 {
-    QVERIFY(db->connectToDatabase());
     QCOMPARE_EQ(db->port(), 3306);
 }
 

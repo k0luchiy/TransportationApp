@@ -1,7 +1,7 @@
-qt_add_library(userModels STATIC
-    usermodel.cpp
-    usermodel.h
+qt_add_library(userModels SHARED
+    usermodel.cpp usermodel.h
     user.h user.cpp
+    rolesmodel.h rolesmodel.cpp
 )
 
 

@@ -7,76 +7,17 @@
 
 #include "usermodel.h"
 
+
 //! Query to database for selecting all user information.
 const char* UserModel::SELECT_QUERY =
-    " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle, ur.RolePriority  "
+    " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle  "
     " from Users u  "
     " join UserRoles ur on u.roleId = ur.roleId ";
 
-UserModel::UserModel(QObject *parent)
-    : QSqlQueryModel{parent}
+UserModel::UserModel(QObject* parent)
+    : AbstractSqlQueryModel{SELECT_QUERY, parent}
 {
-    setQuery(SELECT_QUERY);
-}
 
-//! Getter for role names
-QHash<int, QByteArray> UserModel::roleNames() const
-{
-    return m_roleNames;
-}
-
-//! Generates role names from record columns
-void UserModel::generateRoleNames()
-{
-    m_roleNames.clear();
-    QSqlRecord empty_record = record(); // gets empty record with fields information
-    for(size_t i=0; i < empty_record.count(); ++i){
-        m_roleNames.insert(Qt::UserRole + i +1, empty_record.fieldName(i).toUtf8());
-    }
-}
-
-//! Sets given query to model
-void UserModel::setQuery(const QString& query, const QSqlDatabase& db)
-{
-    QSqlQueryModel::setQuery(query, db);
-    generateRoleNames();
-}
-
-//! Sets given query to model
-void UserModel::setQuery(QString&& query)
-{
-    QSqlQueryModel::setQuery(std::move(query));
-    generateRoleNames();
-}
-
-/*! \brief Returns the value for the specified index and role.
- *  If item is out of bounds or if an error occurred, an invalid QVariant is returned.
- *
- *  @param index Index of a record row
- *  @param role Role name to get value from. Simply column index.
- *  @return Returns value of a specified row and column or empty QVariant on error.
- */
-QVariant UserModel::data(const QModelIndex& index, int role) const
-{
-    QVariant value;
-    if(role < Qt::UserRole){
-        value = QSqlQueryModel::data(index, role);
-        return value;
-    }
-
-    int columnInd = role - Qt::UserRole - 1;
-    QModelIndex modelIndex = this->index(index.row(), columnInd);
-    value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
-
-    return value;
-}
-
-/*!
- * \brief Updates data in the model by running setted query.
- */
-void UserModel::updateModel()
-{
-    setQuery(SELECT_QUERY);
 }
 
 
@@ -88,7 +29,7 @@ void UserModel::updateModel()
 bool UserModel::isUserExist(const QString &email) const
 {
     const QString find_query =
-        " select UserId form Users u "
+        " select UserId from Users u "
         " where u.email = :email; ";
     QSqlQuery query;
     query.prepare(find_query);

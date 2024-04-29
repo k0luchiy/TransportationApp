@@ -30,4 +30,4 @@
 
 add_executable(DatabaseTest tst_databasetest.cpp)
 add_test(NAME DatabaseTest COMMAND DatabaseTest)
-target_link_libraries(DatabaseTest PRIVATE Qt::Test PRIVATE databaseLib PRIVATE Qt6::Sql)
+target_link_libraries(DatabaseTest PRIVATE Qt::Test PRIVATE Qt6::Sql)

@@ -4,6 +4,7 @@ qt_add_library(
     usermodel.h usermodel.cpp
     rolesmodel.h rolesmodel.cpp
     drivermodel.h drivermodel.cpp
+    carsmodel.h carsmodel.cpp
 )
 
 

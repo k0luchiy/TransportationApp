@@ -8,7 +8,7 @@
 #include "usermodel.h"
 
 
-//! Query to database for selecting all user information.
+//! Query whitch AbstractSqlQueryModel will execute for selecting all user information.
 const char* UserModel::SELECT_QUERY =
     " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle  "
     " from Users u  "

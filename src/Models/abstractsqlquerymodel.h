@@ -39,6 +39,11 @@ public:
     virtual void updateModel();
     virtual void generateRoleNames();
 
+public Q_SLOTS:
+    QSqlRecord getRecordByRowNum(quint64 rowNum) const;
+    QModelIndex getIndexByValue(quint64 colunbIndex, const QVariant& value) const ;
+    QSqlRecord getRecordByValue(quint64 colunbIndex, const QVariant& value) const;
+
 private:
     QString m_select_query;        //!< Query to database for selecting all user information.
     QHash<int, QByteArray> m_roleNames;

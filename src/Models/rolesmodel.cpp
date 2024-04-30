@@ -7,7 +7,7 @@
 
 #include "rolesmodel.h"
 
-//! Query to database for selecting all user information.
+//! Query whitch AbstractSqlQueryModel will execute for selecting all roles information.
 const char* RolesModel::SELECT_QUERY =
     " SELECT ur.RoleId, ur.RoleTitle, ur.RolePriority  "
     " from UserRoles ur  "

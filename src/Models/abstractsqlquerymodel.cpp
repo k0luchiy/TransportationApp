@@ -76,6 +76,48 @@ void AbstractSqlQueryModel::updateModel()
     setQuery(get_query());
 }
 
+/*!
+ * \brief Returns record by specified id.
+ * \param rowNum Record id
+ * \return  Record from model or empty record.
+ */
+QSqlRecord AbstractSqlQueryModel::getRecordByRowNum(quint64 rowNum) const
+{
+    if(rowNum < 0 || rowNum >= rowCount()){
+        return QSqlRecord();//record();
+    }
+    return record(rowNum);
+}
 
+/*!
+ * \brief Gets record index of specified value and column index.
+ * \param columnIndex Index of a column in a model in witch value will be searched.
+ * \param value Value to find in a model.
+ * \return Index of record with specified value or empty index on error.
+ */
+QModelIndex AbstractSqlQueryModel::getIndexByValue(quint64 columnIndex, const QVariant& value) const {
+    QModelIndex startIndex = this->index(0, columnIndex);
+    QModelIndexList indexes = this->match(startIndex, columnIndex, value);
+    if(indexes.empty()){
+        return QModelIndex();
+    }
 
+    return indexes.at(0);
+}
+
+/*!
+ * \brief Gets record of specified value and column index.
+ * \param columnIndex Index of a column in a model in witch value will be searched.
+ * \param value Value to find in a model.
+ * \return Record with specified value or empty record otherwise.
+ */
+QSqlRecord AbstractSqlQueryModel::getRecordByValue(quint64 columnIndex, const QVariant& value) const
+{
+    QModelIndex rowInd = getIndexByValue(columnIndex, value);
+    if(!rowInd.isValid()){
+        return QSqlRecord();
+    }
+
+    return this->record(rowInd.row());
+}
 

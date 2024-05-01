@@ -11,6 +11,9 @@
 #include "rolesmodel.h"
 #include "drivermodel.h"
 #include "carsmodel.h"
+#include "ordersmodel.h"
+#include "orderstatusmodel.h"
+#include "drivingcategoriesmodel.h"
 
 class ModelsTest : public QObject
 {
@@ -37,8 +40,8 @@ private slots:
     void test_modelData();
     void test_getRecordByRowNum();
     //void test_getRecordByRowNum_data();
-    void test_getRecordByValue();
-    void test_getRecordByValue_data();
+    void test_findRecord();
+    void test_getValue();
 };
 
 ModelsTest::ModelsTest()
@@ -65,12 +68,18 @@ void ModelsTest::fill_models()
     RolesModel* rolesModel = new RolesModel();
     DriverModel* driverModel = new DriverModel();
     CarsModel* carsModel = new CarsModel();
+    OrdersModel* ordersModel = new OrdersModel();
+    DrivingCategoriesModel* drivingCategoriesModel = new DrivingCategoriesModel();
+    OrderStatusModel* statusModel = new OrderStatusModel();
 
 
     models->push_back(userModel);
     models->push_back(rolesModel);
     models->push_back(driverModel);
     models->push_back(carsModel);
+    models->push_back(ordersModel);
+    models->push_back(drivingCategoriesModel);
+    models->push_back(statusModel);
 }
 
 void ModelsTest::initTestCase_data()
@@ -81,10 +90,11 @@ void ModelsTest::initTestCase_data()
 
     qDebug() << "Data";
     QTest::addColumn<AbstractSqlQueryModel*>("model");
+    QTest::addColumn<quint64>("index");
 
     for(size_t i=0; i<models->size(); ++i){
         AbstractSqlQueryModel* model = models->at(i);
-        QTest::newRow(typeid(*model).name()) << model;
+        QTest::newRow(typeid(*model).name()) << model << i;
     }
 }
 
@@ -143,28 +153,43 @@ void ModelsTest::test_getRecordByRowNum()
     QCOMPARE_EQ(model->getRecordByRowNum(model->rowCount() + 1), QSqlRecord());
 }
 
-void ModelsTest::test_getRecordByValue_data()
-{
-    QTest::addColumn<int>("columnIndex");
-    QTest::addColumn<QVariant>("value");
-    QTest::addColumn<QVariant>("expected");
-
-    QTest::addRow("FirstValue") << 0 << QVariant{1} << QVariant{1};
-    QTest::addRow("NonExistingValue") << 0 << QVariant{9999} << QVariant{};
-    QTest::addRow("OutOfRange") << 9999 <<  QVariant{1} << QVariant{};
-}
-
-void ModelsTest::test_getRecordByValue()
+void ModelsTest::test_findRecord()
 {
     QFETCH_GLOBAL(AbstractSqlQueryModel*, model);
-    QFETCH(int, columnIndex);
-    QFETCH(QVariant, value);
-    QFETCH(QVariant, expected);
 
-    QVariant res_value = model->getRecordByValue(columnIndex, value).value(columnIndex);
-    QCOMPARE_EQ(res_value, expected);
-    //QCOMPARE_EQ(model->getRecordByRowNum(0, value), 0);
+    QString fieldName = model->record().fieldName(0);
+    QVariant value = model->record(0).value(0);
 
+    QCOMPARE_NE(model->rowCount(), 0);
+    QCOMPARE_NE(fieldName, "");
+    QVERIFY(value.isValid());
+
+    QSqlRecord record = model->findRecord(fieldName, value);
+    QVariant res_value = record.value(fieldName);
+    QCOMPARE_EQ(res_value, value);
+
+    record = model->findRecord("NonExistingField", value);
+    QVERIFY(record.isEmpty());
+
+    record = model->findRecord(fieldName, "NonExistingValue");
+    QVERIFY(record.isEmpty());
+}
+
+void ModelsTest::test_getValue()
+{
+    QFETCH_GLOBAL(AbstractSqlQueryModel*, model);
+
+    quint64 recordId = 0;
+    QString fieldName = model->record().fieldName(0);
+    QVariant value = model->record(recordId).value(fieldName);
+
+    QCOMPARE_NE(model->rowCount(), 0);
+    QCOMPARE_NE(fieldName, "");
+    QVERIFY(value.isValid());
+
+    QCOMPARE_EQ(model->getValue(recordId, fieldName), value);
+    QVERIFY(!model->getValue(recordId, "NonExistingField").isValid());
+    QVERIFY(!model->getValue(model->rowCount()+1, fieldName).isValid());
 }
 
 QTEST_APPLESS_MAIN(ModelsTest)

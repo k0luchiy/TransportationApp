@@ -47,7 +47,9 @@ target_link_libraries(TransportationApp
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Sql
     PRIVATE Qt::Test
-    PRIVATE userModels
+    #PRIVATE UserModelsLib
+    PRIVATE ModelsLib
+    PRIVATE FilterModelsLib
 )
 
 include(GNUInstallDirs)

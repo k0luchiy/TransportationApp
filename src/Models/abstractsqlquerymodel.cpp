@@ -95,8 +95,14 @@ QSqlRecord AbstractSqlQueryModel::getRecordByRowNum(quint64 rowNum) const
  * \param value Value to find in a model.
  * \return Index of record with specified value or empty index on error.
  */
-QModelIndex AbstractSqlQueryModel::getIndexByValue(quint64 columnIndex, const QVariant& value) const {
+QModelIndex AbstractSqlQueryModel::findIndex(const QString& fieldName, const QVariant& value) const {
+    int columnIndex = this->record().indexOf(fieldName);
+    if(columnIndex==-1){
+        return QModelIndex();
+    }
+
     QModelIndex startIndex = this->index(0, columnIndex);
+
     QModelIndexList indexes = this->match(startIndex, columnIndex, value);
     if(indexes.empty()){
         return QModelIndex();
@@ -111,13 +117,24 @@ QModelIndex AbstractSqlQueryModel::getIndexByValue(quint64 columnIndex, const QV
  * \param value Value to find in a model.
  * \return Record with specified value or empty record otherwise.
  */
-QSqlRecord AbstractSqlQueryModel::getRecordByValue(quint64 columnIndex, const QVariant& value) const
+QSqlRecord AbstractSqlQueryModel::findRecord(const QString& fieldName, const QVariant& value) const
 {
-    QModelIndex rowInd = getIndexByValue(columnIndex, value);
+    QModelIndex rowInd = findIndex(fieldName, value);
     if(!rowInd.isValid()){
         return QSqlRecord();
     }
 
     return this->record(rowInd.row());
+}
+
+/*!
+ * \brief Gets value by record id and fieldName.
+ * \param recordId Id of record in model to get data from.
+ * \param fieldName Field name to get data from.
+ * \return Returns value in record or QVariant(Invalid) on error.
+ */
+QVariant AbstractSqlQueryModel::getValue(quint64 recordId, const QString& fieldName) const
+{
+    return record(recordId).value(fieldName);
 }
 

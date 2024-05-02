@@ -5,6 +5,9 @@ qt_add_library(
     rolesmodel.h rolesmodel.cpp
     drivermodel.h drivermodel.cpp
     carsmodel.h carsmodel.cpp
+    orderstatusmodel.h orderstatusmodel.cpp
+    drivingcategoriesmodel.h drivingcategoriesmodel.cpp
+    ordersmodel.h ordersmodel.cpp
 )
 
 

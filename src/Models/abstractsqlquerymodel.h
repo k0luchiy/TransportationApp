@@ -41,8 +41,9 @@ public:
 
 public Q_SLOTS:
     QSqlRecord getRecordByRowNum(quint64 rowNum) const;
-    QModelIndex getIndexByValue(quint64 colunbIndex, const QVariant& value) const ;
-    QSqlRecord getRecordByValue(quint64 colunbIndex, const QVariant& value) const;
+    QModelIndex findIndex(const QString& fieldName, const QVariant& value) const;
+    QSqlRecord findRecord(const QString& fieldName, const QVariant& value) const;
+    QVariant getValue(quint64 recordId, const QString& fieldName) const;
 
 private:
     QString m_select_query;        //!< Query to database for selecting all user information.

@@ -7,13 +7,16 @@
 
 #include "carsmodel.h"
 
+
+//! Query whitch AbstractSqlQueryModel will execute for selecting all user information.
 const char* CarsModel::SELECT_QUERY =
     "select \
         c.CarId, c.CarType, c.CarModel, \
-        c.CarNumber, c.DrivingCategory, \
+        c.CarNumber, c.DrivingCategory, dc.CategoryPriority, \
         c.VolumeCapacity, c.Weightcapacity, \
         c.LastInspection, c.ReleaseYear \
-    from Cars c";
+    from Cars c \
+    join DrivingCategories dc on c.DrivingCategory = dc.CategoryName ";
 
 
 CarsModel::CarsModel(QObject *parent)

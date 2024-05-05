@@ -5,6 +5,10 @@ project(TransportationApp VERSION 0.1 LANGUAGES CXX)
 #set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Test)
 
 enable_testing(true)
@@ -23,6 +27,7 @@ qt_add_qml_module(TransportationApp
     QML_FILES Main.qml
     RESOURCE_PREFIX /TransportationApp.com/qml
     RESOURCES docs/config/Doxyfile
+    RESOURCES qrc.qrc
 )
 
 add_subdirectory(qml)

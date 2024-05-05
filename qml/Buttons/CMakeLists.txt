@@ -22,6 +22,9 @@ qt_add_qml_module(
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES Button.qml
     QML_FILES ${MODULE_QML_FILES}
+    QML_FILES PrimaryButton.qml
+    QML_FILES SecondaryButton.qml
+    QML_FILES IconButton.qml
 )
 
 

@@ -5,15 +5,19 @@ import Qt5Compat.GraphicalEffects
 import Colors
 
 Rectangle {
-    property var buttonSize : ButtonSizes.largeSize
+    property var buttonSize : ButtonSizes.mediumSize
+    property int iconSize : buttonRoot.buttonSize.iconSize
+    property int fontSize : buttonRoot.buttonSize.fontSize
     property color bgColor : Themes.colors.primary.primary500
     property color contentColor : Themes.colors.elementary.white
     property string btnText : "Button"
+    property bool textVisible : true
     property bool iconLeftVisible : true
     property bool iconRightVisible : false
     property url iconLeftSource : "qrc:/assets/icons/Outline/filter.svg"
     property url iconRightSource : "qrc:/assets/icons/Outline/filter.svg"
     property int borderSize : 0
+
 
     signal clicked()
 
@@ -35,10 +39,10 @@ Rectangle {
         }
         Image {
             id: btnLeftIcon
-            Layout.preferredHeight: buttonRoot.buttonSize.iconSize
-            Layout.preferredWidth: buttonRoot.buttonSize.iconSize
-            sourceSize.height: buttonRoot.buttonSize.iconSize
-            sourceSize.width: buttonRoot.buttonSize.iconSize
+            Layout.preferredHeight: buttonRoot.iconSize
+            Layout.preferredWidth: buttonRoot.iconSize
+            sourceSize.height: buttonRoot.iconSize
+            sourceSize.width: buttonRoot.iconSize
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             visible: buttonRoot.iconLeftVisible
             source: buttonRoot.iconLeftSource
@@ -52,13 +56,15 @@ Rectangle {
         }
 
         Text{
-            font.pointSize: buttonRoot.buttonSize.fontSize
+            id : btnText
+            font.pointSize: buttonRoot.fontSize
             color: buttonRoot.contentColor
             text: buttonRoot.btnText
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            visible: buttonRoot.textVisible
         }
 
 

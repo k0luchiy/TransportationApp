@@ -2,13 +2,16 @@ cmake_minimum_required(VERSION 3.16)
 
 project(TransportationApp VERSION 0.1 LANGUAGES CXX)
 
+#set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Test)
 
 enable_testing(true)
 
-qt_standard_project_setup(REQUIRES 6.5)
+qt_standard_project_setup()
+
+#qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(TransportationApp
     main.cpp
@@ -18,6 +21,7 @@ qt_add_qml_module(TransportationApp
     URI TransportationApp
     VERSION 1.0
     QML_FILES Main.qml
+    RESOURCE_PREFIX /TransportationApp.com/qml
     RESOURCES docs/config/Doxyfile
 )
 
@@ -26,7 +30,12 @@ add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(docs)
 
-
+list(APPEND QML_DIRS "${CMAKE_BINARY_DIR}/qml") #"${CMAKE_CURRENT_SOURCE_DIR}/Colors"
+set(
+    QML_IMPORT_PATH "${QML_DIRS}"
+    CACHE STRING "Qt Creator 4.1 extra qml import paths"
+    FORCE
+)
 
 #list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 #include(Doxygen)
@@ -50,6 +59,8 @@ target_link_libraries(TransportationApp
     #PRIVATE UserModelsLib
     PRIVATE ModelsLib
     PRIVATE FilterModelsLib
+    PRIVATE ColorsLibplugin
+    PRIVATE ButtonsLibplugin
 )
 
 include(GNUInstallDirs)

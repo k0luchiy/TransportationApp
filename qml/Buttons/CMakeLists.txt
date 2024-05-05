@@ -3,7 +3,6 @@ qt_add_library(ButtonsLib STATIC)
 set_target_properties(ButtonsLib PROPERTIES AUTOMOC ON)
 target_link_libraries(ButtonsLib
     PRIVATE Qt6::Quick
-    PRIVATE ColorsLibplugin
 )
 
 list(

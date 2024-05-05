@@ -14,13 +14,14 @@ Window {
         Themes.currentTheme = Themes.themes.dark //: Themes.themes.dark
     }
 
-    color: Themes.colors.neutral.neutral200
-
+    color: Themes.colors.neutral.neutral800
     Button{
-        color: Themes.colors.primary.primary50 //Themes.colors.neutral0
-        fontColor: Themes.colors.green.green200
-        onClicked : {
-            Themes.currentTheme = Themes.themes.dark
-        }
+        borderSize: 1
+        bgColor: Colors.elementary.transparent
+        contentColor: Colors.neutral.neutral400
+        iconLeftVisible: false
+        iconRightVisible: false
+        buttonSize: ButtonSizes.mediumSize
     }
+
 }

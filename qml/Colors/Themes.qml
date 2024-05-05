@@ -22,6 +22,7 @@ QtObject{
 
 
             readonly property var elementary : QtObject{
+                readonly property string transparent  : Colors.elementary.transparent
                 readonly property string white  : Colors.elementary.black
                 readonly property string black  : Colors.elementary.white
             }

@@ -8,6 +8,7 @@ QtObject{
 
 
     readonly property var elementary : QtObject{
+        readonly property string transparent  : "transparent"
         readonly property string white  : "#FFFFFF"
         readonly property string black  : "#000000"
     }

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import Colors
 import Buttons
+import InputFields
 
 Window {
     width: 640
@@ -14,14 +15,23 @@ Window {
         Themes.currentTheme = Themes.themes.dark //: Themes.themes.dark
     }
 
-    color: Themes.colors.neutral.neutral800
-    Button{
-        borderSize: 1
-        bgColor: Colors.elementary.transparent
-        contentColor: Colors.neutral.neutral400
-        iconLeftVisible: false
-        iconRightVisible: false
-        buttonSize: ButtonSizes.mediumSize
+    color: Themes.colors.neutral.neutral0
+
+    TextInputField{
+
     }
 
+    PrimaryButton{
+        x: 521
+        y: 403
+        onClicked : {
+            console.log(Themes.currentTheme.themeId)
+            if (Themes.currentTheme.themeId === 0){
+                Themes.currentTheme = Themes.themes.dark
+            }
+            else{
+                Themes.currentTheme = Themes.themes.light
+            }
+        }
+    }
 }

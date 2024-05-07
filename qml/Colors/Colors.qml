@@ -28,7 +28,7 @@ QtObject{
     }
 
     readonly property var neutral : QtObject{
-        //readonly property string neutral0   : "#FFFFFF"
+        readonly property string neutral0   : "#FFFFFF"
         readonly property string neutral50  : "#F4F5F7"
         readonly property string neutral100 : "#E9ECF1"
         readonly property string neutral200 : "#D8DDE4"

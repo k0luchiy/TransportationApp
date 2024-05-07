@@ -10,6 +10,7 @@ QtObject{
 
         readonly property var light: QtObject{
             id: lightTheme
+            readonly property int themeId : 0
 
             readonly property var elementary : Colors.elementary
             readonly property var primary : Colors.primary
@@ -20,6 +21,7 @@ QtObject{
         readonly property var dark: QtObject{
             id: darkTheme
 
+            readonly property int themeId : 1
 
             readonly property var elementary : QtObject{
                 readonly property string transparent  : Colors.elementary.transparent
@@ -42,18 +44,18 @@ QtObject{
             }
 
             readonly property var neutral : QtObject{
-                //readonly property string neutral0   : Colors.neutral.neutral950
-                readonly property string neutral50  : Colors.neutral.neutral950
+                readonly property string neutral0   : Colors.neutral.neutral950
+                readonly property string neutral50  : Colors.neutral.neutral900
                 readonly property string neutral100 : Colors.neutral.neutral800
-                readonly property string neutral200 : Colors.neutral.neutral800
-                readonly property string neutral300 : Colors.neutral.neutral700
-                readonly property string neutral400 : Colors.neutral.neutral600
-                readonly property string neutral500 : Colors.neutral.neutral500
-                readonly property string neutral600 : Colors.neutral.neutral400
-                readonly property string neutral700 : Colors.neutral.neutral300
-                readonly property string neutral800 : Colors.neutral.neutral200
-                readonly property string neutral900 : Colors.neutral.neutral100
-                readonly property string neutral950 : Colors.neutral.neutral50
+                readonly property string neutral200 : Colors.neutral.neutral700
+                readonly property string neutral300 : Colors.neutral.neutral600
+                readonly property string neutral400 : Colors.neutral.neutral500
+                readonly property string neutral500 : Colors.neutral.neutral400
+                readonly property string neutral600 : Colors.neutral.neutral300
+                readonly property string neutral700 : Colors.neutral.neutral200
+                readonly property string neutral800 : Colors.neutral.neutral100
+                readonly property string neutral900 : Colors.neutral.neutral50
+                readonly property string neutral950 : Colors.neutral.neutral0
             }
 
             readonly property var green : QtObject{

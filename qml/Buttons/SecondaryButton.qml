@@ -4,8 +4,8 @@ import Colors
 
 Button{
     borderSize: 1
-    bgColor: Colors.elementary.transparent
-    contentColor: Colors.neutral.neutral600
+    bgColor: Themes.colors.elementary.transparent
+    contentColor: Themes.colors.neutral.neutral600
     iconLeftVisible: false
     iconRightVisible: false
 }

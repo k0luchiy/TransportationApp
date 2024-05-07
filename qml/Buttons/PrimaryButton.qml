@@ -5,7 +5,7 @@ import Colors
 Button {
     id: primaryButtonRoot
 
-    bgColor: Colors.primary.primary500
+    bgColor: Themes.colors.primary.primary500
     contentColor: Colors.elementary.white
     borderSize: 0
     iconRightVisible: false

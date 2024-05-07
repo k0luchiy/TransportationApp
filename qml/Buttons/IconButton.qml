@@ -5,8 +5,8 @@ import Colors
 
 Rectangle {
     id: buttonRoot
-    property color bgColor : Colors.elementary.transparent
-    property color iconColor : Colors.neutral.neutral950
+    property color bgColor : Themes.colors.elementary.transparent
+    property color iconColor : Themes.colors.neutral.neutral950
     property url iconSource : "qrc:/assets/icons/Outline/filter.svg"
     property int iconSize : 15
 
@@ -25,7 +25,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
 
         ColorOverlay {
-            anchors.fill: btnLeftIcon
+            anchors.fill: icon
             source: icon
             color: buttonRoot.iconColor
         }

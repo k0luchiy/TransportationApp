@@ -10,7 +10,7 @@ Rectangle {
     property int fontSize : buttonRoot.buttonSize.fontSize
     property color bgColor : Themes.colors.primary.primary500
     property color contentColor : Themes.colors.elementary.white
-    property string btnText : "Button"
+    property string btnText : qsTr("Button")
     property bool textVisible : true
     property bool iconLeftVisible : true
     property bool iconRightVisible : false
@@ -28,6 +28,7 @@ Rectangle {
     radius: buttonRoot.buttonSize.radius
     border.width: buttonRoot.borderSize
     border.color: buttonRoot.contentColor
+    opacity: mouseArea.containsMouse ? 0.9 : 1
 
     RowLayout{
         anchors.fill: parent

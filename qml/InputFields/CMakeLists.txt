@@ -13,4 +13,7 @@ qt_add_qml_module(InputFieldsLib
     VERSION 1.0
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES TextInputField.qml
+    QML_FILES NumberInputField.qml
+    QML_FILES ComboBoxControl.qml
+    QML_FILES ComboBoxInputField.qml
 )

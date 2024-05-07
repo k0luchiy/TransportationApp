@@ -5,34 +5,46 @@ import Colors
 import Buttons
 
 Item {
-    property color titleColor : Themes.colors.neutral.neutral950
+    property color titleColor : Themes.colors.neutral.neutral700
     property color contentColor : Themes.colors.neutral.neutral600
     property color placeholderColor : Themes.colors.neutral.neutral500
-    property color bgColor : Themes.colors.elementary.transparent
-    property color borderColor : Themes.colors.neutral.neutral100
-    property string title : "Title:"
-    property string placeholderText : "Placeholder"
-    property bool leftIconVisible : true
-    property bool rightIconVisible : true
+    property color bgColor :
+        fieldRoot.enabled ? Themes.colors.neutral.neutral0 :
+        Themes.colors.neutral.neutral200
+    property color borderColor :
+        fieldRoot.enabled ? Themes.colors.neutral.neutral100 :
+        Themes.colors.neutral.neutral300
+    property string title : qsTr("Title:")
+    property string placeholderText : qsTr("Placeholder")
+    property bool titleVisible : true
+    property bool iconLeftVisible : false
+    property bool iconRightVisible : false
+    property bool enabled : true
     property url iconLeftSource : "qrc:/assets/icons/Outline/filter.svg"
     property url iconRightSource : "qrc:/assets/icons/Outline/filter.svg"
     property int titleFontSize : 12
     property int contentFontSize : 12
 
+    property alias text : inputField.text
+    property alias fieldValidator : inputField.validator
+    property alias fieldInputMask : inputField.inputMask
+    property alias fieldEchoMode : inputField.echoMode
+    property alias readOnly : inputField.readOnly
 
-    signal textChanged
+    //signal textChanged
     signal editingFinished(int text)
 
 
     id: fieldRoot
     width: 280
-    height: 70
+    height: fieldRoot.titleVisible ? 45 + 25 : 45
 
     ColumnLayout{
         anchors.fill: fieldRoot
         RowLayout{
             //Layout.preferredHeight: 20
             Layout.fillWidth: true
+            visible : fieldRoot.titleVisible
             Text{
                 text : fieldRoot.title
                 verticalAlignment: Text.AlignVCenter
@@ -63,8 +75,8 @@ Item {
                     Layout.preferredWidth: 20
                     iconSize: 20
                     iconColor: fieldRoot.contentColor
-                    visible: fieldRoot.leftIconVisible
-                    iconSource: fieldRoot.leftIconSource
+                    visible: fieldRoot.iconLeftVisible
+                    iconSource: fieldRoot.iconLeftSource
                 }
 
 
@@ -77,6 +89,9 @@ Item {
                     rightPadding: 5
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
+                    inputMask: ""
+                    readOnly: false
+                    enabled: fieldRoot.enabled
                     clip: true
                     echoMode: TextInput.Normal
                     onTextChanged: { fieldRoot.textChanged() }
@@ -103,8 +118,8 @@ Item {
                     Layout.preferredWidth: 20
                     iconSize: 20
                     iconColor: fieldRoot.contentColor
-                    visible: fieldRoot.rightIconVisible
-                    iconSource: fieldRoot.rightIconSource
+                    visible: fieldRoot.iconRightVisible
+                    iconSource: fieldRoot.iconRightSource
                 }
             }
         }

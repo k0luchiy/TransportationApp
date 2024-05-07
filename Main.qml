@@ -1,10 +1,13 @@
 import QtQuick
 import QtQuick.Window
+import QtQuick.Layouts
+
 import Colors
 import Buttons
 import InputFields
 
 Window {
+    id: window
     width: 640
     height: 480
     visible: true
@@ -17,8 +20,48 @@ Window {
 
     color: Themes.colors.neutral.neutral0
 
-    TextInputField{
+    ColumnLayout{
+        width: 200
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
 
+        TextInputField{
+            Layout.fillWidth: true
+            enabled: false
+
+        }
+
+        NumberInputField{
+            Layout.fillWidth: true
+        }
+
+        ComboBoxControl{
+            Layout.fillWidth: true
+            Layout.preferredHeight: 45
+        }
+        ComboBoxInputField{
+            id: comboBoxField
+            Layout.fillWidth: true
+            model: ["First", "Second", "Third", "Forth"]
+            onCurrentTextChanged : {
+                label.text = comboBoxField.currentText
+            }
+
+        }
+
+        Text{
+            id: label
+            height: 30
+            Layout.fillWidth: true
+            color: Themes.colors.elementary.black
+            text: "Hello"
+            font.pointSize: 14
+        }
+
+        Item{
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
     }
 
     PrimaryButton{

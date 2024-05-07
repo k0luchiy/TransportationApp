@@ -15,6 +15,7 @@ Rectangle {
     color: bgColor
     width: 25
     height: 25
+    opacity: mouseArea.containsMouse ? 0.85 : 1
 
     Image {
         id: icon

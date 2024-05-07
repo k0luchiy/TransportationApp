@@ -1,10 +1,12 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
+import QtQuick.Controls.Basic
 
 import Colors
 import Buttons
 import InputFields
+import TabControls
 
 Window {
     id: window
@@ -21,6 +23,17 @@ Window {
     color: Themes.colors.neutral.neutral0
 
     ColumnLayout{
+        width: 200
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        LeftMenuTabPannel{
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
+    }
+
+    ColumnLayout{
+        visible: false
         width: 200
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -68,7 +81,6 @@ Window {
         x: 521
         y: 403
         onClicked : {
-            console.log(Themes.currentTheme.themeId)
             if (Themes.currentTheme.themeId === 0){
                 Themes.currentTheme = Themes.themes.dark
             }

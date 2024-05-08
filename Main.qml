@@ -7,6 +7,7 @@ import Colors
 import Buttons
 import InputFields
 import TabControls
+import Calendar
 
 Window {
     id: window
@@ -22,7 +23,10 @@ Window {
 
     color: Themes.colors.neutral.neutral0
 
+    AdditionalCalendar{}
+
     ColumnLayout{
+        visible: false
         width: 200
         anchors.top: parent.top
         anchors.bottom: parent.bottom

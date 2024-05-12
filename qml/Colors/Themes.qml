@@ -16,6 +16,7 @@ QtObject{
             readonly property var primary : Colors.primary
             readonly property var neutral : Colors.neutral
             readonly property var green : Colors.green
+            readonly property var red : Colors.red
         }
 
         readonly property var dark: QtObject{
@@ -59,12 +60,23 @@ QtObject{
             }
 
             readonly property var green : QtObject{
-                readonly property string green50  : Colors.green.green700
-                readonly property string green100 : Colors.green.green600
-                readonly property string green200 : Colors.green.green500
-                readonly property string green500 : Colors.green.green200
-                readonly property string green600 : Colors.green.green100
-                readonly property string green700 : Colors.green.green50
+                readonly property string green50  : Colors.green.green950
+                readonly property string green100 : Colors.green.green800
+                readonly property string green200 : Colors.green.green600
+                readonly property string green500 : Colors.green.green500
+                readonly property string green600 : Colors.green.green200
+                readonly property string green700 : Colors.green.green100
+                readonly property string green950 : Colors.green.green50
+            }
+
+            readonly property var red : QtObject{
+                readonly property string red50  : Colors.red.red950
+                readonly property string red100 : Colors.red.red800
+                readonly property string red200 : Colors.red.red600
+                readonly property string red500 : Colors.red.red500
+                readonly property string red600 : Colors.red.red200
+                readonly property string red700 : Colors.red.red100
+                readonly property string red950 : Colors.red.red50
             }
         }
     }
@@ -76,5 +88,6 @@ QtObject{
         readonly property var primary : currentTheme.primary
         readonly property var neutral : currentTheme.neutral
         readonly property var green : currentTheme.green
+        readonly property var red : currentTheme.red
     }
 }

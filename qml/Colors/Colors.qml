@@ -50,6 +50,17 @@ QtObject{
         readonly property string green500 : "#22C55E"
         readonly property string green600 : "#16A34A"
         readonly property string green700 : "#15803D"
+        readonly property string green950 : "#0D602C"
+    }
+
+    readonly property var red : QtObject{
+        readonly property string red50  : "#FFF1F3"
+        readonly property string red100 : "#FFE4E6"
+        readonly property string red200 : "#FECDD3"
+        readonly property string red500 : "#F43F5E"
+        readonly property string red600 : "#E11D48"
+        readonly property string red700 : "#BE123C"
+        readonly property string red950 : "#921231"
     }
 
 }

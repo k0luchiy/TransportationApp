@@ -6,8 +6,9 @@ import Buttons
 
 Item {
     property color titleColor : Themes.colors.neutral.neutral700
-    property color contentColor : Themes.colors.neutral.neutral600
+    property color contentColor : Themes.colors.neutral.neutral700
     property color placeholderColor : Themes.colors.neutral.neutral500
+    property color errorColor : Themes.colors.red.red500
     property color bgColor :
         fieldRoot.enabled ? Themes.colors.neutral.neutral0 :
         Themes.colors.neutral.neutral200
@@ -16,10 +17,12 @@ Item {
         Themes.colors.neutral.neutral300
     property string title : qsTr("Title:")
     property string placeholderText : qsTr("Placeholder")
+    property string errorMsg : qsTr("Error")
     property bool titleVisible : true
     property bool iconLeftVisible : false
     property bool iconRightVisible : false
     property bool enabled : true
+    property bool isError : false
     property url iconLeftSource : "qrc:/assets/icons/Outline/filter.svg"
     property url iconRightSource : "qrc:/assets/icons/Outline/filter.svg"
     property int titleFontSize : 12
@@ -49,7 +52,7 @@ Item {
                 text : fieldRoot.title
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize : fieldRoot.titleFontSize
-                color: fieldRoot.titleColor
+                color: fieldRoot.isError ? fieldRoot.errorColor : fieldRoot.titleColor
             }
         }
 
@@ -58,7 +61,7 @@ Item {
             Layout.fillWidth: true
             color: fieldRoot.bgColor
             border.width: 1
-            border.color: fieldRoot.borderColor
+            border.color: fieldRoot.isError ? fieldRoot.errorColor : fieldRoot.borderColor
             radius: 5
 
 

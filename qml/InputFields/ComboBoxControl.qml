@@ -15,7 +15,7 @@ ComboBox {
         comboBox.enabled ? Themes.colors.neutral.neutral0 :
             Themes.colors.neutral.neutral100
     property color selectedColor: Themes.colors.neutral.neutral100
-    property color contentColor: Themes.colors.neutral.neutral600
+    property color contentColor: Themes.colors.neutral.neutral700
     property color borderColor : Themes.colors.neutral.neutral100
     property int borderSize : 1
     property int fontSize : 12

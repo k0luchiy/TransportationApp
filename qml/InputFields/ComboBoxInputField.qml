@@ -6,7 +6,7 @@ import Buttons
 
 Item {
     property color titleColor : Themes.colors.neutral.neutral700
-    property color contentColor : Themes.colors.neutral.neutral600
+    property color contentColor : Themes.colors.neutral.neutral700
     property color bgColor : Colors.elementary.transparent
     property color borderColor :
         fieldRoot.enabled ? Themes.colors.neutral.neutral100 :

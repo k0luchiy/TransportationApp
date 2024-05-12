@@ -8,6 +8,7 @@ import Buttons
 import InputFields
 import TabControls
 import Calendar
+import Tables
 
 Window {
     id: window
@@ -23,7 +24,13 @@ Window {
 
     color: Themes.colors.neutral.neutral0
 
-    AdditionalCalendar{}
+    Pagination{
+
+    }
+
+    AdditionalCalendar{
+        visible: false
+    }
 
     ColumnLayout{
         visible: false

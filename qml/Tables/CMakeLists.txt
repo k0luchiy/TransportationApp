@@ -12,4 +12,5 @@ qt_add_qml_module(TablesLib
     URI Tables
     VERSION 1.0
     RESOURCE_PREFIX /TransportationApp.com/qml
+    QML_FILES Pagination.qml
 )

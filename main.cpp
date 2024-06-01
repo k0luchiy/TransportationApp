@@ -1,11 +1,15 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "usermodel.h"
+#include <QQmlContext>
 #include <QDebug>
 #include <QSqlDatabase>
+
+#include "usermodel.h"
 #include "abstractsqlquerymodel.h"
 #include "carsfiltermodel.h"
 #include "carsmodel.h"
+#include "ordersfiltermodel.h"
+#include "ordersmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,14 +21,43 @@ int main(int argc, char *argv[])
         &app, []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
     engine.addImportPath(":/TransportationApp.com/qml");
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
+    db.open();
+
+//    QString query =
+//        "select \
+//          o.OrderId, o.CreatedDate, o.AskedDeliveryDate,  \
+//          s.StatusId, s.StatusTitle, o.Cost,  \
+//          o.Address, o.Volume, o.Weight   \
+//          from Orders o   \
+//          join OrderStatus s on o.StatusId = s.StatusId ";
+
+    UserModel* userModel = new UserModel();
+    //qDebug() << userModel->rowCount() << userModel->record(0);
+
+    OrdersModel* ordersModel = new OrdersModel();
+    //ordersModel->setQuery(query);
+    OrdersFilterModel* ordersFilterModel = new OrdersFilterModel();
+    ordersFilterModel->setSourceModel(ordersModel);
+    ordersFilterModel->setDynamicSortFilter(true);
+    ordersFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    ordersFilterModel->sort(0, Qt::AscendingOrder);
+    //ordersFilterModel->setFilterOrderId(3);
+    qDebug() << ordersFilterModel << ordersFilterModel->rowCount();
+    engine.rootContext()->setContextProperty("orders", ordersModel);
+    engine.rootContext()->setContextProperty("ordersFilterModel", ordersFilterModel);
+
+
+//    CarsModel* carsModel = new CarsModel();
+//    qDebug() << carsModel->rowCount() << carsModel->record(0);
+
+//    AbstractSqlQueryModel* abstModel = carsModel;
+//    qDebug() << carsModel << carsModel->rowCount() << abstModel->rowCount();
+
+
     engine.loadFromModule("TransportationApp", "Main");
-
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-
-//    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
-
-//    db.open();
-
 
 //    if(db.isOpen()){
 //       db.close();

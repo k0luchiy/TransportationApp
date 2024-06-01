@@ -35,7 +35,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(docs)
 
-list(APPEND QML_DIRS "${CMAKE_BINARY_DIR}/qml") #"${CMAKE_CURRENT_SOURCE_DIR}/Colors"
+list(APPEND QML_DIRS "${CMAKE_BINARY_DIR}/qml")
 set(
     QML_IMPORT_PATH "${QML_DIRS}"
     CACHE STRING "Qt Creator 4.1 extra qml import paths"

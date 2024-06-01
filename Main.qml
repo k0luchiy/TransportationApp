@@ -24,11 +24,51 @@ Window {
 
     color: Themes.colors.neutral.neutral0
 
+
+    //TableCell{}
+    ColumnLayout{
+        visible: true
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+
+//        TableHeaders{
+//            Layout.fillWidth: true
+//        }
+
+//        TableRow{
+//            Layout.fillWidth: true
+//        }
+        OrdersTable{
+            tableHeaders: ["Код", "Дата создания", "Дата доставки", "Улица", "Статус", "Стоимость"]
+            tableModel : ordersFilterModel
+            pagination : orderPagination
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+        }
+        Pagination{
+            id : orderPagination
+            Layout.preferredHeight: 40
+            Layout.fillWidth: true
+            rowCount: ordersFilterModel.rowCount()
+            rowsPerPage : 5
+        }
+//        Item{
+//            Layout.fillHeight: true
+//            Layout.fillWidth: true
+//        }
+    }
+
     Pagination{
+        visible: false
 
     }
 
     AdditionalCalendar{
+        x: 50
+        y: 50
         visible: false
     }
 
@@ -53,6 +93,11 @@ Window {
             Layout.fillWidth: true
             enabled: false
 
+        }
+
+        TextInputField{
+            Layout.fillWidth: true
+            isError: true
         }
 
         NumberInputField{

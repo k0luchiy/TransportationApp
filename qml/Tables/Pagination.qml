@@ -5,7 +5,7 @@ import QtQuick.Layouts
 import Colors
 import Buttons
 
-Rectangle {
+Item {
     property int currentIndex : 0
     property int rowCount : 150
     property int rowsPerPage: 15
@@ -16,7 +16,7 @@ Rectangle {
 
     property color selectedIndicatorColor : Themes.colors.primary.primary600
     property color defaultIndicatorColor : Themes.colors.elementary.transparent
-    property color selectedFontColor : Themes.colors.neutral.neutral0
+    property color selectedFontColor : Colors.neutral.neutral0
     property color defaultFontColor : Themes.colors.neutral.neutral600
     property int fontSize : 10
     property int indicatorSize: 30
@@ -24,6 +24,7 @@ Rectangle {
     id: paginationRoot
     width: 500
     height: 40
+    visible: pageCount > 0
 
     function generatePageNumbers(pageCount){
         var pages = []

@@ -40,7 +40,6 @@ QtObject{
         readonly property string neutral800 : "#4A4E5E"
         readonly property string neutral900 : "#393C46"
         readonly property string neutral950 : "#17181C"
-        //readonly property string neutral1000 : "#000000"
     }
 
     readonly property var green : QtObject{

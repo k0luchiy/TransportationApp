@@ -11,9 +11,9 @@ ComboBox {
     width: 200
     enabled: true
 
-    property color bgColor :
-        comboBox.enabled ? Themes.colors.neutral.neutral0 :
-            Themes.colors.neutral.neutral100
+    property color bgColor : Themes.colors.neutral.neutral0
+    //    comboBox.enabled ? Themes.colors.neutral.neutral0 :
+    //        Themes.colors.neutral.neutral100
     property color selectedColor: Themes.colors.neutral.neutral100
     property color contentColor: Themes.colors.neutral.neutral700
     property color borderColor : Themes.colors.neutral.neutral100
@@ -32,15 +32,15 @@ ComboBox {
     }
 
     contentItem: Text {
-            anchors.fill: parent
-            text: comboBox.displayText
-            color: comboBox.contentColor
-            font.pointSize: comboBox.fontSize
-            horizontalAlignment: Text.AlignLeft
-            verticalAlignment: Text.AlignVCenter
-            anchors.rightMargin: 25
-            anchors.leftMargin: 5
-            elide: Text.ElideRight
+        anchors.fill: parent
+        text: comboBox.displayText
+        color: comboBox.contentColor
+        font.pointSize: comboBox.fontSize
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        anchors.rightMargin: 25
+        anchors.leftMargin: 5
+        elide: Text.ElideRight
     }
 
     indicator : IconButton{

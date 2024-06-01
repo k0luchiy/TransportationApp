@@ -61,7 +61,7 @@ QtObject{
 
             readonly property var green : QtObject{
                 readonly property string green50  : Colors.green.green950
-                readonly property string green100 : Colors.green.green800
+                readonly property string green100 : Colors.green.green700
                 readonly property string green200 : Colors.green.green600
                 readonly property string green500 : Colors.green.green500
                 readonly property string green600 : Colors.green.green200
@@ -71,7 +71,7 @@ QtObject{
 
             readonly property var red : QtObject{
                 readonly property string red50  : Colors.red.red950
-                readonly property string red100 : Colors.red.red800
+                readonly property string red100 : Colors.red.red700
                 readonly property string red200 : Colors.red.red600
                 readonly property string red500 : Colors.red.red500
                 readonly property string red600 : Colors.red.red200

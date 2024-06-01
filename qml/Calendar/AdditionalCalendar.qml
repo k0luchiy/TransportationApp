@@ -9,6 +9,9 @@ Rectangle {
     width: 390
     height: 300
 
+    border.width: 1
+    border.color: Themes.colors.neutral.neutral700
+    radius: 6
 
     function getPureDate(date){
         return new Date(date.getFullYear(), date.getMonth(), date.getDate())
@@ -17,9 +20,13 @@ Rectangle {
 
     RowLayout{
         anchors.fill: parent
+        anchors.topMargin: 5
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 5
+        anchors.rightMargin: 5
         ColumnLayout{
             Layout.fillHeight: true
-            Layout.preferredWidth: 130
+            Layout.preferredWidth: 100
 
             Text{
                 verticalAlignment: Text.AlignVCenter
@@ -65,12 +72,65 @@ Rectangle {
                 }
             }
 
-            SecondaryButton{
+
+            Text{
+                verticalAlignment: Text.AlignVCenter
+                Layout.leftMargin: 5
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                color: Themes.colors.neutral.neutral600
+                font.pointSize: 10
+                text: "Last 14 days"
+            }
+            Text{
+                verticalAlignment: Text.AlignVCenter
+                Layout.leftMargin: 5
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                color: Themes.colors.neutral.neutral600
+                font.pointSize: 10
+                text: "Last 30 days"
+            }
+            Text{
+                verticalAlignment: Text.AlignVCenter
+                Layout.leftMargin: 5
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                color: Themes.colors.neutral.neutral600
+                font.pointSize: 10
+                text: "Last 3 month"
+            }
+            Text{
+                verticalAlignment: Text.AlignVCenter
+                Layout.leftMargin: 5
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                color: Themes.colors.neutral.neutral600
+                font.pointSize: 10
+                text: "Last 12 month"
+            }
+            Text{
+                verticalAlignment: Text.AlignVCenter
+                Layout.leftMargin: 5
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                color: Themes.colors.neutral.neutral600
+                font.pointSize: 10
+                text: "Custom"
+            }
+
+
+            /*SecondaryButton{
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 //Layout.fillWidth: true
                 borderSize: 0
-            }
+            }*/
             Item{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -93,6 +153,7 @@ Rectangle {
                     buttonSize: ButtonSizes.smallSize
                     iconLeftVisible: false
                     iconRightVisible: false
+                    btnText: "Cancel"
                 }
                 Item{
                     Layout.fillHeight: true
@@ -102,6 +163,7 @@ Rectangle {
                     buttonSize: ButtonSizes.smallSize
                     iconLeftVisible: false
                     iconRightVisible: false
+                    btnText: "Apply"
                 }
             }
         }

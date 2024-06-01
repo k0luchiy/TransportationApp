@@ -5,11 +5,15 @@
 #include "abstractsqlquerymodel.h"
 
 AbstractSqlQueryModel::AbstractSqlQueryModel(const QString& select_query, QObject* parent)
-    : QSqlQueryModel{parent}
+    : QSqlQueryModel{parent}, m_select_query(select_query)
 {
-    setQuery(select_query);
+    updateModel();
 }
 
+//int AbstractSqlQueryModel::rowCount(const QModelIndex& parent) const
+//{
+//    return QSqlQueryModel::rowCount();
+//}
 
 //! Getter for role names
 QHash<int, QByteArray> AbstractSqlQueryModel::roleNames() const
@@ -27,6 +31,7 @@ void AbstractSqlQueryModel::generateRoleNames()
     }
 }
 
+
 //! Get current query from model
 QString AbstractSqlQueryModel::get_query() const {
     return m_select_query;
@@ -35,16 +40,17 @@ QString AbstractSqlQueryModel::get_query() const {
 //! Sets given query to model
 void AbstractSqlQueryModel::setQuery(const QString& query, const QSqlDatabase& db)
 {
-    QSqlQueryModel::setQuery(query, db);
+    this->QSqlQueryModel::setQuery(query, db);
     generateRoleNames();
 }
 
 //! Sets given query to model
 void AbstractSqlQueryModel::setQuery(QString&& query)
 {
-    QSqlQueryModel::setQuery(std::move(query));
+    this->QSqlQueryModel::setQuery(std::move(query));
     generateRoleNames();
 }
+
 
 /*! \brief Returns the value for the specified index and role.
  *  If item is out of bounds or if an error occurred, an invalid QVariant is returned.
@@ -73,7 +79,14 @@ QVariant AbstractSqlQueryModel::data(const QModelIndex& index, int role) const
  */
 void AbstractSqlQueryModel::updateModel()
 {
-    setQuery(get_query());
+    //setQuery(get_query());
+    //setQuery(m_select_query);
+    this->setQuery(m_select_query);
+    if (this->lastError().isValid()) {
+        qDebug() << "Failed to execute query:" << this->lastError();
+    }
+    generateRoleNames();
+    qDebug() << "Row count after query:" << rowCount();
 }
 
 /*!

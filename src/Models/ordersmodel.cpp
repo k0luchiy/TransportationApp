@@ -24,7 +24,6 @@ OrdersModel::OrdersModel(QObject *parent)
 
 }
 
-
 bool OrdersModel::updateOrder(
     quint64 orderId, const QDate& askedDeliveryDate,
     quint64 statusId, float cost, const QString& address,

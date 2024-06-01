@@ -14,6 +14,7 @@
 #include <QSqlRecord>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QSqlError>
 
 /*!
  * \brief The AbstractSqlQueryModel class wrapper for interaction with database tables.
@@ -51,3 +52,5 @@ private:
 };
 
 #endif // ABSTRACTSQLQUERYMODEL_H
+
+

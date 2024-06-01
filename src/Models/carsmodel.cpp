@@ -22,7 +22,7 @@ const char* CarsModel::SELECT_QUERY =
 CarsModel::CarsModel(QObject *parent)
     : AbstractSqlQueryModel{SELECT_QUERY, parent}
 {
-
+    //updateModel();
 }
 
 

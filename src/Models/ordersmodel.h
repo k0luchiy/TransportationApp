@@ -23,6 +23,7 @@ class OrdersModel : public AbstractSqlQueryModel
 public:
     explicit OrdersModel(QObject *parent = nullptr);
 
+    //int rowCount( const QModelIndex & parent = QModelIndex() ) const;
 
 public Q_SLOTS:
     bool updateOrder(

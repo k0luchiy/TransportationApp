@@ -14,6 +14,7 @@ Rectangle {
     property alias selectedDate : calendar.selectedDate
     property alias month : calendar.month
     property alias year : calendar.year
+    property alias  isRangePicker : calendar.isRangePicker
 
     signal applyClicked
 
@@ -114,6 +115,7 @@ Rectangle {
                 id: calendar
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                isRangePicker: true
             }
 
             RowLayout{

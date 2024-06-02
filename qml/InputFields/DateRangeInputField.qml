@@ -4,6 +4,8 @@ import Calendar
 
 TextInputField {
     property alias currentDate : calendar.currentDate
+    property alias startDate : calendar.startDate
+    property alias endDate : calendar.endDate
     property alias selectedDate : calendar.selectedDate
 
     property alias month : calendar.month
@@ -12,11 +14,11 @@ TextInputField {
     id: fieldRoot
     iconRightSource : "qrc:/assets/icons/Outline/calendar.svg"
     iconRightVisible: true
-    placeholderText: "dd.mm.yyyy"
+    placeholderText: "dd.mm - dd.mm"
     text: ""
     z: 5
 
-    DatePicker{
+    DateRangePicker{
         id: calendar
         y: fieldRoot.height + 10
         x: (Window.width >= fieldRoot.x + calendar.width) ? 0 :
@@ -24,7 +26,7 @@ TextInputField {
         z: 5
         visible: false
         onApplyClicked : {
-            fieldRoot.text = DatesUtils.formatDate(fieldRoot.selectedDate)
+            fieldRoot.text = DatesUtils.dateRangeToString(fieldRoot.startDate, fieldRoot.endDate)
         }
     }
 

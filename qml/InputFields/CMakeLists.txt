@@ -18,4 +18,5 @@ qt_add_qml_module(InputFieldsLib
     QML_FILES ComboBoxControl.qml
     QML_FILES ComboBoxInputField.qml
     QML_FILES DateInputField.qml
+    QML_FILES DateRangeInputField.qml
 )

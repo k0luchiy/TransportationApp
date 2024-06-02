@@ -31,13 +31,34 @@ function formatDate(date) {
     return day + '.' + month;
 }
 
+function formatDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    day = day < 10 ? '0' + day : day;
+    month = month < 10 ? '0' + month : month;
+
+    return day + '.' + month + "." + year;
+}
+
+function formatPartDateRage(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+
+    day = day < 10 ? '0' + day : day;
+    month = month < 10 ? '0' + month : month;
+
+    return day + '.' + month;
+}
+
 
 function dateRangeToString(startDate, endDate) {
     if(isNaN(startDate) || isNaN(endDate)){
         return ""
     }
-    var startFormatted = formatDate(startDate);
-    var endFormatted = formatDate(endDate);
+    var startFormatted = formatPartDateRage(startDate);
+    var endFormatted = formatPartDateRage(endDate);
     return startFormatted + " - " + endFormatted;
 }
 

@@ -14,18 +14,23 @@ Rectangle{
 
     property var month : currentDate.getMonth()
     property var year : currentDate.getFullYear()
+    property bool isRangePicker : true
 
     property color bgColor : Themes.colors.neutral.neutral0
     property color basicFontColor : Themes.colors.neutral.neutral950
     property color secondaryFontColor : Themes.colors.neutral.neutral500
 
+    property color bgSelectedColor : isRangePicker ?
+                 Themes.colors.neutral.neutral100 :
+                 Themes.colors.primary.primary500
     property color bgBoundColor : Themes.colors.primary.primary500
-    property color bgSelectedColor : Themes.colors.neutral.neutral100
     property color bgInRangeColor : Themes.colors.neutral.neutral50
 
     property color fontDefaultColor : Themes.colors.neutral.neutral950
     property color fontBoundColor : Themes.colors.neutral.neutral0
-    property color fontSelectedColor : Themes.colors.neutral.neutral950
+    property color fontSelectedColor : isRangePicker ?
+                                           Themes.colors.neutral.neutral950 :
+                                           Themes.colors.neutral.neutral50
     property color fontInRangeColor : Themes.colors.primary.primary600
     property color fontNextMonthColor : Themes.colors.neutral.neutral500
 
@@ -254,7 +259,7 @@ Rectangle{
                             onClicked: {
                                 // Basicly sets start and end dates
                                 // or just selected on first click
-                                if(!calendarRoot.selectedDate){
+                                if(!calendarRoot.selectedDate || !calendarRoot.isRangePicker){
                                     calendarRoot.selectedDate = dayRoot.date
                                 }
                                 else if(calendarRoot.selectedDate.getTime() === dayRoot.date.getTime())

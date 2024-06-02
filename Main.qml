@@ -29,18 +29,77 @@ Window {
     color: Themes.colors.neutral.neutral0
 
 
-    RowLayout{
+    ColumnLayout{
         anchors.fill: parent
         visible: true
+        spacing: 0
 
-        LeftMenuTabPannel{
-            Layout.fillHeight: true
-            Layout.preferredWidth: 200
+        Rectangle{
+            Layout.preferredHeight: 40
+            Layout.fillWidth: true
+            color: Themes.colors.neutral.neutral50
+
+            RowLayout{
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                anchors.rightMargin: 10
+
+                Text{
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: 150
+                    font.pointSize: 16
+                    color: Themes.colors.neutral.neutral950
+                    text: "Transportation"
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                }
+                Item{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+                IconButton{
+                    iconSize: 18
+                    iconSource: "qrc:/assets/icons/Outline/cog.svg"
+                }
+                IconButton{
+                    iconSize: 18
+                    iconSource: "qrc:/assets/icons/Outline/information-circle.svg"
+                }
+                IconButton{
+                    iconSize: 18
+                    iconSource: "qrc:/assets/icons/Outline/question-mark-circle.svg"
+                }
+                Button{
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: 235
+                    clip: true
+                    iconSize: 18
+                    fontSize: 12
+                    bgColor: Colors.elementary.transparent
+                    contentColor: Themes.colors.neutral.neutral950
+                    btnText: "antoshka.osipov.04@mail.ru"
+                    iconLeftSource: "qrc:/assets/icons/Outline/user.svg"
+                }
+                IconButton{
+                    iconSize: 18
+                    iconSource: "qrc:/assets/icons/Outline/logout.svg"
+                }
+            }
         }
 
-        OrderPage{
+        RowLayout{
             Layout.fillHeight: true
             Layout.fillWidth: true
+
+            LeftMenuTabPannel{
+                Layout.fillHeight: true
+                Layout.preferredWidth: 200
+            }
+
+            OrderPage{
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
         }
     }
 

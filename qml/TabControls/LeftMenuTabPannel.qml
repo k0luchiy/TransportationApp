@@ -11,7 +11,7 @@ TabBar {
     height: 500
     background: Rectangle{
         anchors.fill: parent
-        color: Colors.elementary.transparent
+        color: Themes.colors.neutral.neutral50
     }
 
     LeftMenuTabButton{

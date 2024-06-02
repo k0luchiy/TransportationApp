@@ -31,6 +31,7 @@ Rectangle {
     opacity: mouseArea.containsMouse ? 0.9 : 1
 
     RowLayout{
+        clip: true
         anchors.fill: parent
         spacing: 5
 

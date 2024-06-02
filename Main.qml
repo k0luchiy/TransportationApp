@@ -9,11 +9,15 @@ import InputFields
 import TabControls
 import Calendar
 import Tables
+import Notifications
+import Pages
 
 Window {
     id: window
-    width: 640
-    height: 480
+    width: 1040
+    height: 840
+
+//    visibility: Window.FullScreen
     visible: true
     title: qsTr("Hello World")
 
@@ -25,6 +29,89 @@ Window {
     color: Themes.colors.neutral.neutral0
 
 
+    RowLayout{
+        anchors.fill: parent
+        visible: true
+
+        LeftMenuTabPannel{
+            Layout.fillHeight: true
+            Layout.preferredWidth: 200
+        }
+
+        OrderPage{
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
+    }
+
+    Item{
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 400
+        visible: false
+//        ColumnLayout{
+//            Layout.fillHeight: true
+//            Layout.fillWidth: true
+//            NotificationMsg {
+//            }
+//        }
+        NotificationManager{
+            id: notificationManager
+            anchors.fill: parent
+        }
+    }
+
+    ColumnLayout{
+        visible: false
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        x: 500
+        width: 120
+        PrimaryButton{
+            Layout.preferredHeight: 50
+            Layout.fillWidth: true
+            btnText: "Info"
+            onClicked: {
+                notificationManager.showNotification(
+                    NotificationTypes.info,
+                    "Information notification test"
+                );
+            }
+        }
+        PrimaryButton{
+            Layout.preferredHeight: 50
+            Layout.fillWidth: true
+            btnText: "Success"
+            onClicked: {
+                notificationManager.showNotification(
+                    NotificationTypes.success,
+                    "Success notification test"
+                );
+            }
+        }
+        PrimaryButton{
+            Layout.preferredHeight: 50
+            Layout.fillWidth: true
+            btnText: "Warning"
+            onClicked: {
+                notificationManager.showNotification(
+                    NotificationTypes.warning,
+                    "Warning notification test"
+                );
+            }
+        }
+        PrimaryButton{
+            Layout.preferredHeight: 50
+            Layout.fillWidth: true
+            btnText: "Failure"
+            onClicked: {
+                notificationManager.showNotification(
+                    NotificationTypes.failure,
+                    "Failure notification test"
+                );
+            }
+        }
+    }
 
     Component{
         id: tabButton
@@ -98,7 +185,7 @@ Window {
 
 
     RowLayout{
-        visible: true
+        visible: false
 //        width: 200
 //        anchors.top: parent.top
 //        anchors.bottom: parent.bottom

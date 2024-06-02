@@ -9,11 +9,11 @@ Item {
     property color contentColor : Themes.colors.neutral.neutral700
     property color placeholderColor : Themes.colors.neutral.neutral500
     property color errorColor : Themes.colors.red.red500
-    property color bgColor :
-        fieldRoot.enabled ? Themes.colors.neutral.neutral0 :
+    property color bgColor : fieldRoot.enabled ?
+        Themes.colors.neutral.neutral0 :
         Themes.colors.neutral.neutral200
-    property color borderColor :
-        fieldRoot.enabled ? Themes.colors.neutral.neutral100 :
+    property color borderColor : fieldRoot.enabled ?
+        Themes.colors.neutral.neutral100 :
         Themes.colors.neutral.neutral300
     property string title : qsTr("Title:")
     property string placeholderText : qsTr("Placeholder")
@@ -42,12 +42,12 @@ Item {
 
     id: fieldRoot
     width: 280
-    height: fieldRoot.titleVisible ? 45 + 25 : 45
+    height: fieldRoot.titleVisible ? 45 + 20 : 45
 
     ColumnLayout{
         anchors.fill: fieldRoot
         RowLayout{
-            //Layout.preferredHeight: 20
+            Layout.preferredHeight: 20
             Layout.fillWidth: true
             visible : fieldRoot.titleVisible
             Text{

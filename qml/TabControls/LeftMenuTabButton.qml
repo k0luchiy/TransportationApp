@@ -29,6 +29,8 @@ TabButton {
 
 
     contentItem:
+        Item{
+        anchors.fill: parent
         RowLayout{
             anchors.fill: parent
             anchors.rightMargin: 10
@@ -62,12 +64,13 @@ TabButton {
                 text: buttonRoot.text
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
+                clip: true
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
         }
-
+    }
 }
 
 

@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Colors
 import Buttons
 import "DatesUtils.js" as DatesUtils
+
 Rectangle {
     property color bgColor : Themes.colors.neutral.neutral0
 

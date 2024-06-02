@@ -16,14 +16,14 @@ TextInputField {
     iconRightVisible: true
     placeholderText: "mm-dd - mm-dd"
     text: ""
-
+    z: 5
 
     AdditionalCalendar{
         id: calendar
         y: fieldRoot.height + 10
         x: (Window.width >= fieldRoot.x + calendar.width) ? 0 :
                fieldRoot.width - calendar.width - 5
-
+        z: 5
         visible: false
         onApplyClicked : {
             fieldRoot.text = DatesUtils.dateRangeToString(fieldRoot.startDate, fieldRoot.endDate)

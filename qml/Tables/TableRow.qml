@@ -40,18 +40,6 @@ Item {
                 text: ""
             }
 
-            MouseArea{
-                id: mouseArea
-                //anchors.fill: parent
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                hoverEnabled: true
-                enabled: rowRoot.enabled
-                onClicked: {
-                    rowRoot.clicked();
-                }
-                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
         }
 
         Rectangle{
@@ -61,4 +49,16 @@ Item {
         }
     }
 
+    MouseArea{
+        id: mouseArea
+        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        hoverEnabled: true
+        enabled: rowRoot.enabled
+        onClicked: {
+            rowRoot.clicked();
+        }
+        cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+    }
 }

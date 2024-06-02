@@ -18,4 +18,5 @@ qt_add_qml_module(TablesLib
     QML_FILES TableHeaders.qml
     QML_FILES TableRow.qml
     QML_FILES OrdersTable.qml
+    QML_FILES TableBase.qml
 )

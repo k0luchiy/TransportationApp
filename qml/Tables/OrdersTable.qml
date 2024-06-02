@@ -5,9 +5,11 @@ import QtQuick.Layouts
 
 ColumnLayout {
 
-    property var tableHeaders
-    property var tableModel
+    property var tableHeaders :  ["Код", "Дата создания", "Дата доставки", "Улица", "Статус", "Стоимость"]
+    property var tableModel : ordersFilterModel
     property var pagination
+
+    signal rowClicked
 
     id : tableRoot
     spacing: 0
@@ -23,6 +25,9 @@ ColumnLayout {
         TableRow{
             Layout.fillWidth: true
             model: rowModel
+            onClicked: {
+                tableRoot.rowClicked()
+            }
         }
     }
 
@@ -32,9 +37,8 @@ ColumnLayout {
     }
 
     Component {
-        id: rowComp
+        id: rowComponent
         Loader {
-            id : rowLoader
             anchors.left: parent ? parent.left : undefined
             anchors.right: parent ? parent.right : undefined
             property var rowModel : [OrderId, CreatedDate.toLocaleDateString("en_US"),
@@ -54,6 +58,6 @@ ColumnLayout {
         Layout.fillHeight: true
         Layout.fillWidth: true
 
-        delegate: rowComp
+        delegate: rowComponent
     }
 }

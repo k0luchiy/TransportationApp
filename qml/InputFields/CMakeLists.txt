@@ -6,6 +6,7 @@ target_link_libraries(InputFieldsLib
     PRIVATE Qt6::Quick
     PRIVATE ColorsLibplugin
     PRIVATE ButtonsLibplugin
+    PRIVATE CalendarLibplugin
 )
 
 qt_add_qml_module(InputFieldsLib
@@ -16,4 +17,5 @@ qt_add_qml_module(InputFieldsLib
     QML_FILES NumberInputField.qml
     QML_FILES ComboBoxControl.qml
     QML_FILES ComboBoxInputField.qml
+    QML_FILES DateInputField.qml
 )

@@ -35,6 +35,8 @@ Item {
     property alias readOnly : inputField.readOnly
 
     //signal textChanged
+    signal leftIconClicked
+    signal rightIconClicked
     signal editingFinished(int text)
 
 
@@ -80,6 +82,9 @@ Item {
                     iconColor: fieldRoot.contentColor
                     visible: fieldRoot.iconLeftVisible
                     iconSource: fieldRoot.iconLeftSource
+                    onClicked: {
+                        leftIconClicked()
+                    }
                 }
 
 
@@ -123,6 +128,9 @@ Item {
                     iconColor: fieldRoot.contentColor
                     visible: fieldRoot.iconRightVisible
                     iconSource: fieldRoot.iconRightSource
+                    onClicked: {
+                        rightIconClicked()
+                    }
                 }
             }
         }

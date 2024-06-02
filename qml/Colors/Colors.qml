@@ -42,6 +42,16 @@ QtObject{
         readonly property string neutral950 : "#17181C"
     }
 
+    readonly property var blue : QtObject{
+        readonly property string blue50  : "#EFF5FF"
+        readonly property string blue100 : "#DBEAFE"
+        readonly property string blue200 : "#BFDBFE"
+        readonly property string blue500 : "#3B82F6"
+        readonly property string blue600 : "#2563EB"
+        readonly property string blue700 : "#4338CA"
+        readonly property string blue950 : "#2B1BF1"
+    }
+
     readonly property var green : QtObject{
         readonly property string green50  : "#F0FDF5"
         readonly property string green100 : "#DCFCE7"
@@ -50,6 +60,16 @@ QtObject{
         readonly property string green600 : "#16A34A"
         readonly property string green700 : "#15803D"
         readonly property string green950 : "#0D602C"
+    }
+
+    readonly property var yellow : QtObject{
+        readonly property string yellow50  : "#FEFAE8"
+        readonly property string yellow100 : "#FEF9C3"
+        readonly property string yellow200 : "#FEF08A"
+        readonly property string yellow500 : "#FACC15"
+        readonly property string yellow600 : "#F59E0B"
+        readonly property string yellow700 : "#B45309"
+        readonly property string yellow950 : "#E56809"
     }
 
     readonly property var red : QtObject{

@@ -230,5 +230,9 @@
         <file>assets/icons/Outline/close.svg</file>
         <file>assets/icons/Outline/zoom-in.svg</file>
         <file>assets/icons/Outline/zoom-out.svg</file>
+        <file>assets/icons/Essentials/Failure.svg</file>
+        <file>assets/icons/Essentials/Info.svg</file>
+        <file>assets/icons/Essentials/Success.svg</file>
+        <file>assets/icons/Essentials/Warning.svg</file>
     </qresource>
 </RCC>

@@ -12,11 +12,13 @@ QtObject{
             id: lightTheme
             readonly property int themeId : 0
 
-            readonly property var elementary : Colors.elementary
-            readonly property var primary : Colors.primary
-            readonly property var neutral : Colors.neutral
-            readonly property var green : Colors.green
-            readonly property var red : Colors.red
+            readonly property var elementary    : Colors.elementary
+            readonly property var primary       : Colors.primary
+            readonly property var neutral       : Colors.neutral
+            readonly property var blue          : Colors.blue
+            readonly property var green         : Colors.green
+            readonly property var yellow        : Colors.yellow
+            readonly property var red           : Colors.red
         }
 
         readonly property var dark: QtObject{
@@ -25,9 +27,9 @@ QtObject{
             readonly property int themeId : 1
 
             readonly property var elementary : QtObject{
-                readonly property string transparent  : Colors.elementary.transparent
-                readonly property string white  : Colors.elementary.black
-                readonly property string black  : Colors.elementary.white
+                readonly property string transparent    : Colors.elementary.transparent
+                readonly property string white          : Colors.elementary.black
+                readonly property string black          : Colors.elementary.white
             }
 
             readonly property var primary : QtObject{
@@ -59,6 +61,16 @@ QtObject{
                 readonly property string neutral950 : Colors.neutral.neutral0
             }
 
+            readonly property var blue : QtObject{
+                readonly property string blue50  : Colors.blue.blue950
+                readonly property string blue100 : Colors.blue.blue700
+                readonly property string blue200 : Colors.blue.blue600
+                readonly property string blue500 : Colors.blue.blue500
+                readonly property string blue600 : Colors.blue.blue200
+                readonly property string blue700 : Colors.blue.blue100
+                readonly property string blue950 : Colors.blue.blue50
+            }
+
             readonly property var green : QtObject{
                 readonly property string green50  : Colors.green.green950
                 readonly property string green100 : Colors.green.green700
@@ -67,6 +79,16 @@ QtObject{
                 readonly property string green600 : Colors.green.green200
                 readonly property string green700 : Colors.green.green100
                 readonly property string green950 : Colors.green.green50
+            }
+
+            readonly property var yellow : QtObject{
+                readonly property string yellow50  : Colors.yellow.yellow950
+                readonly property string yellow100 : Colors.yellow.yellow700
+                readonly property string yellow200 : Colors.yellow.yellow600
+                readonly property string yellow500 : Colors.yellow.yellow500
+                readonly property string yellow600 : Colors.yellow.yellow200
+                readonly property string yellow700 : Colors.yellow.yellow100
+                readonly property string yellow950 : Colors.yellow.yellow50
             }
 
             readonly property var red : QtObject{
@@ -84,10 +106,12 @@ QtObject{
 
     readonly property var colors : QtObject{
         id: colorsObject
-        readonly property var elementary : currentTheme.elementary
-        readonly property var primary : currentTheme.primary
-        readonly property var neutral : currentTheme.neutral
-        readonly property var green : currentTheme.green
-        readonly property var red : currentTheme.red
+        readonly property var elementary    : currentTheme.elementary
+        readonly property var primary       : currentTheme.primary
+        readonly property var neutral       : currentTheme.neutral
+        readonly property var blue          : currentTheme.blue
+        readonly property var green         : currentTheme.green
+        readonly property var yellow        : currentTheme.yellow
+        readonly property var red           : currentTheme.red
     }
 }

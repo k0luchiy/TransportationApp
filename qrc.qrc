@@ -227,7 +227,7 @@
         <file>assets/icons/Outline/volume-up.svg</file>
         <file>assets/icons/Outline/wifi.svg</file>
         <file>assets/icons/Outline/x-circle.svg</file>
-        <file>assets/icons/Outline/x.svg</file>
+        <file>assets/icons/Outline/close.svg</file>
         <file>assets/icons/Outline/zoom-in.svg</file>
         <file>assets/icons/Outline/zoom-out.svg</file>
     </qresource>

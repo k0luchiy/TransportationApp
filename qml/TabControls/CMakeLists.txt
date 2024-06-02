@@ -14,4 +14,6 @@ qt_add_qml_module(TabControlsLib
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES LeftMenuTabButton.qml
     QML_FILES LeftMenuTabPannel.qml
+    QML_FILES TabButtonBase.qml
+    QML_FILES TabPannel.qml
 )

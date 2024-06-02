@@ -25,40 +25,64 @@ Window {
     color: Themes.colors.neutral.neutral0
 
 
-    //TableCell{}
-    ColumnLayout{
-        visible: true
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
 
-//        TableHeaders{
-//            Layout.fillWidth: true
-//        }
+    Component{
+        id: tabButton
+        TabButtonBase{
+            height: 40
+            width: 100
+            text: "Order 1"
+        }
+    }
 
-//        TableRow{
-//            Layout.fillWidth: true
-//        }
-        OrdersTable{
-            tableHeaders: ["Код", "Дата создания", "Дата доставки", "Улица", "Статус", "Стоимость"]
-            tableModel : ordersFilterModel
-            pagination : orderPagination
+    RowLayout{
+        anchors.fill: parent
+        visible: false
+
+        LeftMenuTabPannel{
+            Layout.fillHeight: true
+            Layout.preferredWidth: 200
+        }
+
+
+        ColumnLayout{
             Layout.fillHeight: true
             Layout.fillWidth: true
 
+            TabPannel{
+                id: tabPannel
+                Layout.preferredHeight: 40
+                Layout.fillWidth: true
+            }
+
+            ColumnLayout{
+                visible: true
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                OrdersTable{
+                    pagination : orderPagination
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    onRowClicked: {
+    //                    var component = Qt.createComponent("TabButtonBase.qml")
+                        var tab    = tabButton.createObject(tabPannel)
+    //                    tab.text = "Order 1"
+    //                    tabPannel.addItem(tab)
+                        tabPannel.addItem(tab)
+                    }
+                }
+
+                Pagination{
+                    id : orderPagination
+                    Layout.preferredHeight: 40
+                    Layout.fillWidth: true
+                    rowCount: ordersFilterModel.rowCount()
+                    rowsPerPage : 5
+                }
+            }
         }
-        Pagination{
-            id : orderPagination
-            Layout.preferredHeight: 40
-            Layout.fillWidth: true
-            rowCount: ordersFilterModel.rowCount()
-            rowsPerPage : 5
-        }
-//        Item{
-//            Layout.fillHeight: true
-//            Layout.fillWidth: true
-//        }
     }
 
     Pagination{
@@ -72,28 +96,22 @@ Window {
         visible: false
     }
 
-    ColumnLayout{
-        visible: false
-        width: 200
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        LeftMenuTabPannel{
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-    }
 
-    ColumnLayout{
-        visible: false
-        width: 200
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+    RowLayout{
+        visible: true
+//        width: 200
+//        anchors.top: parent.top
+//        anchors.bottom: parent.bottom
+
+        anchors.fill: parent
+
 
         TextInputField{
             Layout.fillWidth: true
             enabled: false
 
         }
+
 
         TextInputField{
             Layout.fillWidth: true
@@ -104,27 +122,18 @@ Window {
             Layout.fillWidth: true
         }
 
-        ComboBoxControl{
-            Layout.fillWidth: true
-            Layout.preferredHeight: 45
-        }
         ComboBoxInputField{
             id: comboBoxField
             Layout.fillWidth: true
-            model: ["First", "Second", "Third", "Forth"]
+            model: ordersFilterModel//["First", "Second", "Third", "Forth"]
+            textRole: "OrderId"
             onCurrentTextChanged : {
                 label.text = comboBoxField.currentText
             }
-
         }
 
-        Text{
-            id: label
-            height: 30
+        DateInputField{
             Layout.fillWidth: true
-            color: Themes.colors.elementary.black
-            text: "Hello"
-            font.pointSize: 14
         }
 
         Item{

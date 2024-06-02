@@ -3,20 +3,27 @@ import QtQuick.Layouts
 
 import Colors
 import Buttons
-
+import "DatesUtils.js" as DatesUtils
 Rectangle {
-    id: root
+    property color bgColor : Themes.colors.neutral.neutral0
+
+    property alias currentDate : calendar.currentDate
+    property alias startDate : calendar.startDate
+    property alias endDate : calendar.endDate
+    property alias selectedDate : calendar.selectedDate
+    property alias month : calendar.month
+    property alias year : calendar.year
+
+    signal applyClicked
+
+    id: calendarRoot
     width: 390
     height: 300
 
+    color: calendarRoot.bgColor
     border.width: 1
     border.color: Themes.colors.neutral.neutral700
     radius: 6
-
-    function getPureDate(date){
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate())
-    }
-
 
     RowLayout{
         anchors.fill: parent
@@ -27,110 +34,72 @@ Rectangle {
         ColumnLayout{
             Layout.fillHeight: true
             Layout.preferredWidth: 100
+            Layout.topMargin: 5
 
-            Text{
-                verticalAlignment: Text.AlignVCenter
+            AdditionalButton{
                 Layout.leftMargin: 5
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                color: Themes.colors.neutral.neutral600
-                font.pointSize: 10
                 text: "Today"
-
-                MouseArea{
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-                    onClicked: {
-                        var currentDate = getPureDate(new Date(Date.now()))
-                        calendar.selectedDate = currentDate
-                        calendar.startDate = currentDate
-                        calendar.endDate = currentDate
-                    }
+                onClicked: {
+                    var currentDate = DatesUtils.getPureDate(new Date(Date.now()))
+                    //calendar.selectedDate = currentDate
+                    calendar.startDate = currentDate
+                    calendar.endDate = currentDate
                 }
             }
-            Text{
-                verticalAlignment: Text.AlignVCenter
+
+            AdditionalButton{
                 Layout.leftMargin: 5
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                color: Themes.colors.neutral.neutral600
-                font.pointSize: 10
                 text: "Last 7 days"
-
-                MouseArea{
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-                    onClicked: {
-                        var currentDate = getPureDate(new Date(Date.now()))
-                        calendar.startDate = new Date(currentDate - 7 * 24 * 60 * 60 * 1000);
-                        calendar.endDate = currentDate
-                    }
+                onClicked: {
+                    var currentDate = DatesUtils.getPureDate(new Date(Date.now()))
+                    calendar.startDate = new Date(currentDate - 7 * 24 * 60 * 60 * 1000);
+                    calendar.endDate = currentDate
                 }
             }
 
-
-            Text{
-                verticalAlignment: Text.AlignVCenter
+            AdditionalButton{
                 Layout.leftMargin: 5
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                color: Themes.colors.neutral.neutral600
-                font.pointSize: 10
                 text: "Last 14 days"
-            }
-            Text{
-                verticalAlignment: Text.AlignVCenter
-                Layout.leftMargin: 5
-                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                Layout.preferredHeight: 30
-                Layout.fillWidth: true
-                color: Themes.colors.neutral.neutral600
-                font.pointSize: 10
-                text: "Last 30 days"
-            }
-            Text{
-                verticalAlignment: Text.AlignVCenter
-                Layout.leftMargin: 5
-                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                Layout.preferredHeight: 30
-                Layout.fillWidth: true
-                color: Themes.colors.neutral.neutral600
-                font.pointSize: 10
-                text: "Last 3 month"
-            }
-            Text{
-                verticalAlignment: Text.AlignVCenter
-                Layout.leftMargin: 5
-                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                Layout.preferredHeight: 30
-                Layout.fillWidth: true
-                color: Themes.colors.neutral.neutral600
-                font.pointSize: 10
-                text: "Last 12 month"
-            }
-            Text{
-                verticalAlignment: Text.AlignVCenter
-                Layout.leftMargin: 5
-                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                Layout.preferredHeight: 30
-                Layout.fillWidth: true
-                color: Themes.colors.neutral.neutral600
-                font.pointSize: 10
-                text: "Custom"
+                onClicked: {
+                    var currentDate = DatesUtils.getPureDate(new Date(Date.now()))
+                    calendar.startDate = new Date(currentDate - 7 * 24 * 60 * 60 * 1000 * 2);
+                    calendar.endDate = currentDate
+                }
             }
 
-
-            /*SecondaryButton{
+            AdditionalButton{
+                Layout.leftMargin: 5
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
-                //Layout.fillWidth: true
-                borderSize: 0
-            }*/
+                Layout.fillWidth: true
+                text: "This month"
+                onClicked: {
+                    calendar.startDate = new Date(calendar.year, calendar.month, 1);
+                    calendar.endDate = new Date(calendar.year, calendar.month + 1, 0);
+                }
+            }
+
+            AdditionalButton{
+                Layout.leftMargin: 5
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                text: "This year"
+                onClicked: {
+                    calendar.startDate = new Date(calendar.year, 0, 1);
+                    calendar.endDate = new Date(calendar.year, 11, 31);
+                }
+            }
+
             Item{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -154,6 +123,10 @@ Rectangle {
                     iconLeftVisible: false
                     iconRightVisible: false
                     btnText: "Cancel"
+                    onClicked: {
+                        calendarRoot.selectedDate = null
+                        calendarRoot.visible = false
+                    }
                 }
                 Item{
                     Layout.fillHeight: true
@@ -164,6 +137,10 @@ Rectangle {
                     iconLeftVisible: false
                     iconRightVisible: false
                     btnText: "Apply"
+                    onClicked: {
+                        applyClicked()
+                        calendarRoot.visible = false
+                    }
                 }
             }
         }

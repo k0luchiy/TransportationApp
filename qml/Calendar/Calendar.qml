@@ -4,6 +4,7 @@ import QtQuick.Controls
 
 import Colors
 import Buttons
+import "DatesUtils.js" as DatesUtils
 
 Rectangle{
     property date currentDate : new Date(Date.now());
@@ -33,7 +34,7 @@ Rectangle{
     property url iconLeftSource : "qrc:/assets/icons/Outline/arrow-sm-left.svg"
     property url iconRightSource : "qrc:/assets/icons/Outline/arrow-sm-right.svg"
 
-    property int titleFontSize : 10
+    property int titleFontSize : 12
     property int smallFontSize : 10
 
     property alias locale : monthGrid.locale
@@ -43,23 +44,6 @@ Rectangle{
     height: 250
     color: calendarRoot.bgColor
 
-    function getPureDate(date){
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate())
-    }
-
-    function getMonthName(monthInd){
-        var monthNames = [ "January", "February", "March", "April", "May", "June",
-                               "July", "August", "September", "October", "November", "December" ];
-        return monthNames[monthInd];
-    }
-
-    function get30Years(year){
-        var years = []
-        for(var i=-30; i < 30; ++i){
-            years.push(i + year)
-        }
-        return years
-    }
 
     ColumnLayout{
         anchors.fill: parent
@@ -96,7 +80,7 @@ Rectangle{
                 verticalAlignment: Text.AlignVCenter
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 font.pointSize: calendarRoot.titleFontSize
-                text: getMonthName(calendarRoot.month) + " " + calendarRoot.year
+                text: DatesUtils.getMonthName(calendarRoot.month) + " " + calendarRoot.year
                 color: calendarRoot.basicFontColor
 
                 MouseArea{
@@ -139,7 +123,7 @@ Rectangle{
             orientation: ListView.Horizontal
             contentX: contentWidth / 2 - width/2
 
-            model : get30Years(calendarRoot.currentDate.getFullYear())
+            model : DatesUtils.get30Years(calendarRoot.currentDate.getFullYear())
 
             delegate:
                 Text{
@@ -190,7 +174,7 @@ Rectangle{
 
                 delegate:
                     Rectangle{
-                        property date date: getPureDate(model.date)
+                        property date date: DatesUtils.getPureDate(model.date)
                         property bool selected : false
                         property bool inRange : false
                         property bool isBoundRange : false

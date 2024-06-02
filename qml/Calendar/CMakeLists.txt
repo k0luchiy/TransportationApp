@@ -14,4 +14,6 @@ qt_add_qml_module(CalendarLib
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES Calendar.qml
     QML_FILES AdditionalCalendar.qml
+    QML_FILES AdditionalButton.qml
+    QML_FILES DatesUtils.js
 )

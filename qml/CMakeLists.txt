@@ -4,6 +4,7 @@ add_subdirectory(InputFields)
 add_subdirectory(TabControls)
 add_subdirectory(Tables)
 add_subdirectory(Calendar)
+add_subdirectory(Notifications)
 
 #list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}/Buttons")
 

@@ -70,6 +70,7 @@ target_link_libraries(TransportationApp
     PRIVATE TabControlsLibplugin
     PRIVATE TablesLibplugin
     PRIVATE CalendarLibplugin
+    PRIVATE NotificationsLibplugin
 )
 
 include(GNUInstallDirs)

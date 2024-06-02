@@ -60,6 +60,14 @@ Window {
                 IconButton{
                     iconSize: 18
                     iconSource: "qrc:/assets/icons/Outline/cog.svg"
+                    onClicked : {
+                        if (Themes.currentTheme.themeId === 0){
+                            Themes.currentTheme = Themes.themes.dark
+                        }
+                        else{
+                            Themes.currentTheme = Themes.themes.light
+                        }
+                    }
                 }
                 IconButton{
                     iconSize: 18
@@ -236,7 +244,7 @@ Window {
 
     }
 
-    AdditionalCalendar{
+    DateRangePicker{
         x: 50
         y: 50
         visible: false
@@ -288,16 +296,16 @@ Window {
         }
     }
 
-    PrimaryButton{
-        x: 521
-        y: 403
-        onClicked : {
-            if (Themes.currentTheme.themeId === 0){
-                Themes.currentTheme = Themes.themes.dark
-            }
-            else{
-                Themes.currentTheme = Themes.themes.light
-            }
-        }
-    }
+//    PrimaryButton{
+//        x: 521
+//        y: 403
+//        onClicked : {
+//            if (Themes.currentTheme.themeId === 0){
+//                Themes.currentTheme = Themes.themes.dark
+//            }
+//            else{
+//                Themes.currentTheme = Themes.themes.light
+//            }
+//        }
+//    }
 }

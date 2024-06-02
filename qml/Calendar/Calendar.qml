@@ -21,16 +21,16 @@ Rectangle{
     property color secondaryFontColor : Themes.colors.neutral.neutral500
 
     property color bgSelectedColor : isRangePicker ?
-                 Themes.colors.neutral.neutral100 :
-                 Themes.colors.primary.primary500
+                    Themes.colors.neutral.neutral100 :
+                    Themes.colors.primary.primary500
     property color bgBoundColor : Themes.colors.primary.primary500
     property color bgInRangeColor : Themes.colors.neutral.neutral50
 
     property color fontDefaultColor : Themes.colors.neutral.neutral950
-    property color fontBoundColor : Themes.colors.neutral.neutral0
+    property color fontBoundColor : Colors.neutral.neutral0
     property color fontSelectedColor : isRangePicker ?
-                                           Themes.colors.neutral.neutral950 :
-                                           Themes.colors.neutral.neutral50
+                   Themes.colors.neutral.neutral950 :
+                   Colors.neutral.neutral50
     property color fontInRangeColor : Themes.colors.primary.primary600
     property color fontNextMonthColor : Themes.colors.neutral.neutral500
 

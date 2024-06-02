@@ -33,5 +33,10 @@ Item {
             Layout.fillWidth: true
             connectedTabPannel: orderTabPannel
         }
+//        OrderInfoPage{
+//            Layout.margins: 10
+//            Layout.fillHeight: true
+//            Layout.fillWidth: true
+//        }
     }
 }

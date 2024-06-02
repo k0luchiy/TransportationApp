@@ -16,6 +16,7 @@ Item {
 
     ColumnLayout{
         anchors.fill: parent
+        spacing: 10
 
         RowLayout{
             Layout.preferredHeight: 60
@@ -27,12 +28,12 @@ Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
             }
-            DateInputField{
+            DateRangeInputField{
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
                 z: 10
             }
-            DateInputField{
+            DateRangeInputField{
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
             }

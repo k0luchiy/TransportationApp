@@ -16,4 +16,5 @@ qt_add_qml_module(TabsLib
     VERSION 1.0
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES OrderTableTab.qml
+    QML_FILES OrderInfoPage.qml
 )

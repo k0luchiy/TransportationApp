@@ -28,12 +28,12 @@ Item {
 
     id: fieldRoot
     width: 280
-    height: fieldRoot.titleVisible ? 45 + 25 : 45
+    height: fieldRoot.titleVisible ? 45 + 20 : 45
 
     ColumnLayout{
         anchors.fill: fieldRoot
         RowLayout{
-            //Layout.preferredHeight: 20
+            Layout.preferredHeight: 20
             Layout.fillWidth: true
             visible : fieldRoot.titleVisible
             Text{
@@ -47,7 +47,6 @@ Item {
         ComboBoxControl{
             id : comboBox
             enabled: fieldRoot.enabled
-
             Layout.fillHeight: true
             Layout.fillWidth: true
             selectedColor: Themes.colors.neutral.neutral100
@@ -56,8 +55,6 @@ Item {
             fontSize : fieldRoot.titleFontSize
             itemHeight : 30
             itemCount : 3
-
         }
-
     }
 }

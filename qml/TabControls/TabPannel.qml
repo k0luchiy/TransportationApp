@@ -5,15 +5,24 @@ import QtQuick.Layouts
 import Colors
 
 TabBar {
-    id: tabBar
+    id: tabBarRoot
     width: 500
     contentWidth: 500
     height: 50
 
-
     background: Rectangle{
         anchors.fill: parent
         color: Colors.elementary.transparent
+    }
+
+    function addTab(title, iconVisible = true, checked = false){
+        var component = Qt.createComponent("TabButtonBase.qml")
+        var tab    = tabButton.createObject(tabBarRoot)
+        tab.text = "Order 1"
+        tab.iconVisible = iconVisible
+        tab.checked = checked
+        tab.closed.connect(()=>{tabBarRoot.removeItem(tab)})
+        tabBarRoot.addItem(tab)
     }
 
     contentItem:
@@ -30,14 +39,11 @@ TabBar {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 boundsMovement: Flickable.StopAtBounds
-                model: tabBar.contentModel
-                currentIndex: tabBar.currentIndex
+                model: tabBarRoot.contentModel
+                currentIndex: tabBarRoot.currentIndex
                 contentHeight: 40
                 orientation: ListView.Horizontal
                 boundsBehavior: Flickable.StopAtBounds
-                delegate: TabButtonBase{
-                    text: "Order "
-                }
             }
             Rectangle{
                 Layout.preferredHeight: 2

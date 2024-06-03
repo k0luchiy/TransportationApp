@@ -19,7 +19,6 @@ Item {
             Layout.preferredHeight: 40
             Layout.fillWidth: true
 
-
             TabButtonBase {
                 id: mainTabButton
                 text: "Orders"
@@ -27,16 +26,22 @@ Item {
                 iconVisible: false
             }
         }
-        OrderTableTab{
-            Layout.margins: 10
+
+        StackLayout {
+            id: ordersStackView
             Layout.fillHeight: true
             Layout.fillWidth: true
-            connectedTabPannel: orderTabPannel
+            Layout.margins: 10
+            currentIndex: orderTabPannel.currentIndex
+            OrderTableTab{
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                connectedTabPannel: orderTabPannel
+            }
+            OrderInfoPage{
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
         }
-//        OrderInfoPage{
-//            Layout.margins: 10
-//            Layout.fillHeight: true
-//            Layout.fillWidth: true
-//        }
     }
 }

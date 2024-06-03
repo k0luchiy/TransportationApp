@@ -64,11 +64,7 @@ Item {
             Layout.fillWidth: true
 
             onRowClicked: {
-                var component = Qt.createComponent("TabButtonBase.qml")
-                var tab    = tabButton.createObject(connectedTabPannel)
-                tab.text = "Order 1"
-                tab.connectedTabPannel = connectedTabPannel
-                connectedTabPannel.addItem(tab)
+                connectedTabPannel.addTab("Order 1")
             }
         }
 

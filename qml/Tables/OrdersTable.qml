@@ -9,7 +9,7 @@ ColumnLayout {
     property var tableModel : ordersFilterModel
     property var pagination
 
-    signal rowClicked
+    signal rowClicked(recordId : int)
 
     id : tableRoot
     spacing: 0
@@ -26,7 +26,7 @@ ColumnLayout {
             Layout.fillWidth: true
             model: rowModel
             onClicked: {
-                tableRoot.rowClicked()
+                tableRoot.rowClicked(recordId)
             }
         }
     }
@@ -44,6 +44,7 @@ ColumnLayout {
             property var rowModel : [OrderId, CreatedDate.toLocaleDateString("en_US"),
                                     AskedDeliveryDate.toLocaleDateString("en_US"),
                                     Address, StatusTitle, Cost]
+            property int recordId : OrderId
             sourceComponent: (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
                                  tableRow : emptyItem
         }

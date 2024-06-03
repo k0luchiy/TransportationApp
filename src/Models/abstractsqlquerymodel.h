@@ -26,6 +26,7 @@
  */
 class AbstractSqlQueryModel : public QSqlQueryModel
 {
+    Q_OBJECT
 public:
     //explicit AbstractSqlQueryModel(QObject *parent = nullptr);
     explicit AbstractSqlQueryModel(const QString& select_query, QObject* parent = nullptr);

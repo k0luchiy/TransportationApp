@@ -7,8 +7,10 @@ import InputFields
 import Tables
 import TabControls
 
+import TransportationsApp.Models 1.0
+
 Item {
-    property var order
+    property var orderModel : Order{}
 
     id: pageRoot
     height: 800
@@ -26,7 +28,7 @@ Item {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
-                text: "Order 1"
+                text: qsTr("Order ") + orderModel.orderId
             }
 
             SecondaryButton{
@@ -45,19 +47,22 @@ Item {
                 Layout.fillWidth: true
                 NumberInputField{
                     Layout.fillWidth: true
-                    title: "Id:"
+                    title: qsTr("Id:")
+                    text: orderModel.orderId
                 }
                 DateInputField{
                     Layout.fillWidth: true
-                    title: "Created date:"
+                    title:  qsTr("Created date:")
+                    text: orderModel.createdDate
                 }
                 DateInputField{
                     Layout.fillWidth: true
-                    title: "Delivery date:"
+                    title:  qsTr("Delivery date:")
+                    text: orderModel.askedDeliveryDate
                 }
                 ComboBoxInputField{
                     Layout.fillWidth: true
-                    title: "Status:"
+                    title:  qsTr("Status:")
                 }
             }
             ColumnLayout{
@@ -65,19 +70,23 @@ Item {
                 Layout.fillWidth: true
                 NumberInputField{
                     Layout.fillWidth: true
-                    title: "Volume:"
+                    title:  qsTr("Volume:")
+                    text: orderModel.volume
                 }
                 NumberInputField{
                     Layout.fillWidth: true
-                    title: "Weight:"
+                    title:  qsTr("Weight:")
+                    text: orderModel.weight
                 }
                 TextInputField{
                     Layout.fillWidth: true
-                    title: "Address:"
+                    title:  qsTr("Address:")
+                    text: orderModel.address
                 }
                 NumberInputField{
                     Layout.fillWidth: true
-                    title: "Cost:"
+                    title:  qsTr("Cost:")
+                    text: orderModel.cost
                 }
             }
         }

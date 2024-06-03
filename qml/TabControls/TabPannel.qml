@@ -5,6 +5,8 @@ import QtQuick.Layouts
 import Colors
 
 TabBar {
+    signal tabClosed
+
     id: tabBarRoot
     width: 500
     contentWidth: 500
@@ -18,10 +20,13 @@ TabBar {
     function addTab(title, iconVisible = true, checked = false){
         var component = Qt.createComponent("TabButtonBase.qml")
         var tab    = tabButton.createObject(tabBarRoot)
-        tab.text = "Order 1"
+        tab.text = title
         tab.iconVisible = iconVisible
         tab.checked = checked
-        tab.closed.connect(()=>{tabBarRoot.removeItem(tab)})
+        tab.closed.connect( ()=>{
+            tabBarRoot.removeItem(tab)
+            tabBarRoot.tabClosed()
+        })
         tabBarRoot.addItem(tab)
     }
 

@@ -79,14 +79,11 @@ QVariant AbstractSqlQueryModel::data(const QModelIndex& index, int role) const
  */
 void AbstractSqlQueryModel::updateModel()
 {
-    //setQuery(get_query());
-    //setQuery(m_select_query);
     this->setQuery(m_select_query);
     if (this->lastError().isValid()) {
         qDebug() << "Failed to execute query:" << this->lastError();
     }
     generateRoleNames();
-    qDebug() << "Row count after query:" << rowCount();
 }
 
 /*!

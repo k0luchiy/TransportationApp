@@ -8,7 +8,7 @@ import Tables
 import TabControls
 
 Item {
-    property var connectedTabPannel
+    signal rowClicked(recordId : int)
 
     id: pageRoot
     height: 800
@@ -59,12 +59,12 @@ Item {
             }
         }
         OrdersTable{
-            pagination : orderPagination
             Layout.fillHeight: true
             Layout.fillWidth: true
+            pagination : orderPagination
 
-            onRowClicked: {
-                connectedTabPannel.addTab("Order 1")
+            onRowClicked: (recordId) => {
+                pageRoot.rowClicked(recordId)
             }
         }
 

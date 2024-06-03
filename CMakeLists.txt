@@ -61,9 +61,9 @@ target_link_libraries(TransportationApp
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Sql
     PRIVATE Qt::Test
-    #PRIVATE UserModelsLib
     PRIVATE ModelsLib
     PRIVATE FilterModelsLib
+    PRIVATE ComponentsClassesLib
     PRIVATE ColorsLibplugin
     PRIVATE ButtonsLibplugin
     PRIVATE InputFieldsLibplugin

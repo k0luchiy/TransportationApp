@@ -11,6 +11,8 @@
 #include "ordersfiltermodel.h"
 #include "ordersmodel.h"
 
+#include "order.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -45,18 +47,12 @@ int main(int argc, char *argv[])
     ordersFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     ordersFilterModel->sort(0, Qt::AscendingOrder);
     //ordersFilterModel->setFilterOrderId(3);
-    qDebug() << ordersFilterModel << ordersFilterModel->rowCount();
+
     engine.rootContext()->setContextProperty("orders", ordersModel);
     engine.rootContext()->setContextProperty("ordersFilterModel", ordersFilterModel);
 
 
-//    CarsModel* carsModel = new CarsModel();
-//    qDebug() << carsModel->rowCount() << carsModel->record(0);
-
-//    AbstractSqlQueryModel* abstModel = carsModel;
-//    qDebug() << carsModel << carsModel->rowCount() << abstModel->rowCount();
-
-
+    qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");
     engine.loadFromModule("TransportationApp", "Main");
 
 //    if(db.isOpen()){

@@ -282,7 +282,7 @@ Window {
             model: ordersFilterModel//["First", "Second", "Third", "Forth"]
             textRole: "OrderId"
             onCurrentTextChanged : {
-                label.text = comboBoxField.currentText
+                //label.text = comboBoxField.currentText
             }
         }
 

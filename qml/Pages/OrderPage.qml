@@ -29,17 +29,25 @@ Item {
             id: orderTabPannel
             Layout.preferredHeight: 40
             Layout.fillWidth: true
+            tabs: [{text: "Order", checked: true, iconVisible: false}]
+            onTabClosed: (index) => {
+                ordersStackView.children[index].destroy()
+                //orderTabPannel.currentIndexChanged()
+                //ordersStackView.currentIndex = ordersStackView.currentIndex
+                //ordersStackView.currentIndex = orderTabPannel.currentIndex
 
-//            onTabClosed: (index) => {
-//                ordersStackView
-//            }
-
-            TabButtonBase {
-                id: mainTabButton
-                text: "Orders"
-                checked: true
-                iconVisible: false
+//                if(orderTabPannel.currentIndex >= index){
+//                     //tabBarRoot.currentIndex = tabBarRoot.currentIndex
+//                    ordersStackView.currentIndex -= 1
+//                }
             }
+
+//            TabButtonBase {
+//                id: mainTabButton
+//                text: "Orders"
+//                checked: true
+//                iconVisible: false
+//            }
         }
 
         StackLayout {
@@ -54,7 +62,7 @@ Item {
                 //connectedTabPannel: orderTabPannel
                 onRowClicked: (recordId) => {
                     orderTabPannel.addTab("Order " + recordId)
-                    var orderInfoPage    = orderInfoPageComp.createObject(ordersStackView)
+                    var orderInfoPage = orderInfoPageComp.createObject(ordersStackView)
                     orderInfoPage.orderModel.setRecord(orders.findRecord("OrderId", recordId))
                     orderInfoPage.parent = ordersStackView;
                 }

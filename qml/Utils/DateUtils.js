@@ -28,6 +28,9 @@ function strToDate(date){
 }
 
 function formatDate(date) {
+    if(isNaN(date)){
+        return ""
+    }
     var day = date.getDate();
     var month = date.getMonth() + 1;
     var year = date.getFullYear();

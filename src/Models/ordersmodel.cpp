@@ -26,13 +26,13 @@ OrdersModel::OrdersModel(QObject *parent)
 
 bool OrdersModel::updateOrder(
     quint64 orderId, const QDate& askedDeliveryDate,
-    quint64 statusId, float cost, const QString& address,
-    quint64 volume, quint64 weight
+    quint64 statusId, const QString& address,
+    quint64 volume, quint64 weight, float cost
 )
 {
     QSqlQuery query;
     const QString reg_query =
-        "U pdate Orders set \
+        "Update Orders set \
             askedDeliveryDate = :askedDeliveryDate, statusId = :statusId,   \
             cost = :cost, address = :address, volume = :volume, weight = :weight    \
         where orderId = :orderId";
@@ -41,10 +41,10 @@ bool OrdersModel::updateOrder(
     query.bindValue(":orderId", orderId);
     query.bindValue(":askedDeliveryDate", askedDeliveryDate);
     query.bindValue(":statusId", statusId);
-    query.bindValue(":cost", cost);
     query.bindValue(":address", address);
     query.bindValue(":volume", volume);
     query.bindValue(":weight", weight);
+    query.bindValue(":cost", cost);
 
     return query.exec();
 }

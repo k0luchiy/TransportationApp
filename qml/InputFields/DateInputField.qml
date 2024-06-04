@@ -48,10 +48,10 @@ TextInputField {
     }
 
     onTextChanged:{
-        if(!fieldRoot.text){
+        var newDate = DateUtils.strToDate(fieldRoot.text)
+        if(!fieldRoot.text || isNaN(newDate)){
             return;
         }
-        var newDate = DateUtils.strToDate(fieldRoot.text)
         fieldRoot.month = newDate.getMonth()
         fieldRoot.year = newDate.getFullYear()
         fieldRoot.selectedDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())

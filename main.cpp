@@ -10,6 +10,7 @@
 #include "carsmodel.h"
 #include "ordersfiltermodel.h"
 #include "ordersmodel.h"
+#include "orderstatusmodel.h"
 
 #include "order.h"
 
@@ -40,6 +41,8 @@ int main(int argc, char *argv[])
     //qDebug() << userModel->rowCount() << userModel->record(0);
 
     OrdersModel* ordersModel = new OrdersModel();
+    OrderStatusModel* ordersStatusModel = new OrderStatusModel();
+
     //ordersModel->setQuery(query);
     OrdersFilterModel* ordersFilterModel = new OrdersFilterModel();
     ordersFilterModel->setSourceModel(ordersModel);
@@ -48,7 +51,9 @@ int main(int argc, char *argv[])
     ordersFilterModel->sort(0, Qt::AscendingOrder);
     //ordersFilterModel->setFilterOrderId(3);
 
-    engine.rootContext()->setContextProperty("orders", ordersModel);
+    engine.rootContext()->setContextProperty("userModel", userModel);
+    engine.rootContext()->setContextProperty("ordersModel", ordersModel);
+    engine.rootContext()->setContextProperty("ordersStatusModel", ordersStatusModel);
     engine.rootContext()->setContextProperty("ordersFilterModel", ordersFilterModel);
 
 

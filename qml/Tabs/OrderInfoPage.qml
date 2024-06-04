@@ -39,15 +39,15 @@ Item {
                 btnText: "Save"
                 onClicked: {
                     var orderId = Number(orderIdField.text)
-                    var createdDate = createdDateField.text
-                    var askedDeliveryDate = askedDeliveryDateField.text
-                    var statusId = Number(statusField.currentIndex)
+                    var askedDeliveryDate = DateUtils.strToDate(askedDeliveryDateField.text)
+                    var statusId = Number(statusField.currentIndex) + 1
                     var volume = Number(volumeField.text)
                     var weight = Number(weightField.text)
                     var address = addressField.text
                     var cost = Number(costField.text)
-
-                    console.log(orderId, createdDate, askedDeliveryDate, statusId, volume, weight, address, cost)
+                    console.log(statusId)
+                    ordersModel.updateOrder(orderId, askedDeliveryDate, statusId,
+                                            address, volume, weight, cost);
                 }
             }
         }
@@ -80,6 +80,9 @@ Item {
                     id: statusField
                     Layout.fillWidth: true
                     title:  qsTr("Status:")
+                    model: ordersStatusModel
+                    textRole: "StatusTitle"
+                    currentIndex: orderModel.statusId
                 }
             }
             ColumnLayout{

@@ -63,7 +63,7 @@ Item {
                 onRowClicked: (recordId) => {
                     orderTabPannel.addTab("Order " + recordId)
                     var orderInfoPage = orderInfoPageComp.createObject(ordersStackView)
-                    orderInfoPage.orderModel.setRecord(orders.findRecord("OrderId", recordId))
+                    orderInfoPage.orderModel.setRecord(ordersModel.findRecord("OrderId", recordId))
                     orderInfoPage.parent = ordersStackView;
                 }
             }

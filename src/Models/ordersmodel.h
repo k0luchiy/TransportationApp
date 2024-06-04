@@ -20,16 +20,16 @@
  */
 class OrdersModel : public AbstractSqlQueryModel
 {
+    Q_OBJECT
+
 public:
     explicit OrdersModel(QObject *parent = nullptr);
-
-    //int rowCount( const QModelIndex & parent = QModelIndex() ) const;
 
 public Q_SLOTS:
     bool updateOrder(
         quint64 orderId, const QDate& askedDeliveryDate,
-        quint64 statusId, float cost, const QString& address,
-        quint64 volume, quint64 weight
+        quint64 statusId, const QString& address,
+        quint64 volume, quint64 weight, float cost
     );
 
 private:

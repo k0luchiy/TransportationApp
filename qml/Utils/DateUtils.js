@@ -21,14 +21,10 @@ function getPureDate(date){
     return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }
 
-function formatDate(date) {
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-
-    day = day < 10 ? '0' + day : day;
-    month = month < 10 ? '0' + month : month;
-
-    return day + '.' + month;
+function strToDate(date){
+    var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+    var newDate = new Date(date.replace(pattern,'$3-$2-$1'));
+    return newDate
 }
 
 function formatDate(date) {

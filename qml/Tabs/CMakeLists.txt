@@ -9,6 +9,8 @@ target_link_libraries(TabsLib
     PRIVATE InputFieldsLibplugin
     PRIVATE TabControlsLibplugin
     PRIVATE TablesLibplugin
+    PRIVATE UtilsLibplugin
+    PRIVATE CalendarLibplugin
 )
 
 qt_add_qml_module(TabsLib

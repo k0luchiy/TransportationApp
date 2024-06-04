@@ -1,6 +1,7 @@
 import QtQuick 2.15
 
 import Calendar
+import Utils
 
 TextInputField {
     property alias currentDate : calendar.currentDate
@@ -26,7 +27,7 @@ TextInputField {
         z: 5
         visible: false
         onApplyClicked : {
-            fieldRoot.text = DatesUtils.dateRangeToString(fieldRoot.startDate, fieldRoot.endDate)
+            fieldRoot.text = DateUtils.dateRangeToString(fieldRoot.startDate, fieldRoot.endDate)
         }
     }
 

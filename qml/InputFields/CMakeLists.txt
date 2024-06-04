@@ -7,6 +7,7 @@ target_link_libraries(InputFieldsLib
     PRIVATE ColorsLibplugin
     PRIVATE ButtonsLibplugin
     PRIVATE CalendarLibplugin
+    PRIVATE UtilsLibplugin
 )
 
 qt_add_qml_module(InputFieldsLib

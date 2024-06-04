@@ -1,6 +1,7 @@
 import QtQuick 2.15
 
 import Calendar
+import Utils
 
 TextInputField {
     property alias currentDate : calendar.currentDate
@@ -24,7 +25,12 @@ TextInputField {
         z: 5
         visible: false
         onApplyClicked : {
-            fieldRoot.text = DatesUtils.formatDate(fieldRoot.selectedDate)
+            if(!fieldRoot.selectedDate){
+                fieldRoot.text = ""
+            }
+            else{
+                fieldRoot.text = DateUtils.formatDate(fieldRoot.selectedDate)
+            }
         }
     }
 
@@ -39,5 +45,15 @@ TextInputField {
         onClicked : {
             calendar.visible = !calendar.visible
         }
+    }
+
+    onTextChanged:{
+        if(!fieldRoot.text){
+            return;
+        }
+        var newDate = DateUtils.strToDate(fieldRoot.text)
+        fieldRoot.month = newDate.getMonth()
+        fieldRoot.year = newDate.getFullYear()
+        fieldRoot.selectedDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
     }
 }

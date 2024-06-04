@@ -3,7 +3,7 @@ import QtQuick.Layouts
 
 import Colors
 import Buttons
-import "DatesUtils.js" as DatesUtils
+import Utils
 
 Rectangle {
     property color bgColor : Themes.colors.neutral.neutral0
@@ -45,7 +45,7 @@ Rectangle {
                 Layout.fillWidth: true
                 text: "Today"
                 onClicked: {
-                    var currentDate = DatesUtils.getPureDate(new Date(Date.now()))
+                    var currentDate = DateUtils.getPureDate(new Date(Date.now()))
                     //calendar.selectedDate = currentDate
                     calendar.startDate = currentDate
                     calendar.endDate = currentDate
@@ -59,7 +59,7 @@ Rectangle {
                 Layout.fillWidth: true
                 text: "Last 7 days"
                 onClicked: {
-                    var currentDate = DatesUtils.getPureDate(new Date(Date.now()))
+                    var currentDate = DateUtils.getPureDate(new Date(Date.now()))
                     calendar.startDate = new Date(currentDate - 7 * 24 * 60 * 60 * 1000);
                     calendar.endDate = currentDate
                 }
@@ -72,7 +72,7 @@ Rectangle {
                 Layout.fillWidth: true
                 text: "Last 14 days"
                 onClicked: {
-                    var currentDate = DatesUtils.getPureDate(new Date(Date.now()))
+                    var currentDate = DateUtils.getPureDate(new Date(Date.now()))
                     calendar.startDate = new Date(currentDate - 7 * 24 * 60 * 60 * 1000 * 2);
                     calendar.endDate = currentDate
                 }

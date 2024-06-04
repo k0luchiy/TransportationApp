@@ -4,7 +4,7 @@ import QtQuick.Controls
 
 import Colors
 import Buttons
-import "DatesUtils.js" as DatesUtils
+import Utils
 
 Rectangle{
     property date currentDate : new Date(Date.now());
@@ -85,7 +85,7 @@ Rectangle{
                 verticalAlignment: Text.AlignVCenter
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 font.pointSize: calendarRoot.titleFontSize
-                text: DatesUtils.getMonthName(calendarRoot.month) + " " + calendarRoot.year
+                text: DateUtils.getMonthName(calendarRoot.month) + " " + calendarRoot.year
                 color: calendarRoot.basicFontColor
 
                 MouseArea{
@@ -128,7 +128,7 @@ Rectangle{
             orientation: ListView.Horizontal
             contentX: contentWidth / 2 - width/2
 
-            model : DatesUtils.get30Years(calendarRoot.currentDate.getFullYear())
+            model : DateUtils.get30Years(calendarRoot.currentDate.getFullYear())
 
             delegate:
                 Text{
@@ -179,7 +179,7 @@ Rectangle{
 
                 delegate:
                     Rectangle{
-                        property date date: DatesUtils.getPureDate(model.date)
+                        property date date: DateUtils.getPureDate(model.date)
                         property bool selected : false
                         property bool inRange : false
                         property bool isBoundRange : false
@@ -259,13 +259,18 @@ Rectangle{
                             onClicked: {
                                 // Basicly sets start and end dates
                                 // or just selected on first click
-                                if(!calendarRoot.selectedDate || !calendarRoot.isRangePicker){
+                                if(!calendarRoot.selectedDate){
                                     calendarRoot.selectedDate = dayRoot.date
                                 }
-                                else if(calendarRoot.selectedDate.getTime() === dayRoot.date.getTime())
+                                else if(!calendarRoot.isRangePicker)
                                 {
-                                    calendarRoot.selectedDate = null
-                                    dayRoot.selected = false
+                                    if(calendarRoot.selectedDate.getTime() === dayRoot.date.getTime()){
+                                        calendarRoot.selectedDate = null
+                                        dayRoot.selected = false
+                                    }
+                                    else{
+                                        calendarRoot.selectedDate = dayRoot.date
+                                    }
                                 }
                                 else{
                                     var lastSelectedDate = dayRoot.date

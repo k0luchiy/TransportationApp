@@ -1,4 +1,5 @@
 #include "ordersfiltermodel.h"
+#include <QDebug>
 
 OrdersFilterModel::OrdersFilterModel(QObject *parent)
     : QSortFilterProxyModel{parent}
@@ -36,7 +37,7 @@ QDate OrdersFilterModel::filterMinDeliveryDate() const { return m_minDeliveryDat
 QDate OrdersFilterModel::filterMaxDeliveryDate() const { return m_maxDeliveryDate; }
 
 //! Getter for order street field
-QString OrdersFilterModel::filterStreet() const { return m_street; }
+QString OrdersFilterModel::filterAddress() const { return m_address; }
 
 //! Getter for order street field
 QString OrdersFilterModel::filterStatus() const { return m_status; }
@@ -98,9 +99,9 @@ void OrdersFilterModel::setFilterMaxDeliveryDate(const QDate& maxDeliveryDate)
  * \brief Setter for order address street filter field.
  * \param street Street address to set.
  */
-void OrdersFilterModel::setFilterStreet(const QString& street)
+void OrdersFilterModel::setFilterAddress(const QString& address)
 {
-    m_street = street;
+    m_address = address;
     invalidateRowsFilter();
 }
 
@@ -138,7 +139,7 @@ void OrdersFilterModel::setFilters
 (
     quint64 orderId, const QDate& minCreatedDate,
     const QDate& maxCreatedDate, const QDate& minDeliveryDate,
-    const QDate& maxDeliveryDate, const QString& street,
+    const QDate& maxDeliveryDate, const QString& address,
     const QString& status, quint64 cost
 )
 {
@@ -147,7 +148,7 @@ void OrdersFilterModel::setFilters
     m_maxCreatedDate = maxCreatedDate;
     m_minDeliveryDate = minDeliveryDate;
     m_maxDeliveryDate = maxDeliveryDate;
-    m_street = street;
+    m_address = address;
     m_status = status;
     m_cost = cost;
     invalidateRowsFilter();
@@ -177,17 +178,16 @@ bool OrdersFilterModel::filterAcceptsRow(int source_row, const QModelIndex &sour
     quint64 orderId = m_sourceModel->getValue(source_row, "OrderId").toInt();
     QDate createdDate = m_sourceModel->getValue(source_row, "CreatedDate").toDate();
     QDate deliveryDate = m_sourceModel->getValue(source_row, "AskedDeliveryDate").toDate();
-    QString street = m_sourceModel->getValue(source_row, "FullAddress").toString();
-    QString status = m_sourceModel->getValue(source_row, "Status").toString();
+    QString address = m_sourceModel->getValue(source_row, "Address").toString();
+    QString status = m_sourceModel->getValue(source_row, "StatusTitle").toString();
     quint64 cost = m_sourceModel->getValue(source_row, "Cost").toInt();
 
     return
         (m_orderId == orderId || m_orderId == 0) &&
         isDateInRange(createdDate, m_minCreatedDate, m_maxCreatedDate) &&
         isDateInRange(deliveryDate, m_minDeliveryDate, m_maxDeliveryDate) &&
-        street.contains(QRegularExpression(m_street, QRegularExpression::CaseInsensitiveOption)) &&
-        QString::compare(status, m_status, Qt::CaseInsensitive) == 0
-            || m_status.isEmpty() &&
-        (m_cost == cost  || m_cost == 0)
+        address.contains(QRegularExpression(m_address, QRegularExpression::CaseInsensitiveOption)) &&
+        (QString::compare(status, m_status, Qt::CaseInsensitive) == 0 || m_status.isEmpty()) &&
+        (m_cost < cost  || m_cost == 0)
         ;
 }

@@ -17,6 +17,11 @@ TextInputField {
     text: ""
     z: 5
 
+    function clear(){
+        calendar.clear()
+        fieldRoot.text = ""
+    }
+
     DatePicker{
         id: calendar
         y: fieldRoot.height + 10
@@ -24,6 +29,11 @@ TextInputField {
                fieldRoot.width - calendar.width - 5
         z: 5
         visible: false
+
+        onClearClicked: {
+            fieldRoot.clear()
+        }
+
         onApplyClicked : {
             if(!fieldRoot.selectedDate){
                 fieldRoot.text = ""

@@ -17,6 +17,7 @@ Rectangle {
     property alias  isRangePicker : calendar.isRangePicker
 
     signal applyClicked
+    signal clearClicked
 
     id: calendarRoot
     width: 390
@@ -26,6 +27,10 @@ Rectangle {
     border.width: 1
     border.color: Themes.colors.neutral.neutral700
     radius: 6
+
+    function clear(){
+        calendar.clear()
+    }
 
     RowLayout{
         anchors.fill: parent
@@ -125,8 +130,9 @@ Rectangle {
                     buttonSize: ButtonSizes.smallSize
                     iconLeftVisible: false
                     iconRightVisible: false
-                    btnText: "Cancel"
+                    btnText: "Clear"
                     onClicked: {
+                        calendarRoot.clearClicked()
                         calendarRoot.selectedDate = null
                         calendarRoot.visible = false
                     }

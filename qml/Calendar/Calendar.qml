@@ -49,6 +49,14 @@ Rectangle{
     height: 250
     color: calendarRoot.bgColor
 
+    function clear(){
+        calendarRoot.startDate = new Date("")
+        calendarRoot.endDate = new Date("")
+        calendarRoot.selectedDate = null
+        calendarRoot.month = currentDate.getMonth()
+        calendarRoot.year = currentDate.getFullYear()
+    }
+
 
     ColumnLayout{
         anchors.fill: parent

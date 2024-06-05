@@ -40,12 +40,12 @@ Item {
                 onClicked: {
                     var orderId = Number(orderIdField.text)
                     var askedDeliveryDate = DateUtils.strToDate(askedDeliveryDateField.text)
-                    var statusId = Number(statusField.currentIndex) + 1
+                    var statusId = Number(statusField.currentIndex)
                     var volume = Number(volumeField.text)
                     var weight = Number(weightField.text)
                     var address = addressField.text
                     var cost = Number(costField.text)
-                    console.log(statusId)
+
                     ordersModel.updateOrder(orderId, askedDeliveryDate, statusId,
                                             address, volume, weight, cost);
                 }

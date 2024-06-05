@@ -25,7 +25,7 @@ Item {
     property bool isError : false
     property url iconLeftSource : "qrc:/assets/icons/Outline/filter.svg"
     property url iconRightSource : "qrc:/assets/icons/Outline/filter.svg"
-    property int titleFontSize : 12
+    property int titleFontSize : 10
     property int contentFontSize : 12
 
     property alias text : inputField.text
@@ -43,6 +43,10 @@ Item {
     id: fieldRoot
     width: 280
     height: fieldRoot.titleVisible ? 45 + 20 : 45
+
+    function clear(){
+        fieldRoot.text = ""
+    }
 
     ColumnLayout{
         anchors.fill: fieldRoot

@@ -30,6 +30,10 @@ Item {
     width: 280
     height: fieldRoot.titleVisible ? 45 + 20 : 45
 
+    function clear(){
+        comboBox.currentIndex = 0
+    }
+
     ColumnLayout{
         anchors.fill: fieldRoot
         RowLayout{

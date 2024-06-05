@@ -17,6 +17,43 @@ Item {
     ColumnLayout{
         anchors.fill: parent
         spacing: 10
+        RowLayout{
+            Layout.preferredHeight: 35
+            Layout.fillWidth: true
+            spacing: 10
+            TextInputField{
+                Layout.fillWidth: true
+                Layout.preferredHeight: 35
+                titleVisible: false
+                placeholderText: "Search..."
+                iconLeftVisible: true
+                iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
+            }
+            PrimaryButton{
+                Layout.preferredWidth: 95
+                Layout.preferredHeight: 35
+                btnText: "Filter"
+                iconLeftVisible: true
+                iconLeftSource: "qrc:/assets/icons/Outline/filter.svg"
+
+                onClicked: {
+                    var orderId = orderIdField.text ? Number(orderIdField.text) : 0
+                    var minCreatedDate = createdDateRangeField.startDate
+                    var maxCreatedDate = createdDateRangeField.endDate
+                    var minDeliveryDate = deliveryDateRangeField.startDate
+                    var maxDeliveryDate = deliveryDateRangeField.endDate
+                    var address = addressField.text
+                    var statusTitle = statusField.currentText
+                    var cost = costField.text ? Number(costField.text) : 0
+
+                    ordersFilterModel.setFilters(
+                        orderId, minCreatedDate, maxCreatedDate,
+                        minDeliveryDate, maxDeliveryDate,
+                        address, statusTitle, cost
+                    );
+                }
+            }
+        }
 
         RowLayout{
             Layout.preferredHeight: 60
@@ -24,30 +61,44 @@ Item {
             spacing: 10
             z: 10
 
-            TextInputField{
+            NumberInputField{
+                id: orderIdField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
+                title: qsTr("Id:")
             }
             DateRangeInputField{
+                id: createdDateRangeField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
                 z: 10
+                title: qsTr("Created date:")
             }
             DateRangeInputField{
+                id: deliveryDateRangeField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
+                title: qsTr("Delivery date:")
             }
             TextInputField{
+                id: addressField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
+                title: qsTr("Address:")
             }
             ComboBoxInputField{
+                id: statusField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
+                title: qsTr("Status:")
+                model: ordersStatusModel
+                textRole: "StatusTitle"
             }
-            TextInputField{
+            NumberInputField{
+                id: costField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
+                title: qsTr("Cost:")
             }
 
             SecondaryButton{
@@ -56,6 +107,14 @@ Item {
                 Layout.preferredWidth: 60
                 btnText: "Clear"
                 fontSize: 10
+                onClicked: {
+                    orderIdField.text = ""
+                    createdDateRangeField.clear()
+                    deliveryDateRangeField.clear()
+                    addressField.text = ""
+                    statusField.clear()
+                    costField.text = ""
+                }
             }
         }
         OrdersTable{

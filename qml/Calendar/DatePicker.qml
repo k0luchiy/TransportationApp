@@ -13,6 +13,7 @@ Rectangle {
     property alias year : calendar.year
 
     signal applyClicked
+    signal clearClicked
 
     id: calendarRoot
     width: 300
@@ -22,6 +23,10 @@ Rectangle {
     border.width: 1
     border.color: Themes.colors.neutral.neutral700
     radius: 6
+
+    function clear(){
+        calendar.clear()
+    }
 
     ColumnLayout{
         anchors.fill: parent
@@ -41,8 +46,9 @@ Rectangle {
                 buttonSize: ButtonSizes.smallSize
                 iconLeftVisible: false
                 iconRightVisible: false
-                btnText: "Cancel"
+                btnText: "Clear"
                 onClicked: {
+                    calendarRoot.clearClicked()
                     calendarRoot.selectedDate = null
                     calendarRoot.visible = false
                 }
@@ -57,7 +63,7 @@ Rectangle {
                 iconRightVisible: false
                 btnText: "Apply"
                 onClicked: {
-                    applyClicked()
+                    calendarRoot.applyClicked()
                     calendarRoot.visible = false
                 }
             }

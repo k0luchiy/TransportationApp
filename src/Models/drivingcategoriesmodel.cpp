@@ -9,6 +9,7 @@
 
 //! Query whitch AbstractSqlQueryModel will execute for selecting all user information.
 const char* DrivingCategoriesModel::SELECT_QUERY =
+    "Select 0 as StatusId, '' as StatusTitle union " \
     "select CategoryName, FullName, CategoryPriority \
     from DrivingCategories \
     order by CategoryPriority";

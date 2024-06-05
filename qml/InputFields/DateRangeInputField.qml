@@ -19,6 +19,11 @@ TextInputField {
     text: ""
     z: 5
 
+    function clear(){
+        calendar.clear()
+        fieldRoot.text = ""
+    }
+
     DateRangePicker{
         id: calendar
         y: fieldRoot.height + 10
@@ -26,6 +31,11 @@ TextInputField {
                fieldRoot.width - calendar.width - 5
         z: 5
         visible: false
+
+        onClearClicked: {
+            fieldRoot.clear()
+        }
+
         onApplyClicked : {
             fieldRoot.text = DateUtils.dateRangeToString(fieldRoot.startDate, fieldRoot.endDate)
         }

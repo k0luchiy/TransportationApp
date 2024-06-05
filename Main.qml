@@ -22,12 +22,6 @@ Window {
 //    visibility: Window.FullScreen
     visible: true
     title: qsTr("Hello World")
-
-    //color: CustomColors.primary
-    function foo() {
-        Themes.currentTheme = Themes.themes.dark //: Themes.themes.dark
-    }
-
     color: Themes.colors.neutral.neutral0
 
 
@@ -102,24 +96,24 @@ Window {
             Layout.fillWidth: true
 
             LeftMenuTabPannel{
+                id: leftMenuTabPannel
                 Layout.fillHeight: true
                 Layout.preferredWidth: 200
             }
-//            OrderTableTab{
-//                Layout.fillHeight: true
-//                Layout.fillWidth: true
-//            }
-//            CarTableTab{
-//                Layout.fillHeight: true
-//                Layout.fillWidth: true
-//            }
-//            OrderPage{
-//                Layout.fillHeight: true
-//                Layout.fillWidth: true
-//            }
-            CarPage{
+
+            StackLayout {
+                id: carsStackView
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                currentIndex: leftMenuTabPannel.currentIndex
+                OrderPage{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+                CarPage{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
             }
         }
     }
@@ -129,12 +123,7 @@ Window {
         anchors.bottom: parent.bottom
         width: 400
         visible: false
-//        ColumnLayout{
-//            Layout.fillHeight: true
-//            Layout.fillWidth: true
-//            NotificationMsg {
-//            }
-//        }
+
         NotificationManager{
             id: notificationManager
             anchors.fill: parent
@@ -192,133 +181,4 @@ Window {
             }
         }
     }
-
-    Component{
-        id: tabButton
-        TabButtonBase{
-            height: 40
-            width: 100
-            text: "Order 1"
-        }
-    }
-
-    RowLayout{
-        anchors.fill: parent
-        visible: false
-
-        LeftMenuTabPannel{
-            Layout.fillHeight: true
-            Layout.preferredWidth: 200
-        }
-
-
-        ColumnLayout{
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            TabPannel{
-                id: tabPannel
-                Layout.preferredHeight: 40
-                Layout.fillWidth: true
-            }
-
-            ColumnLayout{
-                visible: true
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                OrdersTable{
-                    pagination : orderPagination
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-
-                    onRowClicked: {
-    //                    var component = Qt.createComponent("TabButtonBase.qml")
-                        var tab    = tabButton.createObject(tabPannel)
-    //                    tab.text = "Order 1"
-    //                    tabPannel.addItem(tab)
-                        tabPannel.addItem(tab)
-                    }
-                }
-
-                Pagination{
-                    id : orderPagination
-                    Layout.preferredHeight: 40
-                    Layout.fillWidth: true
-                    rowCount: ordersFilterModel.rowCount()
-                    rowsPerPage : 5
-                }
-            }
-        }
-    }
-
-    Pagination{
-        visible: false
-
-    }
-
-    DateRangePicker{
-        x: 50
-        y: 50
-        visible: false
-    }
-
-
-    RowLayout{
-        visible: false
-//        width: 200
-//        anchors.top: parent.top
-//        anchors.bottom: parent.bottom
-
-        anchors.fill: parent
-
-
-        TextInputField{
-            Layout.fillWidth: true
-            enabled: false
-
-        }
-
-
-        TextInputField{
-            Layout.fillWidth: true
-            isError: true
-        }
-
-        NumberInputField{
-            Layout.fillWidth: true
-        }
-
-        ComboBoxInputField{
-            id: comboBoxField
-            Layout.fillWidth: true
-            model: ordersFilterModel//["First", "Second", "Third", "Forth"]
-            textRole: "OrderId"
-            onCurrentTextChanged : {
-                //label.text = comboBoxField.currentText
-            }
-        }
-
-        DateInputField{
-            Layout.fillWidth: true
-        }
-
-        Item{
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-    }
-
-//    PrimaryButton{
-//        x: 521
-//        y: 403
-//        onClicked : {
-//            if (Themes.currentTheme.themeId === 0){
-//                Themes.currentTheme = Themes.themes.dark
-//            }
-//            else{
-//                Themes.currentTheme = Themes.themes.light
-//            }
-//        }
-//    }
 }

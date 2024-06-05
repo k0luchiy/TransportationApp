@@ -21,7 +21,6 @@
 class OrdersModel : public AbstractSqlQueryModel
 {
     Q_OBJECT
-
 public:
     explicit OrdersModel(QObject *parent = nullptr);
 

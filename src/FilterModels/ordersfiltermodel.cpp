@@ -1,5 +1,4 @@
 #include "ordersfiltermodel.h"
-#include <QDebug>
 
 OrdersFilterModel::OrdersFilterModel(QObject *parent)
     : QSortFilterProxyModel{parent}

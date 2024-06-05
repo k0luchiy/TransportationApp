@@ -1,13 +1,15 @@
 import QtQuick 2.15
 import QtQuick.Layouts
 
+
 ColumnLayout {
 
     property var tableHeaders
     property var tableModel
     property var pagination
-    property var rowComponent
+    property var tableRow
 
+    signal rowClicked(recordId : int)
 
     id : tableRoot
     spacing: 0
@@ -19,29 +21,20 @@ ColumnLayout {
     }
 
     Component{
-        id: tableRow
-        TableRow{
-            Layout.fillWidth: true
-            model: rowModel
-        }
-    }
-
-    Component{
         id: emptyItem
         Item{}
     }
 
-//    Component {
-//        Loader {
-//            anchors.left: parent ? parent.left : undefined
-//            anchors.right: parent ? parent.right : undefined
-//            property var rowModel : [OrderId, CreatedDate.toLocaleDateString("en_US"),
-//                                    AskedDeliveryDate.toLocaleDateString("en_US"),
-//                                    Address, StatusTitle, Cost]
-//            sourceComponent: (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
-//                                 tableRow : emptyItem
-//        }
-//    }
+    Component {
+        id: rowComponent
+        Loader {
+            anchors.left: parent ? parent.left : undefined
+            anchors.right: parent ? parent.right : undefined
+            property var rowModel : model
+            sourceComponent: (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
+                                 tableRow : emptyItem
+        }
+    }
 
     ListView {
         id: tableContent
@@ -55,3 +48,4 @@ ColumnLayout {
         delegate: rowComponent
     }
 }
+

@@ -32,8 +32,8 @@ Item {
 
                 onEditingFinished: {
                     var searchText = searchField.text
-                    var orderId = Number(searchText.replace(/\D/g, ""))
-                    ordersFilterModel.setFilterOrderId(orderId)
+                    var carId = Number(searchText.replace(/\D/g, ""))
+                    carsFilterModel.setFilterCarId(carId)
                 }
             }
             PrimaryButton{
@@ -44,21 +44,19 @@ Item {
                 iconLeftSource: "qrc:/assets/icons/Outline/filter.svg"
 
                 onClicked: {
-                    var orderId = orderIdField.text ? Number(orderIdField.text) : 0
-                    var minCreatedDate = createdDateRangeField.startDate
-                    var maxCreatedDate = createdDateRangeField.endDate
-                    var minDeliveryDate = deliveryDateRangeField.startDate
-                    var maxDeliveryDate = deliveryDateRangeField.endDate
-                    var address = addressField.text
-                    var statusTitle = statusField.currentText
-                    var cost = costField.text ? Number(costField.text) : 0
+                    var carId = carIdField.text ? Number(carIdField.text) : 0
+                    var carType = carTypeField.text
+                    var carModel = carModelField.text
+                    var carNumber = carNumberField.text
+                    var volumeCapacity = volumeCapacityField.text ? Number(volumeCapacityField.text) : 0
+                    var weightCapacity = weightCapacityField.text ? Number(weightCapacityField.text) : 0
+                    var drivingCategory = drivingCategoryField.currentText
 
-                    ordersFilterModel.setFilters(
-                        orderId, minCreatedDate, maxCreatedDate,
-                        minDeliveryDate, maxDeliveryDate,
-                        address, statusTitle, cost
+                    carsFilterModel.setFilters(
+                        carId, carType, carModel,
+                        carNumber, volumeCapacity,
+                        weightCapacity, drivingCategory
                     );
-                    orderPagination.rowCount = ordersFilterModel.rowCount()
                 }
             }
         }
@@ -70,43 +68,48 @@ Item {
             z: 10
 
             NumberInputField{
-                id: orderIdField
+                id: carIdField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
                 title: qsTr("Id:")
             }
-            DateRangeInputField{
-                id: createdDateRangeField
+            TextInputField{
+                id: carTypeField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
-                z: 10
-                title: qsTr("Created date:")
-            }
-            DateRangeInputField{
-                id: deliveryDateRangeField
-                Layout.fillWidth: true
-                Layout.preferredHeight: 60
-                title: qsTr("Delivery date:")
+                title: qsTr("Type:")
             }
             TextInputField{
-                id: addressField
+                id: carModelField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
-                title: qsTr("Address:")
+                title: qsTr("Model:")
             }
-            ComboBoxInputField{
-                id: statusField
+            TextInputField{
+                id: carNumberField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
-                title: qsTr("Status:")
-                model: ordersStatusModel
-                textRole: "StatusTitle"
+                title: qsTr("Car number:")
             }
             NumberInputField{
-                id: costField
+                id: volumeCapacityField
                 Layout.fillWidth: true
                 Layout.preferredHeight: 60
-                title: qsTr("Cost:")
+                title: qsTr("Volume:")
+            }
+            NumberInputField{
+                id: weightCapacityField
+                Layout.fillWidth: true
+                Layout.preferredHeight: 60
+                title: qsTr("Weight:")
+            }
+            ComboBoxInputField{
+                id: drivingCategoryField
+                Layout.fillWidth: true
+                Layout.preferredHeight: 60
+                title: qsTr("Driving category:")
+                model: drivingCatefories
+                textRole: "CategoryName"
             }
 
             SecondaryButton{
@@ -117,19 +120,21 @@ Item {
                 fontSize: 10
                 onClicked: {
                     searchField.text = ""
-                    orderIdField.text = ""
-                    createdDateRangeField.clear()
-                    deliveryDateRangeField.clear()
-                    addressField.text = ""
-                    statusField.clear()
-                    costField.text = ""
+                    carIdField.text = ""
+                    carTypeField.text = ""
+                    carModelField.text = ""
+                    carNumberField.text = ""
+                    volumeCapacityField.text = ""
+                    weightCapacityField.text = ""
+                    drivingCategoryField.clear()
                 }
             }
         }
-        OrdersTable{
+
+        CarsTable{
             Layout.fillHeight: true
             Layout.fillWidth: true
-            pagination : orderPagination
+            pagination : carPagination
 
             onRowClicked: (recordId) => {
                 pageRoot.rowClicked(recordId)
@@ -137,11 +142,10 @@ Item {
         }
 
         Pagination{
-            id : orderPagination
+            id : carPagination
             Layout.preferredHeight: 40
             Layout.fillWidth: true
-            rowCount: ordersFilterModel.rowCount()
-            rowsPerPage : 5
+            rowCount: carsFilterModel.rowCount()
         }
     }
 }

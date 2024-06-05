@@ -14,8 +14,8 @@ Item {
     width: 1040
 
     Component{
-        id: orderInfoPageComp
-        OrderInfoTab{
+        id: carInfoPageComp
+        CarInfoTab{
             Layout.fillHeight: true
             Layout.fillWidth: true
         }
@@ -26,12 +26,12 @@ Item {
         anchors.fill: parent
 
         TabPannel{
-            id: orderTabPannel
+            id: carTabPannel
             Layout.preferredHeight: 40
             Layout.fillWidth: true
-            tabs: [{text: "Order", checked: true, iconVisible: false}]
+            tabs: [{text: "Cars", checked: true, iconVisible: false}]
             onTabClosed: (index) => {
-                ordersStackView.children[index].destroy()
+                carsStackView.children[index].destroy()
                 //orderTabPannel.currentIndexChanged()
                 //ordersStackView.currentIndex = ordersStackView.currentIndex
                 //ordersStackView.currentIndex = orderTabPannel.currentIndex
@@ -44,20 +44,20 @@ Item {
         }
 
         StackLayout {
-            id: ordersStackView
+            id: carsStackView
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: 10
-            currentIndex: orderTabPannel.currentIndex
-            OrderTableTab{
+            currentIndex: carTabPannel.currentIndex
+            CarTableTab{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 //connectedTabPannel: orderTabPannel
                 onRowClicked: (recordId) => {
-                    orderTabPannel.addTab("Order " + recordId)
-                    var orderInfoPage = orderInfoPageComp.createObject(ordersStackView)
-                    orderInfoPage.orderModel.setRecord(ordersModel.findRecord("OrderId", recordId))
-                    orderInfoPage.parent = ordersStackView;
+                    carTabPannel.addTab("Car " + recordId)
+                    var carInfoPage = carInfoPageComp.createObject(carsStackView)
+                    carInfoPage.carModel.setRecord(carsModel.findRecord("CarId", recordId))
+                    carInfoPage.parent = carsStackView;
                 }
             }
         }

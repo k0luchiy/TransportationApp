@@ -12,6 +12,8 @@ import Tables
 import Notifications
 import Pages
 
+import Tabs
+
 Window {
     id: window
     width: 1040
@@ -103,8 +105,19 @@ Window {
                 Layout.fillHeight: true
                 Layout.preferredWidth: 200
             }
-
-            OrderPage{
+//            OrderTableTab{
+//                Layout.fillHeight: true
+//                Layout.fillWidth: true
+//            }
+//            CarTableTab{
+//                Layout.fillHeight: true
+//                Layout.fillWidth: true
+//            }
+//            OrderPage{
+//                Layout.fillHeight: true
+//                Layout.fillWidth: true
+//            }
+            CarPage{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
             }

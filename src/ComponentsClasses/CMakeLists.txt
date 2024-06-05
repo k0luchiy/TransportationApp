@@ -2,6 +2,8 @@ qt_add_library(
     ComponentsClassesLib STATIC
     user.h user.cpp
     order.h order.cpp
+    car.h car.cpp
+
 )
 
 

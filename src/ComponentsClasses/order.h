@@ -57,7 +57,6 @@ public Q_SLOTS:
         const QString& address, quint64 volume, quint64 weight
     );
     void setRecord(const QSqlRecord& record);
-//    Order getOrder(const QSqlRecord& record);
 
 //
 // Getters

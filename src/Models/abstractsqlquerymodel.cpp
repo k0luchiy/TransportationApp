@@ -10,11 +10,6 @@ AbstractSqlQueryModel::AbstractSqlQueryModel(const QString& select_query, QObjec
     updateModel();
 }
 
-//int AbstractSqlQueryModel::rowCount(const QModelIndex& parent) const
-//{
-//    return QSqlQueryModel::rowCount();
-//}
-
 //! Getter for role names
 QHash<int, QByteArray> AbstractSqlQueryModel::roleNames() const
 {

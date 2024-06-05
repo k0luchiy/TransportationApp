@@ -7,6 +7,7 @@
 
 class DeliveriesFilterModel : public QSortFilterProxyModel
 {
+    Q_OBJECT
 public:
     explicit DeliveriesFilterModel(QObject *parent = nullptr);
     void setSourceModel(AbstractSqlQueryModel* sourceModel);
@@ -19,7 +20,7 @@ protected:
         const QDate& endDate
         ) const;
 
-public: // Getters
+public Q_SLOTS: // Getters
     quint64 filterDeliveryId() const;
     QString filterCarNumber() const;
     QString filterDriverName() const;
@@ -30,7 +31,7 @@ public: // Getters
     QString filterStatus() const;
     QString filterToLocation() const;
 
-public: //Setters
+public Q_SLOTS: //Setters
     void setFilterDriverId(quint64 deliveryId);
     void setFilterCarNumber(const QString& carNumber);
     void setFilterDriverName(const QString& driverName);

@@ -13,16 +13,17 @@ const char* CarsModel::SELECT_QUERY =
     "select \
         c.CarId, c.CarType, c.CarModel, \
         c.CarNumber, c.DrivingCategory, dc.CategoryPriority, \
-        c.VolumeCapacity, c.Weightcapacity, \
+        c.VolumeCapacity, c.WeightCapacity, \
         c.LastInspection, c.ReleaseYear \
     from Cars c \
-    join DrivingCategories dc on c.DrivingCategory = dc.CategoryName ";
+    join DrivingCategories dc on c.DrivingCategory = dc.CategoryName \
+    order by c.CarId";
 
 
 CarsModel::CarsModel(QObject *parent)
     : AbstractSqlQueryModel{SELECT_QUERY, parent}
 {
-    //updateModel();
+
 }
 
 
@@ -40,7 +41,7 @@ CarsModel::CarsModel(QObject *parent)
 bool CarsModel::updateCar(
         quint64 carId, const QString& carType, const QString& carModel,
         const QString& carNumber, quint64 volumeCapacity, quint64 weightCapacity,
-        const QString& drivingCateogry
+        const QString& drivingCategory
 )
 {
     QSqlQuery query;
@@ -48,7 +49,7 @@ bool CarsModel::updateCar(
         " Update Cars set  \
             carType = :carType, carModel = :carModel, \
             carNumber = :carNumber, volumeCapacity = :volumeCapacity, \
-            weightCapacity = :weightCapacity,   drivingCateogry = :drivingCateogry \
+            weightCapacity = :weightCapacity, drivingCategory = :drivingCategory \
           where carId = :carId \
         ";
 
@@ -59,7 +60,8 @@ bool CarsModel::updateCar(
     query.bindValue(":carNumber", carNumber);
     query.bindValue(":volumeCapacity", volumeCapacity);
     query.bindValue(":weightCapacity", weightCapacity);
-    query.bindValue(":drivingCateogry", drivingCateogry);
-
-    return query.exec();
+    query.bindValue(":drivingCategory", drivingCategory);
+    bool res = query.exec();
+    updateModel();
+    return res;
 }

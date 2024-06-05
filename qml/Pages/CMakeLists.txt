@@ -17,4 +17,5 @@ qt_add_qml_module(PagesLib
     VERSION 1.0
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES OrderPage.qml
+    QML_FILES CarPage.qml
 )

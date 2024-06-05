@@ -20,6 +20,7 @@
  */
 class DrivingCategoriesModel : public AbstractSqlQueryModel
 {
+    Q_OBJECT
 public:
     explicit DrivingCategoriesModel(QObject *parent = nullptr);
 

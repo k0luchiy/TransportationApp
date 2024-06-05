@@ -24,6 +24,17 @@ OrdersModel::OrdersModel(QObject *parent)
 
 }
 
+/*!
+ * \brief Updates orders's data by car id
+ * \param orderId Id of an order to update
+ * \param askedDeliveryDate New asked delivery date to set
+ * \param statusId New status to set
+ * \param address New address to set
+ * \param volume New volume to set
+ * \param weight New weight to set
+ * \param cost New cost of an order to set
+ * \return True if query executed successfully, False otherwise
+ */
 bool OrdersModel::updateOrder(
     quint64 orderId, const QDate& askedDeliveryDate,
     quint64 statusId, const QString& address,

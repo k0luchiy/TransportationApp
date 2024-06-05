@@ -13,11 +13,12 @@
 
 class DriversFilterModel : public QSortFilterProxyModel
 {
+    Q_OBJECT
 public:
     explicit DriversFilterModel(QObject *parent = nullptr);
     void setSourceModel(AbstractSqlQueryModel* sourceModel);
 
-public: // Getters
+public Q_SLOTS: // Getters
     quint64 filterDriverId() const;
     QString filterFirstName() const;
     QString filterLastName() const;
@@ -25,7 +26,7 @@ public: // Getters
     quint64 filterExperience() const;
 
 
-public: // Setters
+public Q_SLOTS: // Setters
     void setFilterDriverId(quint64 driverId);
     void setFilterFirstName(const QString& firstName);
     void setFilterLastName(const QString& lastName);

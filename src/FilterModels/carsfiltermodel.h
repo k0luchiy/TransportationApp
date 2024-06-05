@@ -13,6 +13,7 @@
 
 class CarsFilterModel : public QSortFilterProxyModel
 {
+    Q_OBJECT
 public:
     explicit CarsFilterModel(QObject *parent = nullptr);
     void setSourceModel(AbstractSqlQueryModel* sourceModel);
@@ -23,9 +24,7 @@ protected:
         const QModelIndex &sourceParent
     ) const;
 
-
-
-public: // Getters
+public Q_SLOTS: // Getters
     quint64 filterCarId() const;
     QString filterCarType() const;
     QString filterCarModel() const;
@@ -34,7 +33,7 @@ public: // Getters
     quint64 filterMinWeightCapacity() const;
     QString filterDrivingCategory() const;
 
-public: // Setters
+public Q_SLOTS: // Setters
     void setFilterCarId(quint64 carId);
     void setFilterCarType(const QString& carType);
     void setFilterCarModel(const QString& carModel);

@@ -145,7 +145,6 @@ void CarsFilterModel::setFilters
  */
 bool CarsFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
-    //QVariant carId = sourceModel()->data(sourceModel()->index(sourceRow, 0, sourceParent));
     quint64 carId = m_sourceModel->getValue(sourceRow, "CarId").toInt();
     QString carType = m_sourceModel->getValue(sourceRow, "CarType").toString();
     QString carModel = m_sourceModel->getValue(sourceRow, "CarModel").toString();
@@ -159,8 +158,9 @@ bool CarsFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceP
         carType.contains(QRegularExpression(m_carType, QRegularExpression::CaseInsensitiveOption))  &&
         carModel.contains(QRegularExpression(m_carModel, QRegularExpression::CaseInsensitiveOption))  &&
         carNumber.contains(QRegularExpression(m_carNumber, QRegularExpression::CaseInsensitiveOption))  &&
-        (volumeCapacity > m_minVolumeCapacity || m_minVolumeCapacity == 0) &&
-        (weightCapacity > m_minWeightCapacity || m_minWeightCapacity == 0) &&
-        QString::compare(drivingCategory, m_drivingCategory, Qt::CaseInsensitive) == 0
+        (volumeCapacity >= m_minVolumeCapacity || m_minVolumeCapacity == 0) &&
+        (weightCapacity >= m_minWeightCapacity || m_minWeightCapacity == 0) &&
+        (QString::compare(drivingCategory, m_drivingCategory, Qt::CaseInsensitive) == 0 || m_drivingCategory.isEmpty())
     ;
 }
+

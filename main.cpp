@@ -8,11 +8,15 @@
 #include "abstractsqlquerymodel.h"
 #include "carsfiltermodel.h"
 #include "carsmodel.h"
+#include "drivingcategoriesmodel.h"
 #include "ordersfiltermodel.h"
 #include "ordersmodel.h"
 #include "orderstatusmodel.h"
+#include "drivermodel.h"
+#include "driversfiltermodel.h"
 
 #include "order.h"
+#include "car.h"
 
 int main(int argc, char *argv[])
 {
@@ -40,24 +44,41 @@ int main(int argc, char *argv[])
     UserModel* userModel = new UserModel();
     //qDebug() << userModel->rowCount() << userModel->record(0);
 
-    OrdersModel* ordersModel = new OrdersModel();
-    OrderStatusModel* ordersStatusModel = new OrderStatusModel();
 
-    //ordersModel->setQuery(query);
+    OrderStatusModel* ordersStatusModel = new OrderStatusModel();
+    DrivingCategoriesModel* drivingCatefories = new DrivingCategoriesModel();
+
+    OrdersModel* ordersModel = new OrdersModel();
     OrdersFilterModel* ordersFilterModel = new OrdersFilterModel();
     ordersFilterModel->setSourceModel(ordersModel);
     ordersFilterModel->setDynamicSortFilter(true);
     ordersFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     ordersFilterModel->sort(0, Qt::AscendingOrder);
-    //ordersFilterModel->setFilterOrderId(3);
+
+    CarsModel* carsModel = new CarsModel();
+    CarsFilterModel* carsFilterModel = new CarsFilterModel();
+    carsFilterModel->setSourceModel(carsModel);
+    carsFilterModel->setDynamicSortFilter(true);
+    carsFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    carsFilterModel->sort(0, Qt::AscendingOrder);
+
+    DriverModel* driversModel = new DriverModel();
+    DriversFilterModel* driversFilterModel = new DriversFilterModel();
+    driversFilterModel->setSourceModel(driversModel);
+    driversFilterModel->setDynamicSortFilter(true);
+    driversFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    driversFilterModel->sort(0, Qt::AscendingOrder);
 
     engine.rootContext()->setContextProperty("userModel", userModel);
-    engine.rootContext()->setContextProperty("ordersModel", ordersModel);
+    engine.rootContext()->setContextProperty("drivingCatefories", drivingCatefories);
     engine.rootContext()->setContextProperty("ordersStatusModel", ordersStatusModel);
+    engine.rootContext()->setContextProperty("ordersModel", ordersModel);
     engine.rootContext()->setContextProperty("ordersFilterModel", ordersFilterModel);
-
+    engine.rootContext()->setContextProperty("carsModel", carsModel);
+    engine.rootContext()->setContextProperty("carsFilterModel", carsFilterModel);
 
     qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");
+    qmlRegisterType<Car>("TransportationsApp.Models", 1, 0, "Car");
     engine.loadFromModule("TransportationApp", "Main");
 
 //    if(db.isOpen()){

@@ -20,6 +20,7 @@
  */
 class OrderStatusModel : public AbstractSqlQueryModel
 {
+    Q_OBJECT
 public:
     explicit OrderStatusModel(QObject *parent = nullptr);
 

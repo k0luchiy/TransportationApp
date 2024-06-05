@@ -20,6 +20,7 @@
  */
 class DriverModel : public AbstractSqlQueryModel
 {
+    Q_OBJECT
 public:
     explicit DriverModel(QObject *parent = nullptr);
 

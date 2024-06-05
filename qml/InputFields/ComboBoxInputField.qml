@@ -14,7 +14,7 @@ Item {
     property string title : qsTr("Title:")
     property bool titleVisible : true
     property bool enabled : true
-    property int titleFontSize : 12
+    property int titleFontSize : 10
     property int contentFontSize : 12
 
     property alias currentText: comboBox.currentText
@@ -32,6 +32,14 @@ Item {
 
     function clear(){
         comboBox.currentIndex = 0
+    }
+
+    function setValue(value){
+        comboBox.currentIndex = comboBox.find(value)
+    }
+
+    function findIndex(value){
+        return comboBox.find(value)
     }
 
     ColumnLayout{

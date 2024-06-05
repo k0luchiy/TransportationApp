@@ -19,6 +19,7 @@
  */
 class CarsModel : public AbstractSqlQueryModel
 {
+    Q_OBJECT
 public:
     explicit CarsModel(QObject *parent = nullptr);
 

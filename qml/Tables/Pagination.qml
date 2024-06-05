@@ -24,7 +24,7 @@ Item {
     id: paginationRoot
     width: 500
     height: 40
-    visible: pageCount > 0
+    visible: pageCount > 1
 
     function generatePageNumbers(pageCount){
         var pages = []

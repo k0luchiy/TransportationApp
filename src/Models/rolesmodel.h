@@ -18,6 +18,7 @@
  */
 class RolesModel : public AbstractSqlQueryModel
 {
+    Q_OBJECT
 public:
     explicit RolesModel(QObject *parent = nullptr);
 

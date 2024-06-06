@@ -73,8 +73,8 @@ Item {
 
             RowLayout{
                 anchors.fill: parent
-                anchors.rightMargin: 5
-                anchors.leftMargin: 5
+                anchors.rightMargin: 10
+                anchors.leftMargin: 10
 
 
                 IconButton{

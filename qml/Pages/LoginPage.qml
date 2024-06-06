@@ -9,10 +9,11 @@ import InputFields
 
 Rectangle {
     signal loginSuccessful
+    signal sigUpClicked
 
     id: loginPage
     width: 450
-    height: 650
+    height: 750
     color: Themes.colors.neutral.neutral50
 
     function authenticate(email, password){
@@ -40,10 +41,17 @@ Rectangle {
                 btnText: "Sign up"
                 borderSize: 0
                 contentColor: Themes.colors.primary.primary500
+                onClicked: {
+                    loginPage.sigUpClicked()
+                }
             }
         }
+        Item{
+            Layout.preferredHeight: 30
+            Layout.fillWidth: true
+        }
         Text{
-            Layout.preferredHeight: 90
+            Layout.preferredHeight: 130
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             font.pointSize: 20
@@ -75,6 +83,16 @@ Rectangle {
                 title: "Password"
                 placeholderText: "password..."
                 fieldEchoMode: TextInput.Password
+                iconRightVisible: true
+                iconRightSource: "qrc:/assets/icons/Outline/eye.svg"
+                onRightIconClicked: {
+                    if(passwordField.fieldEchoMode === TextInput.Password){
+                        passwordField.fieldEchoMode = TextInput.Normal
+                    }
+                    else{
+                        passwordField.fieldEchoMode = TextInput.Password
+                    }
+                }
             }
             PrimaryButton{
                 Layout.preferredHeight: 35

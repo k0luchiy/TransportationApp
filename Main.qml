@@ -16,23 +16,31 @@ import Tabs
 Window{
     id: window
     width: 450
-    height: 650
+    height: 750
     visible: true
     title: qsTr("Transportation app")
     color: Themes.colors.neutral.neutral0
 
     Component{
-        id: loginPageComp
-        LoginPage{
-            width: 450
-            height: 650
-            onLoginSuccessful: {
+        id: authPageComp
+        AuthPage{
+            onAuthSuccess: {
                 mainLoader.sourceComponent = mainPageComp
                 window.width = 1040
                 window.height = 840
                 window.visibility = Window.Maximized
             }
         }
+        //        LoginPage{
+//            width: 450
+//            height: 650
+//            onLoginSuccessful: {
+//                mainLoader.sourceComponent = mainPageComp
+//                window.width = 1040
+//                window.height = 840
+//                window.visibility = Window.Maximized
+//            }
+//        }
     }
 
     Component{
@@ -46,6 +54,6 @@ Window{
     Loader {
         id: mainLoader
         anchors.fill: parent
-        sourceComponent: loginPageComp
+        sourceComponent: authPageComp
     }
 }

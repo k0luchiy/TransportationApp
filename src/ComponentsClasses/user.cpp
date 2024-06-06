@@ -171,7 +171,7 @@ bool User::registration(const QString& email, const QString& password,
     QSqlQuery query;
     const QString reg_query =
         " Insert into Users(email, pwd, firstName, lastName, roleId) "
-        " values(:email, :password, :firstName, :lastName, :roleId); ";
+        " values(:email, md5(:password), :firstName, :lastName, :roleId); ";
     query.prepare(reg_query);
     query.bindValue(":email", email);
     query.bindValue(":password", password);

@@ -15,6 +15,8 @@ Item {
     property color borderColor : fieldRoot.enabled ?
         Themes.colors.neutral.neutral100 :
         Themes.colors.neutral.neutral300
+    property color selectedTextColor : Themes.colors.neutral.neutral50
+    property color selectionColor : Themes.colors.neutral.neutral700
     property string title : qsTr("Title:")
     property string placeholderText : qsTr("Placeholder")
     property string errorMsg : qsTr("Error")
@@ -106,6 +108,8 @@ Item {
                     enabled: fieldRoot.enabled
                     clip: true
                     echoMode: TextInput.Normal
+                    selectedTextColor: fieldRoot.selectedTextColor
+                    selectionColor: fieldRoot.selectionColor
                     onTextChanged: { fieldRoot.textChanged() }
 
                     Text {

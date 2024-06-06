@@ -8,6 +8,9 @@ import Buttons
 import InputFields
 
 Rectangle {
+    property bool authError : false
+    property string authErrorMsg : ""
+
     signal loginSuccessful
     signal sigUpClicked
 
@@ -19,7 +22,15 @@ Rectangle {
     function authenticate(email, password){
         var authSuceess = user.authenticate(email, password)
         if(authSuceess){
+            emailField.isError = false
+            passwordField.isError = false
             loginPage.loginSuccessful()
+        }
+        else{
+            emailField.isError = true
+            passwordField.isError = true
+            loginPage.authError = true
+            loginPage.authErrorMsg = "Wrong credentials were provided"
         }
     }
 
@@ -51,7 +62,7 @@ Rectangle {
             Layout.fillWidth: true
         }
         Text{
-            Layout.preferredHeight: 130
+            Layout.preferredHeight: 100
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             font.pointSize: 20
@@ -65,6 +76,15 @@ Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
             spacing: 10
+            Text{
+                id: wromgAuthLabel
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                font.pointSize: 12
+                color: Themes.colors.red.red500
+                //visible: loginPage.authError
+                text: loginPage.authError ? loginPage.authErrorMsg : ""
+            }
             TextInputField{
                 id: emailField
                 Layout.preferredHeight: 70

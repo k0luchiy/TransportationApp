@@ -4,7 +4,6 @@
 #include <QDebug>
 #include <QSqlDatabase>
 
-#include "usermodel.h"
 #include "abstractsqlquerymodel.h"
 #include "carsfiltermodel.h"
 #include "carsmodel.h"
@@ -15,6 +14,7 @@
 #include "drivermodel.h"
 #include "driversfiltermodel.h"
 
+#include "user.h"
 #include "order.h"
 #include "car.h"
 
@@ -27,24 +27,15 @@ int main(int argc, char *argv[])
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
+
     engine.addImportPath(":/TransportationApp.com/qml");
+
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
     db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
     db.open();
 
-//    QString query =
-//        "select \
-//          o.OrderId, o.CreatedDate, o.AskedDeliveryDate,  \
-//          s.StatusId, s.StatusTitle, o.Cost,  \
-//          o.Address, o.Volume, o.Weight   \
-//          from Orders o   \
-//          join OrderStatus s on o.StatusId = s.StatusId ";
-
-    UserModel* userModel = new UserModel();
-    //qDebug() << userModel->rowCount() << userModel->record(0);
-
-
+    User* user = new User();
     OrderStatusModel* ordersStatusModel = new OrderStatusModel();
     DrivingCategoriesModel* drivingCatefories = new DrivingCategoriesModel();
 
@@ -69,7 +60,7 @@ int main(int argc, char *argv[])
     driversFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     driversFilterModel->sort(0, Qt::AscendingOrder);
 
-    engine.rootContext()->setContextProperty("userModel", userModel);
+    engine.rootContext()->setContextProperty("user", user);
     engine.rootContext()->setContextProperty("drivingCatefories", drivingCatefories);
     engine.rootContext()->setContextProperty("ordersStatusModel", ordersStatusModel);
     engine.rootContext()->setContextProperty("ordersModel", ordersModel);
@@ -77,8 +68,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("carsModel", carsModel);
     engine.rootContext()->setContextProperty("carsFilterModel", carsFilterModel);
 
+    //qmlRegisterType<User>("TransportationsApp.Models", 1, 0, "User");
     qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");
     qmlRegisterType<Car>("TransportationsApp.Models", 1, 0, "Car");
+
     engine.loadFromModule("TransportationApp", "Main");
 
 //    if(db.isOpen()){

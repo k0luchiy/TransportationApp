@@ -19,8 +19,10 @@ Item {
             message: modelData.message
             duration: modelData.duration
             onDismissed: {
+                console.log(manager.notifications[index].notificationType, manager.notifications[index].notificationType.titleText)
                 manager.notifications.splice(index, 1)
-                //listView.model = notifications;
+                //manager.notifications = manager.notifications
+                listView.model = manager.notifications;
             }
         }
     }

@@ -6,6 +6,7 @@
  */
 
 #include "user.h"
+#include <QDebug>
 
 User::User(QObject *parent)
     : QObject{parent}
@@ -78,3 +79,107 @@ void User::setUserData(quint64 userId, const QString& email,
     setRolePriority(rolePriority);
     setIsAuthenticated(isAuthenticated);
 }
+
+/*!
+ * \brief Sets user data from record
+ * \param record Record that contains user data
+ */
+void User::setRecord(const QSqlRecord& record)
+{
+    quint64 userId = record.value("UserId").toInt();
+    QString email = record.value("Email").toString();
+    QString firstName = record.value("FirstName").toString();
+    QString lastName = record.value("LastName").toString();
+    quint64 roleId = record.value("RoleId").toInt();
+    QString roleTitle = record.value("RoleTitle").toString();
+    quint64 rolePriority = record.value("RolePriority").toInt();
+    bool isAuthenticated = true;
+
+    setUserData(
+        userId , email, firstName,
+        lastName, roleId, roleTitle,
+        rolePriority, isAuthenticated
+    );
+}
+
+
+
+/*!
+ * \brief Checks if user with given email already registered.
+ * \param email Email (login) of a user to find.
+ * \return True if user already registered, False otherwise.
+ */
+bool User::isUserExist(const QString &email) const
+{
+    const QString find_query =
+        " select UserId from Users u "
+        " where u.email = :email; ";
+    QSqlQuery query;
+    query.prepare(find_query);
+    query.bindValue(":email", email);
+    bool isSuccess = query.exec();
+
+    return isSuccess && query.next();
+}
+
+/*!
+ * \brief Authenticate user by email (login) and password.
+ * \param email Users email (login) to witch the account is linked.
+ * \param password Users password.
+ * \return Is authntication was a success or not.
+ */
+bool User::authenticate(const QString& email, const QString& password)
+{
+    const QString auth_query =
+        " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle  "
+        " from Users u  "
+        " join UserRoles ur on u.roleId = ur.roleId "
+        " where u.email = :email and u.pwd = md5(:password); ";
+
+    QSqlQuery query;
+    query.prepare(auth_query);
+    query.bindValue(":email", email);
+    query.bindValue(":password", password);
+    bool execSuccess = query.exec();
+    bool authSuccess = query.next();
+
+    if(authSuccess){
+        setRecord(query.record());
+    }
+
+    return execSuccess && authSuccess;
+}
+
+/*!
+ * \brief Register user to database with basic role.
+ * \param email Users email to witch account will be linked.
+ * \param password  Users password for authentication in the future.
+ * \param firstName Users first name.
+ * \param lastName  Users last name.
+ * \return Is registration was a success or not.
+ */
+bool User::registration(const QString& email, const QString& password,
+                             const QString& firstName, const QString& lastName)
+{
+    if(isUserExist(email)){
+        return 0;
+    }
+
+    //RolesModel roles;
+    //quint32 roleId = roles.get_minPriority_roleId();
+    quint32 roleId = 1;
+    QSqlQuery query;
+    const QString reg_query =
+        " Insert into Users(email, pwd, firstName, lastName, roleId) "
+        " values(:email, :password, :firstName, :lastName, :roleId); ";
+    query.prepare(reg_query);
+    query.bindValue(":email", email);
+    query.bindValue(":password", password);
+    query.bindValue(":firstName", firstName);
+    query.bindValue(":lastName", lastName);
+    query.bindValue(":roleId", roleId);
+
+    return query.exec();
+}
+
+

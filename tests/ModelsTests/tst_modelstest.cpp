@@ -7,7 +7,7 @@
 #include <QSharedPointer>
 
 #include "abstractsqlquerymodel.h"
-#include "usermodel.h"
+//#include "usermodel.h"
 #include "rolesmodel.h"
 #include "drivermodel.h"
 #include "carsmodel.h"
@@ -64,7 +64,7 @@ void ModelsTest::connect_database()
 void ModelsTest::fill_models()
 {
     models = QSharedPointer< QVector<AbstractSqlQueryModel*> > ( new QVector<AbstractSqlQueryModel*>() ) ;
-    UserModel* userModel = new UserModel();
+    //UserModel* userModel = new UserModel();
     RolesModel* rolesModel = new RolesModel();
     DriverModel* driverModel = new DriverModel();
     CarsModel* carsModel = new CarsModel();
@@ -73,7 +73,7 @@ void ModelsTest::fill_models()
     OrderStatusModel* statusModel = new OrderStatusModel();
 
 
-    models->push_back(userModel);
+    //models->push_back(userModel);
     models->push_back(rolesModel);
     models->push_back(driverModel);
     models->push_back(carsModel);

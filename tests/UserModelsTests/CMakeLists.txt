@@ -9,7 +9,7 @@ add_test(NAME UserModelsTest COMMAND UserModelsTest)
 target_link_libraries(UserModelsTest
     PRIVATE Qt::Test
     PRIVATE Qt6::Sql
-    PRIVATE ModelsLib
+    PRIVATE ComponentsClassesLib
 )
 
 add_executable(UserTest
@@ -30,5 +30,5 @@ target_link_libraries(UserTest
     PRIVATE Qt6::Quick
     PRIVATE Qt6::QuickTest
     #PRIVATE UserModelsLib
-    PRIVATE ModelsLib
+    PRIVATE ComponentsClassesLib
 )

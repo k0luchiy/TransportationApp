@@ -36,6 +36,7 @@ QString AbstractSqlQueryModel::get_query() const {
 void AbstractSqlQueryModel::setQuery(const QString& query, const QSqlDatabase& db)
 {
     this->QSqlQueryModel::setQuery(query, db);
+    m_select_query = query;
     generateRoleNames();
 }
 
@@ -43,6 +44,7 @@ void AbstractSqlQueryModel::setQuery(const QString& query, const QSqlDatabase& d
 void AbstractSqlQueryModel::setQuery(QString&& query)
 {
     this->QSqlQueryModel::setQuery(std::move(query));
+    m_select_query = query;
     generateRoleNames();
 }
 

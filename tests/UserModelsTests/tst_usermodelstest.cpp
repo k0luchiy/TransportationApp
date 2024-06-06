@@ -4,13 +4,13 @@
 #include <QVariant>
 #include <QDebug>
 
-#include "usermodel.h"
+#include "user.h"
 
 class UserModelTest : public QObject
 {
     Q_OBJECT
 private:
-    UserModel* userModel;
+    User* user;
     QSqlDatabase db;
 
 public:
@@ -42,23 +42,20 @@ void UserModelTest::initTestCase()
     db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
     db.open();
 
-    userModel = new UserModel();
-    //userModel->updateModel();
+    user = new User();
 }
 
 void UserModelTest::cleanupTestCase()
 {
     db.close();
-    delete userModel;
+    delete user;
 }
 
 void UserModelTest::test_isUserExist()
 {
-    QSqlRecord user_record = userModel->record(0);
-    QString email = user_record.value("Email").toString();
-    QVERIFY(userModel->isUserExist(email));
-    QVERIFY(!userModel->isUserExist("imposible email"));
-    QVERIFY(!userModel->isUserExist(""));
+    QVERIFY(user->isUserExist("antoshka.osipov.04@mail.ru"));
+    QVERIFY(!user->isUserExist("imposible email"));
+    QVERIFY(!user->isUserExist(""));
 }
 
 QTEST_APPLESS_MAIN(UserModelTest)

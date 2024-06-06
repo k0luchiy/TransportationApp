@@ -10,6 +10,8 @@
 
 #include <QObject>
 #include <QSqlRecord>
+#include <QVariant>
+#include <QSqlQuery>
 
 /*!
  * \brief Class defining user component.
@@ -51,6 +53,12 @@ public Q_SLOTS:
                      const QString& firstName, const QString& lastName,
                      quint64 roleId, const QString& roleTitle,
                      quint64 rolePriority, bool isAuthenticated);
+    void setRecord(const QSqlRecord& record);
+    bool isUserExist(const QString& email) const;
+    bool authenticate(const QString& email, const QString& password);
+    bool registration(const QString& email, const QString& password,
+                      const QString& firstName, const QString& lastName);
+
 //
 // Getters
 //

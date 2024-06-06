@@ -52,7 +52,6 @@ bool CarsModel::updateCar(
             weightCapacity = :weightCapacity, drivingCategory = :drivingCategory \
           where carId = :carId \
         ";
-
     query.prepare(reg_query);
     query.bindValue(":carId", carId);
     query.bindValue(":carType", carType);

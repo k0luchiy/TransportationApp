@@ -8,6 +8,9 @@ import Buttons
 import InputFields
 
 Rectangle {
+    property bool regError : false
+    property string regErrorMsg : ""
+
     signal registerSuccess
     signal loginClicked
 
@@ -17,11 +20,27 @@ Rectangle {
     color: Themes.colors.neutral.neutral50
 
     function registerUser(lastName, firstName, email, password, repeatPassword){
+        if(user.isUserExist(email)){
+            emailField.isError = true
+            emailField.errorMsg = "User with this email already exists"
+            signUpPage.regError = true
+            signUpPage.regErrorMsg = "User with this email already exists"
+            return;
+        }
+        else{
+            emailField.isError = false
+            emailField.errorMsg = ""
+            signUpPage.regError = false
+            signUpPage.regErrorMsg = ""
+        }
         if(password !== repeatPassword){
             passwordField.isError = true
             passwordField.errorMsg = "Password do not match"
             repeatPasswordField.isError = true
             repeatPasswordField.errorMsg = "Password do not match"
+
+            signUpPage.regError = true
+            signUpPage.regErrorMsg = "Password do not match"
             return;
         }
         else {
@@ -29,19 +48,15 @@ Rectangle {
             passwordField.errorMsg = ""
             repeatPasswordField.isError = false
             repeatPasswordField.errorMsg = ""
+            signUpPage.regError = false
+            signUpPage.regErrorMsg = ""
         }
-        if(user.isUserExist(email)){
-            emailField.isError = true
-            emailField.errorMsg = "User with this email already exists"
-            return;
-        }
-        else{
-            emailField.isError = false
-            emailField.errorMsg = ""
-        }
+
         var registerSuceess = user.registration(email, password, firstName, lastName)
         if(registerSuceess){
             console.log("Registration success")
+            signUpPage.regError = false
+            signUpPage.regErrorMsg = ""
             signUpPage.registerSuccess()
         }
         else{
@@ -77,7 +92,7 @@ Rectangle {
             Layout.fillWidth: true
         }
         Text{
-            Layout.preferredHeight: 80
+            Layout.preferredHeight: 50
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             font.pointSize: 20
@@ -91,6 +106,14 @@ Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
             spacing: 10
+            Text{
+                id: regErrorLabel
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                font.pointSize: 12
+                color: Themes.colors.red.red500
+                text: signUpPage.regError ? signUpPage.regErrorMsg : ""
+            }
             TextInputField{
                 id: lastNameField
                 Layout.preferredHeight: 60

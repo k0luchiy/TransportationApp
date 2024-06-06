@@ -77,7 +77,7 @@ Rectangle {
             Layout.fillWidth: true
             spacing: 10
             Text{
-                id: wromgAuthLabel
+                id: authErrorLabel
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
                 font.pointSize: 12

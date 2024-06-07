@@ -18,6 +18,8 @@ TextInputField {
     placeholderText: "dd.mm - dd.mm"
     text: ""
     z: 5
+    focusField : false
+    focusOnTab: false
 
     function clear(){
         calendar.clear()
@@ -46,11 +48,17 @@ TextInputField {
     }
 
     MouseArea{
+        id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+        focus: true
+        activeFocusOnTab: true
         onClicked : {
             calendar.visible = !calendar.visible
+        }
+        Keys.onReturnPressed: {
+            fieldRoot.rightIconClicked()
         }
     }
 }

@@ -10,6 +10,8 @@ ComboBox {
     height: 45
     width: 200
     enabled: true
+    focus: true
+    activeFocusOnTab: true
 
     property color bgColor : Themes.colors.neutral.neutral0
     //    comboBox.enabled ? Themes.colors.neutral.neutral0 :
@@ -22,6 +24,10 @@ ComboBox {
     property int itemHeight : 30
     property int itemCount : 3
 
+
+    Keys.onReturnPressed: {
+        iconBtn.clicked()
+    }
 
     background: Rectangle {
         anchors.fill: parent
@@ -102,7 +108,6 @@ ComboBox {
                 clip: true
                 model: comboBox.popup.visible ? comboBox.delegateModel : null
                 currentIndex: comboBox.highlightedIndex
-
                 ScrollIndicator.vertical: ScrollIndicator { }
             }
 

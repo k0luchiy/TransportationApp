@@ -97,9 +97,15 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        focus: true
+        activeFocusOnTab: true
         onClicked: {
+            buttonRoot.clicked();
+        }
+        Keys.onReturnPressed: {
             buttonRoot.clicked();
         }
         cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
     }
+
 }

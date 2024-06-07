@@ -45,9 +45,17 @@ Item {
     id: fieldRoot
     width: 280
     height: fieldRoot.titleVisible ? 45 + 20 : 45
+//    focus: true
+//    activeFocusOnTab: true
+    property alias focusField : inputField.focus
+    property alias focusOnTab: inputField.activeFocusOnTab
 
     function clear(){
         fieldRoot.text = ""
+    }
+
+    onFocusChanged: {
+        inputField.focus = true
     }
 
     ColumnLayout{
@@ -111,6 +119,8 @@ Item {
                     selectedTextColor: fieldRoot.selectedTextColor
                     selectionColor: fieldRoot.selectionColor
                     onTextChanged: { fieldRoot.textChanged() }
+                    focus: true //fieldRoot.focus//true
+                    activeFocusOnTab: true //fieldRoot.activeFocusOnTab//true
 
                     Text {
                         text: fieldRoot.placeholderText

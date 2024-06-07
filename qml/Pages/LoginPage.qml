@@ -87,6 +87,8 @@ Rectangle {
             }
             TextInputField{
                 id: emailField
+                focus: true
+                activeFocusOnTab: true
                 Layout.preferredHeight: 70
                 Layout.fillWidth: true
                 titleFontSize: 12
@@ -96,6 +98,7 @@ Rectangle {
             }
             TextInputField{
                 id: passwordField
+                activeFocusOnTab: true
                 Layout.preferredHeight: 70
                 Layout.fillWidth: true
                 titleFontSize: 12

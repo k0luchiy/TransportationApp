@@ -29,6 +29,8 @@ Item {
     id: fieldRoot
     width: 280
     height: fieldRoot.titleVisible ? 45 + 20 : 45
+//    focus: true
+//    activeFocusOnTab: true
 
     function clear(){
         comboBox.currentIndex = 0
@@ -67,6 +69,8 @@ Item {
             fontSize : fieldRoot.titleFontSize
             itemHeight : 30
             itemCount : 3
+            focus: true //fieldRoot.focus
+            activeFocusOnTab: true //fieldRoot.activeFocusOnTab
         }
     }
 }

@@ -99,7 +99,7 @@ void DriversFilterModel::setFilterExperience(quint64 experience)
  * \param drivingCategory   Drivers driving category to set.
  * \param experience    Drivers experience to set.
  */
-void DriversFilterModel::setFiltes
+void DriversFilterModel::setFilters
 (
     quint64 driverId, const QString& firstName,
     const QString& lastName, const QString& drivingCategory,
@@ -128,12 +128,12 @@ bool DriversFilterModel::filterAcceptsRow(int source_row, const QModelIndex &sou
 
     return
         (m_driverId == driverId || m_driverId == 0) &&
-        QString::compare(firstName, m_firstName, Qt::CaseInsensitive) == 0
-                    || m_firstName.isEmpty() &&
-        QString::compare(lastName, m_lastName, Qt::CaseInsensitive) == 0
-                    || m_lastName.isEmpty() &&
-        QString::compare(drivingCategory, m_drivingCategory, Qt::CaseInsensitive) == 0
-                    || m_drivingCategory.isEmpty() &&
-        (m_experience == experience  || m_experience == 0)
+        (QString::compare(firstName, m_firstName, Qt::CaseInsensitive) == 0
+            || m_firstName.isEmpty()) &&
+        (QString::compare(lastName, m_lastName, Qt::CaseInsensitive) == 0
+            || m_lastName.isEmpty()) &&
+        (QString::compare(drivingCategory, m_drivingCategory, Qt::CaseInsensitive) == 0
+            || m_drivingCategory.isEmpty()) &&
+        (m_experience >= experience  || m_experience == 0)
     ;
 }

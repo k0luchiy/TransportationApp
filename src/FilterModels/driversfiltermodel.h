@@ -32,7 +32,7 @@ public Q_SLOTS: // Setters
     void setFilterLastName(const QString& lastName);
     void setFilterDrivingCategory(const QString& drivingCategory);
     void setFilterExperience(quint64 experince);
-    void setFiltes(
+    void setFilters(
         quint64 driverId, const QString& firstName,
         const QString& lastName, const QString& dtivingCategoty,
         quint64 experience

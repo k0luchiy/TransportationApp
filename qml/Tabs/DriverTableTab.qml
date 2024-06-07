@@ -44,19 +44,15 @@ Item {
                 iconLeftSource: "qrc:/assets/icons/Outline/filter.svg"
 
                 onClicked: {
-                    var orderId = orderIdField.text ? Number(orderIdField.text) : 0
-                    var minCreatedDate = createdDateRangeField.startDate
-                    var maxCreatedDate = createdDateRangeField.endDate
-                    var minDeliveryDate = deliveryDateRangeField.startDate
-                    var maxDeliveryDate = deliveryDateRangeField.endDate
-                    var address = addressField.text
-                    var statusTitle = statusField.currentText
-                    var cost = costField.text ? Number(costField.text) : 0
+                    var driverId = driverIdField.text ? Number(driverIdField.text) : 0
+                    var lastName = lastNameField.text
+                    var firstName = firstNameField.text
+                    var drivingCategory = drivingCategoryField.currentText
+                    var experience = experienceField.text ? Number(experienceField.text) : 0
 
                     driversFilterModel.setFilters(
-                        orderId, minCreatedDate, maxCreatedDate,
-                        minDeliveryDate, maxDeliveryDate,
-                        address, statusTitle, cost
+                        driverId, firstName, lastName,
+                        drivingCategory, experience
                     );
                     driverPagination.rowCount = driversFilterModel.rowCount()
                 }
@@ -110,12 +106,11 @@ Item {
                 fontSize: 10
                 onClicked: {
                     searchField.text = ""
-                    orderIdField.text = ""
-                    createdDateRangeField.clear()
-                    deliveryDateRangeField.clear()
-                    addressField.text = ""
-                    statusField.clear()
-                    costField.text = ""
+                    driverIdField.text = ""
+                    lastNameField.clear()
+                    firstNameField.text = ""
+                    drivingCategoryField.clear()
+                    experienceField.text = ""
                 }
             }
         }

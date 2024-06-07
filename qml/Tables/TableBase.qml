@@ -3,7 +3,6 @@ import QtQuick.Layouts
 
 
 ColumnLayout {
-
     property var tableHeaders
     property var tableModel
     property var pagination
@@ -13,6 +12,7 @@ ColumnLayout {
 
     id : tableRoot
     spacing: 0
+    clip: true
 
     TableHeaders{
         Layout.preferredHeight: 35
@@ -31,7 +31,8 @@ ColumnLayout {
             anchors.left: parent ? parent.left : undefined
             anchors.right: parent ? parent.right : undefined
             property var rowModel : model
-            sourceComponent: (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
+            sourceComponent: isNaN(pagination) ? tableRow :
+                (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
                                  tableRow : emptyItem
         }
     }

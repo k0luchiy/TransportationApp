@@ -64,6 +64,7 @@ Item {
                 NumberInputField{
                     id: carIdField
                     Layout.fillWidth: true
+                    readOnly: true
                     title: qsTr("Id:")
                     text: carModel.carId
                 }

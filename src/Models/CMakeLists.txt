@@ -8,6 +8,7 @@ qt_add_library(
     orderstatusmodel.h orderstatusmodel.cpp
     drivingcategoriesmodel.h drivingcategoriesmodel.cpp
     ordersmodel.h ordersmodel.cpp
+    deliveriesmodel.h deliveriesmodel.cpp
 )
 
 

@@ -107,14 +107,18 @@ Rectangle{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 currentIndex: leftMenuTabPannel.currentIndex
-                OrderPage{
+                PlanningTab{
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
-                CarPage{
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                }
+//                OrderPage{
+//                    Layout.fillHeight: true
+//                    Layout.fillWidth: true
+//                }
+//                CarPage{
+//                    Layout.fillHeight: true
+//                    Layout.fillWidth: true
+//                }
             }
         }
     }

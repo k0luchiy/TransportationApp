@@ -13,6 +13,8 @@
 #include "orderstatusmodel.h"
 #include "drivermodel.h"
 #include "driversfiltermodel.h"
+#include "deliveriesmodel.h"
+#include "deliveriesfiltermodel.h"
 
 #include "user.h"
 #include "order.h"
@@ -60,6 +62,14 @@ int main(int argc, char *argv[])
     driversFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     driversFilterModel->sort(0, Qt::AscendingOrder);
 
+    DeliveriesModel* deliveriesModel = new DeliveriesModel();
+    DeliveriesFilterModel* deliveriesFilterModel = new DeliveriesFilterModel();
+    deliveriesFilterModel->setSourceModel(deliveriesModel);
+    deliveriesFilterModel->setDynamicSortFilter(true);
+    deliveriesFilterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    deliveriesFilterModel->sort(0, Qt::AscendingOrder);
+    qDebug()<<deliveriesModel->record(0);
+
     engine.rootContext()->setContextProperty("user", user);
     engine.rootContext()->setContextProperty("drivingCatefories", drivingCatefories);
     engine.rootContext()->setContextProperty("ordersStatusModel", ordersStatusModel);
@@ -67,6 +77,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("ordersFilterModel", ordersFilterModel);
     engine.rootContext()->setContextProperty("carsModel", carsModel);
     engine.rootContext()->setContextProperty("carsFilterModel", carsFilterModel);
+    engine.rootContext()->setContextProperty("deliveriesModel", deliveriesModel);
+    engine.rootContext()->setContextProperty("deliveriesFilterModel", deliveriesFilterModel);
 
     //qmlRegisterType<User>("TransportationsApp.Models", 1, 0, "User");
     qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");

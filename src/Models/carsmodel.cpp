@@ -8,7 +8,7 @@
 #include "carsmodel.h"
 
 
-//! Query whitch AbstractSqlQueryModel will execute for selecting all user information.
+//! Query whitch AbstractSqlQueryModel will execute for selecting all car information.
 const char* CarsModel::SELECT_QUERY =
     "select \
         c.CarId, c.CarType, c.CarModel, \

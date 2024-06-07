@@ -21,4 +21,5 @@ qt_add_qml_module(TabsLib
     QML_FILES OrderInfoTab.qml
     QML_FILES CarTableTab.qml
     QML_FILES CarInfoTab.qml
+    QML_FILES PlanningTab.qml
 )

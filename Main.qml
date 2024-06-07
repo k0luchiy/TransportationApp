@@ -15,8 +15,12 @@ import Tabs
 
 Window{
     id: window
-    width: 450
-    height: 750
+//    width: 450
+//    height: 750
+
+    width: 1040
+    height: 840
+    visibility: Window.Maximized
     visible: true
     title: qsTr("Transportation app")
     color: Themes.colors.neutral.neutral0
@@ -54,6 +58,6 @@ Window{
     Loader {
         id: mainLoader
         anchors.fill: parent
-        sourceComponent: authPageComp
+        sourceComponent: mainPageComp //authPageComp
     }
 }

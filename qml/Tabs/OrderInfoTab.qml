@@ -61,6 +61,7 @@ Item {
                 NumberInputField{
                     id: orderIdField
                     Layout.fillWidth: true
+                    readOnly: true
                     title: qsTr("Id:")
                     text: orderModel.orderId
                 }

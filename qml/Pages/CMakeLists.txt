@@ -22,4 +22,5 @@ qt_add_qml_module(PagesLib
     QML_FILES MainPage.qml
     QML_FILES SignUpPage.qml
     QML_FILES AuthPage.qml
+    QML_FILES DriverPage.qml
 )

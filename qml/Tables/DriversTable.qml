@@ -1,0 +1,20 @@
+import QtQuick 2.15
+import QtQuick.Layouts
+
+TableBase{
+    id : tableRoot
+    tableHeaders :  ["Id", "Last name", "First name", "Driving category", "Experience"]
+    tableModel : driversFilterModel
+    tableRow:
+        Component{
+            TableRow{
+                Layout.fillWidth: true
+                model: [rowModel.DriverId, rowModel.LastName, rowModel.FirstName,
+                        rowModel.DrivingCategory, rowModel.Experience]
+                onClicked: {
+                    tableRoot.rowClicked(rowModel.DriverId)
+                }
+            }
+        }
+}
+

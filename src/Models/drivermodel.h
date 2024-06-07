@@ -24,6 +24,11 @@ class DriverModel : public AbstractSqlQueryModel
 public:
     explicit DriverModel(QObject *parent = nullptr);
 
+public Q_SLOTS:
+    bool updateDriver(quint64 driverId, quint64 personId, const QString& lastName,
+                      const QString& firstName, quint64 experience,
+                      quint64 salary, const QString& drivingCategory);
+
 private:
     const static char* SELECT_QUERY;
 };

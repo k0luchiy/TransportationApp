@@ -1,5 +1,4 @@
 #include "car.h"
-#include <QDebug>
 
 Car::Car(QObject *parent)
     : QObject{parent}

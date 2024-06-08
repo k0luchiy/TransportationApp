@@ -28,7 +28,8 @@ void AbstractSqlQueryModel::generateRoleNames()
 
 
 //! Get current query from model
-QString AbstractSqlQueryModel::get_query() const {
+QString AbstractSqlQueryModel::get_query() const
+{
     return m_select_query;
 }
 
@@ -97,12 +98,13 @@ QSqlRecord AbstractSqlQueryModel::getRecordByRowNum(quint64 rowNum) const
 }
 
 /*!
- * \brief Gets record index of specified value and column index.
- * \param columnIndex Index of a column in a model in witch value will be searched.
+ * \brief Gets record index of specified value and column name.
+ * \param fieldName Name of a column in a model in witch value will be searched.
  * \param value Value to find in a model.
  * \return Index of record with specified value or empty index on error.
  */
-QModelIndex AbstractSqlQueryModel::findIndex(const QString& fieldName, const QVariant& value) const {
+QModelIndex AbstractSqlQueryModel::findIndex(const QString& fieldName, const QVariant& value) const
+{
     int columnIndex = this->record().indexOf(fieldName);
     if(columnIndex==-1){
         return QModelIndex();
@@ -116,6 +118,18 @@ QModelIndex AbstractSqlQueryModel::findIndex(const QString& fieldName, const QVa
     }
 
     return indexes.at(0);
+}
+
+/*!
+ * \brief Gets row id of specified value and column name.
+ * \param fieldName Name of a column in a model in witch value will be searched.
+ * \param value Value to find in a model.
+ * \return Row id of record with specified value or 0 on error.
+ */
+quint64 AbstractSqlQueryModel::findRecordId(const QString& fieldName, const QVariant& value) const
+{
+    QModelIndex recordIndex = findIndex(fieldName, value);
+    return recordIndex.row();
 }
 
 /*!

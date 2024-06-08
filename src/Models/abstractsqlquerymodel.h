@@ -44,6 +44,7 @@ public:
 public Q_SLOTS:
     QSqlRecord getRecordByRowNum(quint64 rowNum) const;
     QModelIndex findIndex(const QString& fieldName, const QVariant& value) const;
+    quint64 findRecordId(const QString& fieldName, const QVariant& value) const;
     QSqlRecord findRecord(const QString& fieldName, const QVariant& value) const;
     QVariant getValue(quint64 recordId, const QString& fieldName) const;
 

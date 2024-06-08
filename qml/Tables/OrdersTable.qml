@@ -3,7 +3,7 @@ import QtQuick.Layouts
 
 TableBase{
     id : tableRoot
-    tableHeaders :  ["Код", "Дата создания", "Дата доставки", "Улица", "Статус", "Стоимость"]
+    tableHeaders :  ["Id", "Created date", "Delivery date", "Address", "Status", "Cost"]
     tableModel : ordersFilterModel
     tableRow:
         Component{

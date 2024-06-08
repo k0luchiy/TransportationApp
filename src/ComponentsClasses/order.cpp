@@ -6,6 +6,33 @@ Order::Order(QObject *parent)
 
 }
 
+Order::Order(const Order& other)
+{
+    m_orderId = other.orderId();
+    m_createdDate = other.createdDate();
+    m_askedDeliveryDate = other.askedDeliveryDate();
+    m_statusId = other.statusId();
+    m_statusTitle = other.statusTitle();
+    m_cost = other.cost();
+    m_address = other.address();
+    m_volume = other.volume();
+    m_weight = other.weight();
+}
+
+
+void Order::operator=(const Order& other)
+{
+    m_orderId = other.orderId();
+    m_createdDate = other.createdDate();
+    m_askedDeliveryDate = other.askedDeliveryDate();
+    m_statusId = other.statusId();
+    m_statusTitle = other.statusTitle();
+    m_cost = other.cost();
+    m_address = other.address();
+    m_volume = other.volume();
+    m_weight = other.weight();
+}
+
 // Getters
 quint64 Order::orderId() const { return m_orderId; }
 QDate Order::createdDate() const { return m_createdDate; }

@@ -47,7 +47,8 @@ private:
 
 public:
     explicit Order(QObject *parent = nullptr);
-    Order(const Order&) = default;
+    Order(const Order& other);// = default;
+    void operator=(const Order& other);
 
 public Q_SLOTS:
     void setData(

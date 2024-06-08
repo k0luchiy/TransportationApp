@@ -11,6 +11,8 @@ import Utils
 import TransportationsApp.Models 1.0
 
 Item {
+    property var carModel : Car{}
+    property var driverModel : Driver{}
     property var deliveryModel : Delivery{
         onCarIdChanged: {
             carModel.setRecord(carsModel.findRecord("CarId", carId))
@@ -18,9 +20,14 @@ Item {
         onDriverIdChanged: {
             driverModel.setRecord(driversModel.findRecord("DriverId", driverId))
         }
+        onDeliveryIdChanged: {
+            deliveryOrderList.setDelivery(deliveryId);
+            console.log(deliveryOrderList.deliveryId)
+            var orderList = deliveryOrderList.orderList
+            console.log(orderList.length, orderList, orderList[0].orderId, orderList[0].createdDate)
+        }
     }
-    property var carModel : Car{}
-    property var driverModel : Driver{}
+    property var deliveryOrderList : DeliveryOrderList{}
 
     id: pageRoot
     height: 800
@@ -130,6 +137,7 @@ Item {
         RowLayout{
             Layout.preferredHeight: 30
             Layout.fillWidth: true
+            spacing: 10
 
             Text{
                 Layout.preferredHeight: 30
@@ -188,6 +196,7 @@ Item {
         RowLayout{
             Layout.preferredHeight: 30
             Layout.fillWidth: true
+            spacing: 10
 
             Text{
                 Layout.preferredHeight: 30
@@ -237,10 +246,67 @@ Item {
             }
         }
 
+        RowLayout{
+            Layout.preferredHeight: 30
+            Layout.fillWidth: true
+            spacing: 10
+
+            Text{
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                font.pointSize: 14
+                color: Themes.colors.neutral.neutral950
+                text: qsTr("Orders in delivery")
+            }
+
+            SecondaryButton{
+                Layout.preferredHeight: 30
+                Layout.preferredWidth: 110
+                fontSize: 10
+                iconLeftVisible: true
+                iconLeftSource: "qrc:/assets/icons/Outline/book-open.svg"
+                btnText: qsTr("Watch all")
+            }
+            SecondaryButton{
+                Layout.preferredHeight: 30
+                Layout.preferredWidth: 155
+                fontSize: 10
+                iconLeftVisible: true
+                iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
+                btnText: qsTr("Add automaticly")
+            }
+        }
+
         Item{
             Layout.fillHeight: true
             Layout.fillWidth: true
+            TableBase{
+                id : tableRoot
+                anchors.fill: parent
+                tableHeaders :  ["Id", "Created date", "Delivery date", "Address", "Status", "Cost"]
+                tableModel : deliveryOrderList.orderList
+                tableRow:
+                    Component{
+                        TableRow{
+                            Layout.fillWidth: true
+                            model: [rowModel.modelData.orderId, rowModel.modelData.createdDate.toLocaleDateString("en_US"),
+                                rowModel.modelData.askedDeliveryDate.toLocaleDateString("en_US"),
+                                rowModel.modelData.address, rowModel.modelData.statusTitle, rowModel.modelData.cost]
+                            onClicked: {
+                                tableRoot.rowClicked(rowModel.orderId)
+                            }
+                            Component.onCompleted: {
+                                console.log(rowModel.modelData.orderId)
+                            }
+                        }
+                    }
+            }
         }
+
+//        Item{
+//            Layout.fillHeight: true
+//            Layout.fillWidth: true
+//        }
     }
 
 }

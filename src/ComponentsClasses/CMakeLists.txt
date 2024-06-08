@@ -4,6 +4,7 @@ qt_add_library(
     order.h order.cpp
     car.h car.cpp
     driver.h driver.cpp
+    delivery.h delivery.cpp
 )
 
 

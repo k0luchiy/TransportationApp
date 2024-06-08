@@ -3,11 +3,13 @@
 //! Query whitch AbstractSqlQueryModel will execute for selecting all delivery information.
 const char* DeliveriesModel::SELECT_QUERY =
     "select del.DeliveryId, del.CarId, c.CarNumber, del.DriverId, pi.LastName, pi. FirstName, \
-            del.DepartureDate, del.ReturnDate, del.StatusId, del.CreatedBy \
+            CONCAT(pi.LastName, ' ', pi. FirstName) as DriverName, \
+            del.DepartureDate, del.ReturnDate, del.StatusId, s.StatusTitle, del.CreatedBy \
     from Deliveries del \
     join Cars c on del.CarId = c.CarId \
     join Drivers dr on del.DriverId = dr.DriverId \
-    join PersonalInfo pi on dr.PersonId = pi.PersonId";
+    join PersonalInfo pi on dr.PersonId = pi.PersonId \
+    join OrderStatus s on del.StatusId = s.StatusId ";
 
 DeliveriesModel::DeliveriesModel(QObject *parent)
     : AbstractSqlQueryModel{SELECT_QUERY, parent}

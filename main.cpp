@@ -20,6 +20,7 @@
 #include "order.h"
 #include "car.h"
 #include "driver.h"
+#include "delivery.h"
 
 int main(int argc, char *argv[])
 {
@@ -86,6 +87,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");
     qmlRegisterType<Car>("TransportationsApp.Models", 1, 0, "Car");
     qmlRegisterType<Driver>("TransportationsApp.Models", 1, 0, "Driver");
+    qmlRegisterType<Delivery>("TransportationsApp.Models", 1, 0, "Delivery");
 
     engine.loadFromModule("TransportationApp", "Main");
 

@@ -11,7 +11,16 @@ import Utils
 import TransportationsApp.Models 1.0
 
 Item {
-    //property var deliveryModel : Delivery{}
+    property var deliveryModel : Delivery{
+        onCarIdChanged: {
+            carModel.setRecord(carsModel.findRecord("CarId", carId))
+        }
+        onDriverIdChanged: {
+            driverModel.setRecord(driversModel.findRecord("DriverId", driverId))
+        }
+    }
+    property var carModel : Car{}
+    property var driverModel : Driver{}
 
     id: pageRoot
     height: 800
@@ -30,7 +39,7 @@ Item {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
-                text: qsTr("Delivery ") + carModel.carNumber
+                text: qsTr("Delivery ") + deliveryModel.deliveryId
             }
 
             SecondaryButton{
@@ -74,12 +83,14 @@ Item {
                     Layout.fillWidth: true
                     z: 5
                     title: qsTr("Departure date:")
+                    text: DateUtils.formatDate(deliveryModel.departureDate)
                 }
                 DateInputField{
                     id: returnDateField
                     Layout.fillWidth: true
                     z: 5
                     title: qsTr("Return date:")
+                    text: DateUtils.formatDate(deliveryModel.returnDate)
                 }
             }
             ColumnLayout{
@@ -90,13 +101,21 @@ Item {
                     id: carIdField
                     Layout.fillWidth: true
                     title:  qsTr("Car id:")
-                    text: "1"
+                    text: deliveryModel.carId
+                    onEditingFinished: {
+                        var carId = carIdField.text ? Number(carIdField.text) : 0
+                        carModel.setRecord(carsModel.findRecord("CarId", carId))
+                    }
                 }
                 NumberInputField{
                     id: driverIdField
                     Layout.fillWidth: true
                     title:  qsTr("Driver id:")
-                    text: "1"
+                    text: deliveryModel.driverId
+                    onEditingFinished: {
+                        var driverId = driverIdField.text ? Number(driverIdField.text) : 0
+                        driverModel.setRecord(driversModel.findRecord("DriverId", driverId))
+                    }
                 }
                 ComboBoxInputField{
                     id: statusField
@@ -104,7 +123,7 @@ Item {
                     title:  qsTr("Status:")
                     model: ordersStatusModel
                     textRole: "StatusTitle"
-                    currentIndex: orderModel.statusId
+                    currentIndex: deliveryModel.statusId
                 }
             }
         }
@@ -141,9 +160,29 @@ Item {
         Item{
             Layout.preferredHeight: 85
             Layout.fillWidth: true
-            CarsTable{
+//            CarsTable{
+//                anchors.fill: parent
+//                tableModel: [ carModel ]
+//            }
+            TableBase{
+                id : carTableRoot
                 anchors.fill: parent
+                tableHeaders :  ["Id", "Type", "Model", "Car number", "Volume", "Weight", "Driving category"]
+                tableModel : carModel
+                tableRow:
+                    Component{
+                        TableRow{
+                            Layout.fillWidth: true
+                            model: [rowModel.carId, rowModel.carType, rowModel.carModel,
+                                    rowModel.carNumber, rowModel.volumeCapacity,
+                                    rowModel.weightCapacity, rowModel.drivingCategory]
+                            onClicked: {
+                                carTableRoot.rowClicked(rowModel.carId)
+                            }
+                        }
+                    }
             }
+
         }
 
         RowLayout{
@@ -179,8 +218,22 @@ Item {
         Item{
             Layout.preferredHeight: 85
             Layout.fillWidth: true
-            CarsTable{
+            TableBase{
+                id : driverTableRoot
                 anchors.fill: parent
+                tableHeaders :  ["Id", "Last name", "First name", "Driving category", "Experience"]
+                tableModel : driverModel
+                tableRow:
+                    Component{
+                        TableRow{
+                            Layout.fillWidth: true
+                            model: [rowModel.driverId, rowModel.lastName, rowModel.firstName,
+                                    rowModel.drivingCategory, rowModel.experience]
+                            onClicked: {
+                                driverTableRoot.rowClicked(rowModel.driverId)
+                            }
+                        }
+                    }
             }
         }
 

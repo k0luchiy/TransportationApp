@@ -153,8 +153,7 @@ void DeliveriesFilterModel::setFilters(
     quint64 deliveryId, const QString& carNumber,
     const QString& driverName, const QDate& minDepartureDate,
     const QDate& maxDepartureDate, const QDate& minReturnDate,
-    const QDate& maxReturnDate, const QString& status,
-    const QString& toLocation
+    const QDate& maxReturnDate, const QString& status//, const QString& toLocation
 )
 {
     m_deliveryId = deliveryId;
@@ -165,7 +164,7 @@ void DeliveriesFilterModel::setFilters(
     m_minReturnDate= minReturnDate;
     m_maxReturnDate = maxReturnDate;
     m_status = status;
-    m_toLocation = toLocation;
+    //m_toLocation = toLocation;
 
     invalidateFilter();
 }
@@ -190,12 +189,12 @@ bool DeliveriesFilterModel::isDateInRange(const QDate& date, const QDate& startD
 bool DeliveriesFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
     quint64 deliveryId = m_sourceModel->getValue(source_row, "DeliveryId").toInt();
-    QString carNumber = m_sourceModel->getValue(source_row, "carNumber").toString();
+    QString carNumber = m_sourceModel->getValue(source_row, "CarNumber").toString();
     QString driverName = m_sourceModel->getValue(source_row, "DriverName").toString();
     QDate departureDate = m_sourceModel->getValue(source_row, "DepartureDate").toDate();
     QDate returnDate = m_sourceModel->getValue(source_row, "ReturnDate").toDate();
-    QString status = m_sourceModel->getValue(source_row, "Status").toString();
-    QString toLocation = m_sourceModel->getValue(source_row, "ToLocation").toString();
+    QString status = m_sourceModel->getValue(source_row, "StatusTitle").toString();
+    //QString toLocation = m_sourceModel->getValue(source_row, "ToLocation").toString();
 
     return
         (m_deliveryId == 0 || m_deliveryId == deliveryId) &&
@@ -203,9 +202,8 @@ bool DeliveriesFilterModel::filterAcceptsRow(int source_row, const QModelIndex &
         driverName.contains(QRegularExpression(m_driverName, QRegularExpression::CaseInsensitiveOption)) &&
         isDateInRange(departureDate, m_minDepartureDate, m_maxDepartureDate) &&
         isDateInRange(returnDate, m_minReturnDate, m_maxReturnDate) &&
-        toLocation.contains(QRegularExpression(m_toLocation, QRegularExpression::CaseInsensitiveOption)) &&
-        QString::compare(status, m_status, Qt::CaseInsensitive) == 0
-           || m_status.isEmpty()
+        //toLocation.contains(QRegularExpression(m_toLocation, QRegularExpression::CaseInsensitiveOption)) &&
+        (QString::compare(status, m_status, Qt::CaseInsensitive) == 0 || m_status.isEmpty())
     ;
 }
 

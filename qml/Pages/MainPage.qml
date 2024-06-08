@@ -110,6 +110,11 @@ Rectangle{
 //                PlanningTab{
 //                    Layout.fillHeight: true
 //                    Layout.fillWidth: true
+//                    Component.onCompleted: {
+//                        deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", 3))
+//                        carModel.setRecord(carsModel.findRecord("CarId", 3))
+//                        driverModel.setRecord(driversModel.findRecord("DriverId", 3))
+//                    }
 //                }
                 OrderPage{
                     Layout.fillHeight: true
@@ -120,6 +125,14 @@ Rectangle{
                     Layout.fillWidth: true
                 }
                 DriverPage{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+                DeliveriesPage{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+                PlanningPage{
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }

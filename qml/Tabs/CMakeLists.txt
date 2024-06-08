@@ -24,4 +24,5 @@ qt_add_qml_module(TabsLib
     QML_FILES PlanningTab.qml
     QML_FILES DriverTableTab.qml
     QML_FILES DriverInfoTab.qml
+    QML_FILES DeliveryTableTab.qml
 )

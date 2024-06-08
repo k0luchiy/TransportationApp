@@ -46,8 +46,7 @@ public Q_SLOTS: //Setters
         quint64 deliveryId, const QString& carNumber,
         const QString& driverName, const QDate& minDepartureDate,
         const QDate& maxDepartureDate, const QDate& minReturnDate,
-        const QDate& maxReturnDate, const QString& status,
-        const QString& toLocation
+        const QDate& maxReturnDate, const QString& status//, const QString& toLocation
     );
 
 private:

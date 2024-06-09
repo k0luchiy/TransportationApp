@@ -9,6 +9,7 @@ add_subdirectory(Tabs)
 add_subdirectory(Pages)
 add_subdirectory(Utils)
 add_subdirectory(Map)
+add_subdirectory(Popups)
 
 
 

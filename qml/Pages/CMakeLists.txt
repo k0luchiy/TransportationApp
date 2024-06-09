@@ -11,6 +11,7 @@ target_link_libraries(PagesLib
     PRIVATE TablesLibplugin
     PRIVATE TabsLibplugin
     PRIVATE MapLibplugin
+    PRIVATE PopupsLibplugin
 )
 
 qt_add_qml_module(PagesLib

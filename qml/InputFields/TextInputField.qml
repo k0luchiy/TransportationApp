@@ -5,7 +5,7 @@ import Colors
 import Buttons
 
 Item {
-    property color titleColor : Themes.colors.neutral.neutral700
+    property color titleColor : Themes.colors.neutral.neutral900
     property color contentColor : Themes.colors.neutral.neutral700
     property color placeholderColor : Themes.colors.neutral.neutral500
     property color errorColor : Themes.colors.red.red500

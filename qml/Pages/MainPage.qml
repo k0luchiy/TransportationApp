@@ -13,6 +13,7 @@ import Notifications
 import Pages
 import Tabs
 import Map
+import Popups
 
 //Window {
 //ApplicationWindow{
@@ -26,6 +27,11 @@ Rectangle{
 //    title: qsTr("Hello World")
     color: Themes.colors.neutral.neutral0
 
+    Settings{
+        id: settingsPopup
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+    }
 
     ColumnLayout{
         anchors.fill: parent
@@ -59,12 +65,13 @@ Rectangle{
                     iconSize: 18
                     iconSource: "qrc:/assets/icons/Outline/cog.svg"
                     onClicked : {
-                        if (Themes.currentTheme.themeId === 0){
-                            Themes.currentTheme = Themes.themes.dark
-                        }
-                        else{
-                            Themes.currentTheme = Themes.themes.light
-                        }
+                        settingsPopup.open()
+//                        if (Themes.currentTheme.themeId === 0){
+//                            Themes.currentTheme = Themes.themes.dark
+//                        }
+//                        else{
+//                            Themes.currentTheme = Themes.themes.light
+//                        }
                     }
                 }
                 IconButton{

@@ -234,5 +234,6 @@
         <file>assets/icons/Essentials/Info.svg</file>
         <file>assets/icons/Essentials/Success.svg</file>
         <file>assets/icons/Essentials/Warning.svg</file>
+        <file>assets/icons/Essentials/map-marker.png</file>
     </qresource>
 </RCC>

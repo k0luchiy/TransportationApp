@@ -22,9 +22,7 @@ Item {
         }
         onDeliveryIdChanged: {
             deliveryOrderList.setDelivery(deliveryId);
-            console.log(deliveryOrderList.deliveryId)
             var orderList = deliveryOrderList.orderList
-            console.log(orderList.length, orderList, orderList[0].orderId, orderList[0].createdDate)
         }
     }
     property var deliveryOrderList : DeliveryOrderList{}
@@ -55,17 +53,18 @@ Item {
                 contentColor: Themes.colors.primary.primary500
                 btnText: "Save"
                 onClicked: {
-                    var carId = Number(carIdField.text)
-                    var carType = carTypeField.text
-                    var carModel = carModelField.text
-                    var carNumber = carNumberField.text
-                    var volumeCapacity = Number(volumeCapacityField.text)
-                    var weightCapacity = Number(weightCapacityField.text)
-                    var drivingCategory = drivingCategoryField.currentText
+                    pageRoot.displayMap()
+//                    var carId = Number(carIdField.text)
+//                    var carType = carTypeField.text
+//                    var carModel = carModelField.text
+//                    var carNumber = carNumberField.text
+//                    var volumeCapacity = Number(volumeCapacityField.text)
+//                    var weightCapacity = Number(weightCapacityField.text)
+//                    var drivingCategory = drivingCategoryField.currentText
 
-                    carsModel.updateCar(carId, carType, carModel,
-                                        carNumber, volumeCapacity,
-                                        weightCapacity, drivingCategory);
+//                    carsModel.updateCar(carId, carType, carModel,
+//                                        carNumber, volumeCapacity,
+//                                        weightCapacity, drivingCategory);
                 }
             }
         }
@@ -295,18 +294,11 @@ Item {
                             onClicked: {
                                 tableRoot.rowClicked(rowModel.orderId)
                             }
-                            Component.onCompleted: {
-                                console.log(rowModel.modelData.orderId)
-                            }
                         }
                     }
             }
         }
 
-//        Item{
-//            Layout.fillHeight: true
-//            Layout.fillWidth: true
-//        }
     }
 
 }

@@ -10,6 +10,7 @@ target_link_libraries(PagesLib
     PRIVATE TabControlsLibplugin
     PRIVATE TablesLibplugin
     PRIVATE TabsLibplugin
+    PRIVATE MapLibplugin
 )
 
 qt_add_qml_module(PagesLib

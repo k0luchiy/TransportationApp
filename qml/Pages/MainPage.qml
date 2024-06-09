@@ -12,6 +12,7 @@ import Tables
 import Notifications
 import Pages
 import Tabs
+import Map
 
 //Window {
 //ApplicationWindow{
@@ -103,7 +104,7 @@ Rectangle{
             }
 
             StackLayout {
-                id: carsStackView
+                id: mainStackView
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 currentIndex: leftMenuTabPannel.currentIndex
@@ -117,25 +118,39 @@ Rectangle{
 //                    }
 //                }
                 OrderPage{
+                    id: orderPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
                 CarPage{
+                    id: carPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
                 DriverPage{
+                    id: driverPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
                 DeliveriesPage{
+                    id: deliveriesPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    onOpenDelivery : (deliveryId)=>{
+                        palnningPage.deliveryId = deliveryId
+                        leftMenuTabPannel.currentIndex = 4
+                    }
                 }
                 PlanningPage{
+                    id: palnningPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
+//                MapComponent{
+//                    Layout.fillHeight: true
+//                    Layout.fillWidth: true
+//                    startAddress: "Екатеринбург, улица 8 Марта, 46"
+//                }
             }
         }
     }

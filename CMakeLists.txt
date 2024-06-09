@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Test)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Positioning Location Test)
 
 enable_testing(true)
 

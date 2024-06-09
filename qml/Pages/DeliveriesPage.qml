@@ -4,22 +4,16 @@ import QtQuick.Layouts
 import Colors
 import TabControls
 import Tabs
+import Map
 
 import TransportationsApp.Models 1.0
 
 Item {
+    signal openDelivery(deliveryId : int)
+
     id: pageRoot
     height: 800
     width: 1040
-
-    Component{
-        id: palnningTabComp
-        PlanningTab{
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-    }
-
 
     ColumnLayout{
         anchors.fill: parent
@@ -44,10 +38,7 @@ Item {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onRowClicked: (recordId) => {
-                    deliveriesTabPannel.addTab("Delivery " + recordId)
-                    var planningTab = palnningTabComp.createObject(deliveiesStackView)
-                    planningTab.deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", recordId))
-                    planningTab.parent = deliveiesStackView;
+                    pageRoot.openDelivery(recordId)
                 }
             }
         }

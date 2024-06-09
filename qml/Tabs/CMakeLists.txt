@@ -11,6 +11,7 @@ target_link_libraries(TabsLib
     PRIVATE TablesLibplugin
     PRIVATE UtilsLibplugin
     PRIVATE CalendarLibplugin
+    PRIVATE MapLibplugin
 )
 
 qt_add_qml_module(TabsLib
@@ -25,4 +26,5 @@ qt_add_qml_module(TabsLib
     QML_FILES DriverTableTab.qml
     QML_FILES DriverInfoTab.qml
     QML_FILES DeliveryTableTab.qml
+    QML_FILES PlanningMapTab.qml
 )

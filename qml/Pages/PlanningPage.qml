@@ -4,17 +4,24 @@ import QtQuick.Layouts
 import Colors
 import TabControls
 import Tabs
+import Map
 
 import TransportationsApp.Models 1.0
 
 Item {
+    property int deliveryId
+
     id: pageRoot
     height: 800
     width: 1040
 
+    onDeliveryIdChanged: {
+        planningTab.deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
+    }
+
     Component{
-        id: driverInfoTabComp
-        DriverInfoTab{
+        id: planningMapTabComp
+        MapComponent{
             Layout.fillHeight: true
             Layout.fillWidth: true
         }
@@ -28,10 +35,10 @@ Item {
             id: deliveryTabPannel
             Layout.preferredHeight: 40
             Layout.fillWidth: true
-            tabs: [{text: "Delivery", checked: true, iconVisible: false}]
-            onTabClosed: (index) => {
-                deliveryStackView.children[index].destroy()
-            }
+            tabs: [
+                {text: "Delivery", checked: true, iconVisible: false},
+                {text: "Map", checked: true, iconVisible: false}
+            ]
         }
 
         StackLayout {
@@ -41,6 +48,13 @@ Item {
             Layout.margins: 10
             currentIndex: deliveryTabPannel.currentIndex
             PlanningTab{
+                id: planningTab
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
+
+            PlanningMapTab{
+                id: planningMapTab
                 Layout.fillHeight: true
                 Layout.fillWidth: true
             }

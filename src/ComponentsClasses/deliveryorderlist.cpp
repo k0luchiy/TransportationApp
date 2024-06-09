@@ -42,7 +42,8 @@ void DeliveryOrderList::setDelivery(quint64 deliveryId)
         From DeliveryOrders do \
         join Orders o on do.OrderId = o.OrderId \
         join OrderStatus s on o.StatusId = s.StatusId \
-        Where DeliveryId=:deliveryId ";
+        Where DeliveryId=:deliveryId \
+        order by do.SequenceNum ";
 
     QSqlQuery query;
     query.prepare(query_str);

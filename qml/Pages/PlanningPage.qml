@@ -17,6 +17,7 @@ Item {
 
     onDeliveryIdChanged: {
         planningTab.deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
+        planningMapTab.orderList = planningTab.deliveryOrderList.orderList
     }
 
     Component{
@@ -57,6 +58,7 @@ Item {
                 id: planningMapTab
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                startAddress: "Екатеринбург, улица Репина 15"
             }
         }
     }

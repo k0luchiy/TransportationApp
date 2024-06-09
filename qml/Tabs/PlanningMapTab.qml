@@ -13,6 +13,5 @@ Item {
     MapComponent{
         id: map
         anchors.fill: parent
-        startAddress: "Екатеринбург, улица 8 Марта, 46"
     }
 }

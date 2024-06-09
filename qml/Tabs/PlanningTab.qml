@@ -22,7 +22,6 @@ Item {
         }
         onDeliveryIdChanged: {
             deliveryOrderList.setDelivery(deliveryId);
-            var orderList = deliveryOrderList.orderList
         }
     }
     property var deliveryOrderList : DeliveryOrderList{}

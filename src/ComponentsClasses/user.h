@@ -54,10 +54,21 @@ public Q_SLOTS:
                      quint64 roleId, const QString& roleTitle,
                      quint64 rolePriority, bool isAuthenticated);
     void setRecord(const QSqlRecord& record);
+    void setUser(quint64 userId);
     bool isUserExist(const QString& email) const;
     bool authenticate(const QString& email, const QString& password);
     bool registration(const QString& email, const QString& password,
                       const QString& firstName, const QString& lastName);
+    bool checkPassword(quint64 userId, const QString& password);
+    bool updateUserInfo(quint64 userId, const QString& lastName,
+                        const QString& firstName, const QString& email);
+    bool updateUserPassword(quint64 userId, const QString& oldPassword,
+                            const QString& newPassword);
+    bool updateUserData(
+        quint64 userId, const QString& lastName,
+        const QString& firstName, const QString& email,
+        const QString& oldPassword, const QString& newPassword
+    );
 
 //
 // Getters

@@ -102,7 +102,23 @@ void User::setRecord(const QSqlRecord& record)
     );
 }
 
+void User::setUser(quint64 userId)
+{
+    const QString select_query =
+        " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle  "
+        " from Users u  "
+        " join UserRoles ur on u.roleId = ur.roleId "
+        " where u.userId = :userId ";
 
+    QSqlQuery query;
+    query.prepare(select_query);
+    query.bindValue(":userId", userId);
+    bool execSuccess = query.exec();
+    if(execSuccess && query.next()){
+        QSqlRecord record = query.record();
+        setRecord(record);
+    }
+}
 
 /*!
  * \brief Checks if user with given email already registered.
@@ -182,4 +198,99 @@ bool User::registration(const QString& email, const QString& password,
     return query.exec();
 }
 
+/*!
+ * \brief Checks whether given password is current
+ * \param userId User id of a user to check
+ * \param password Password to check
+ * \return true if password is matches and query executed successfuly, false otherwise
+ */
+bool User::checkPassword(quint64 userId, const QString& password)
+{
+    QSqlQuery query;
+    const QString select_query =
+        "Select userId from Users \
+        where userId = :userId and pwd = md5(:password)";
+    query.prepare(select_query);
+    query.bindValue(":userId", userId);
+    query.bindValue(":password", password);
+    bool execSuccess = query.exec();
+    return execSuccess && query.next();
+}
 
+/*!
+ * \brief Updates user info by user id
+ * \param userId User id of a user to update
+ * \param lastName New last name to set
+ * \param firstName New first name to set
+ * \param email New email to set
+ * \return true if query executed successfuly, false otherwise
+ */
+bool User::updateUserInfo(
+    quint64 userId, const QString& lastName,
+    const QString& firstName, const QString& email)
+{
+    QSqlQuery query;
+    const QString update_query =
+        "Update users set lastName = :lastName, firstName = :firstName, \
+        email = :email \
+        where userId = :userId";
+    query.prepare(update_query);
+    query.bindValue(":lastName", lastName);
+    query.bindValue(":firstName", firstName);
+    query.bindValue(":email", email);
+    query.bindValue(":userId", userId);
+    bool execSuccess = query.exec();
+    if(execSuccess){
+        qDebug() << "Updated";
+        setLastName(lastName);
+        setFirstName(firstName);
+        setEmail(email);
+    }
+
+    return execSuccess;
+}
+
+
+/*!
+ * \brief User::updateUserPassword
+ * \param userId User id of a user to update
+ * \param oldPassword Current password of a user
+ * \param newPassword New password to set
+ * \return true if query executed successfuly, false otherwise
+ */
+bool User::updateUserPassword(
+    quint64 userId, const QString& oldPassword, const QString& newPassword)
+{
+    QSqlQuery query;
+    const QString update_query =
+        "Update users set pwd = md5(:newPassword) \
+        where userId = :userId and pwd = md5(:oldPassword)";
+    query.prepare(update_query);
+    query.bindValue(":newPassword", newPassword);
+    query.bindValue(":oldPassword", oldPassword);
+    query.bindValue(":userId", userId);
+
+    return query.exec();
+}
+
+/*!
+ * \brief Updates user data by userId
+ * \param userId User id of a user to update
+ * \param lastName New last name to set
+ * \param firstName New first name to set
+ * \param email New email to set
+ * \param oldPassword Current password of a user
+ * \param newPassword New password to set
+ * \return true if query executed successfuly, false otherwise
+ */
+bool User::updateUserData(
+    quint64 userId, const QString& lastName,
+    const QString& firstName, const QString& email,
+    const QString& oldPassword, const QString& newPassword
+)
+{
+    bool infoSuccess = updateUserInfo(userId, lastName, firstName, email);
+    bool passwordSuccess = updateUserPassword(userId, oldPassword, newPassword);
+
+    return infoSuccess && passwordSuccess;
+}

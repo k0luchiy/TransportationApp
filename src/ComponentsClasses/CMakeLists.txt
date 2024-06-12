@@ -6,6 +6,7 @@ qt_add_library(
     driver.h driver.cpp
     delivery.h delivery.cpp
     deliveryorderlist.h deliveryorderlist.cpp
+    settings.h settings.cpp
 )
 
 

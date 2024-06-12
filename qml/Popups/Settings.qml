@@ -14,6 +14,8 @@ Popup {
     property string titleText : "Settings"
     property int borderWidth : 1
 
+    signal logout
+
     id: popupRoot
     height: 570
     width: 400
@@ -29,6 +31,20 @@ Popup {
         border.width: popupRoot.borderWidth
         border.color: popupRoot.borderColor
         radius: 10
+    }
+
+    onClosed: {
+        lastNameField.text = user.lastName
+        firstNameField.text = user.firstName
+        emailField.text = user.email
+        oldPasswordField.text = ""
+        newPasswordField.text = ""
+        lastNameField.isError = false
+        firstNameField.isError = false
+        emailField.isError = false
+        oldPasswordField.isError = false
+        newPasswordField.isError = false
+        popupRoot.close()
     }
 
     ColumnLayout{
@@ -104,7 +120,7 @@ Popup {
                 text: "Reset password"
             }
             TextInputField{
-                id: passwordField
+                id: oldPasswordField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
                 title: "Password"
@@ -113,16 +129,16 @@ Popup {
                 iconRightVisible: true
                 iconRightSource: "qrc:/assets/icons/Outline/eye.svg"
                 onRightIconClicked: {
-                    if(passwordField.fieldEchoMode === TextInput.Password){
-                        passwordField.fieldEchoMode = TextInput.Normal
+                    if(oldPasswordField.fieldEchoMode === TextInput.Password){
+                        oldPasswordField.fieldEchoMode = TextInput.Normal
                     }
                     else{
-                        passwordField.fieldEchoMode = TextInput.Password
+                        oldPasswordField.fieldEchoMode = TextInput.Password
                     }
                 }
             }
             TextInputField{
-                id: repeatPasswordField
+                id: newPasswordField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
                 title: "Password"
@@ -131,11 +147,11 @@ Popup {
                 iconRightVisible: true
                 iconRightSource: "qrc:/assets/icons/Outline/eye.svg"
                 onRightIconClicked: {
-                    if(passwordField.fieldEchoMode === TextInput.Password){
-                        passwordField.fieldEchoMode = TextInput.Normal
+                    if(newPasswordField.fieldEchoMode === TextInput.Password){
+                        newPasswordField.fieldEchoMode = TextInput.Normal
                     }
                     else{
-                        passwordField.fieldEchoMode = TextInput.Password
+                        newPasswordField.fieldEchoMode = TextInput.Password
                     }
                 }
             }
@@ -150,6 +166,7 @@ Popup {
                 Layout.preferredHeight: 25
                 Layout.fillWidth: true
                 text: "Dark mode"
+                checked: Themes.currentTheme.themeId === 1
 
                 onCheckedChanged: {
                     if (darkModeSwitch.checked){
@@ -178,15 +195,17 @@ Popup {
                 color: Themes.colors.red.red500
                 text: "Log out"
                 MouseArea{
+                    id: logoutMouse
                     anchors.fill: parent
                     hoverEnabled: true
                     focus: true
                     activeFocusOnTab: true
                     onClicked: {
-                        buttonRoot.clicked();
+                        popupRoot.close()
+                        popupRoot.logout()
                     }
                     Keys.onReturnPressed: {
-                        buttonRoot.clicked();
+                        logoutMouse.clicked();
                     }
                     cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
                 }
@@ -203,6 +222,9 @@ Popup {
                     Layout.preferredHeight: 30
                     Layout.preferredWidth: 80
                     btnText: "Cancel"
+                    onClicked: {
+                        popupRoot.close()
+                    }
                 }
                 Item{
                     Layout.preferredHeight: 30
@@ -213,6 +235,51 @@ Popup {
                     Layout.preferredWidth: 80
                     iconLeftVisible: false
                     btnText: "Save"
+                    onClicked: {
+                        var lastName = lastNameField.text
+                        var firstName = firstNameField.text
+                        var email = emailField.text
+                        var oldPassword = oldPasswordField.text
+                        var newPassword = newPasswordField.text
+                        var infoSuccess = true
+                        var pwdSuccess = true
+
+                        if(
+                            lastName !== user.lastName ||
+                            firstName !== user.firstName ||
+                            email !== user.email)
+                        {
+                            user.updateUserInfo(user.userId, lastName,
+                                                firstName, email)
+                        }
+
+                        if(oldPassword === "" && newPassword === ""){}
+                        else if(oldPassword !== "" && newPassword !== ""){
+                            var oldPasswordMatch = user.checkPassword(user.userId, oldPassword)
+                            if(oldPasswordMatch){
+                                oldPasswordField.isError = false
+                                user.updateUserPassword(user.userId,
+                                                    oldPassword, newPassword)
+                            }
+                            else{
+                                oldPasswordField.isError = true
+                                pwdSuccess = false
+                            }
+                        }
+                        else{
+                            if(oldPassword !== "") {oldPasswordField.isError = false}
+                            else {oldPasswordField.isError = true}
+                            if(newPassword !== "") {newPasswordField.isError = false}
+                            else {newPasswordField.isError = true}
+                            pwdSuccess = false
+                        }
+
+
+                        if(infoSuccess && pwdSuccess){
+                            settings.dumpSettings()
+                            popupRoot.close()
+                        }
+                    }
                 }
             }
         }

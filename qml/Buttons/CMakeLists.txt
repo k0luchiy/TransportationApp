@@ -25,6 +25,7 @@ qt_add_qml_module(
     QML_FILES PrimaryButton.qml
     QML_FILES SecondaryButton.qml
     QML_FILES IconButton.qml
+    QML_FILES RadioButtonComp.qml
 )
 
 

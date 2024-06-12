@@ -24,6 +24,7 @@ Rectangle {
         if(authSuceess){
             emailField.isError = false
             passwordField.isError = false
+            settings.rememberUser = rememberMeBtn.checked
             loginPage.loginSuccessful()
         }
         else{
@@ -51,7 +52,7 @@ Rectangle {
                 Layout.preferredWidth: 80
                 btnText: "Sign up"
                 borderSize: 0
-                contentColor: Themes.colors.primary.primary500
+                contentColor: Themes.colors.primary.primary600
                 onClicked: {
                     loginPage.sigUpClicked()
                 }
@@ -65,9 +66,10 @@ Rectangle {
             Layout.preferredHeight: 100
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-            font.pointSize: 20
-            text: "Login"
             horizontalAlignment: Text.AlignHCenter
+            font.pointSize: 20
+            color: Themes.colors.neutral.neutral950
+            text: "Login"
         }
 
         ColumnLayout{
@@ -116,6 +118,13 @@ Rectangle {
                         passwordField.fieldEchoMode = TextInput.Password
                     }
                 }
+            }
+            RadioButtonComp{
+                id: rememberMeBtn
+                Layout.preferredHeight: 30
+                Layout.fillWidth: true
+                checked: settings.rememberUser
+                text: qsTr("Remember me")
             }
             PrimaryButton{
                 Layout.preferredHeight: 35

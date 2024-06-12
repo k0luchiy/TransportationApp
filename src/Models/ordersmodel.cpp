@@ -56,6 +56,7 @@ bool OrdersModel::updateOrder(
     query.bindValue(":volume", volume);
     query.bindValue(":weight", weight);
     query.bindValue(":cost", cost);
-
-    return query.exec();
+    bool res = query.exec();
+    updateModel();
+    return res;
 }

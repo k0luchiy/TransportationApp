@@ -15,12 +15,12 @@ import Tabs
 
 Window{
     id: window
-//    width: 450
-//    height: 750
+    width: 450
+    height: 750
 
-    width: 1040
-    height: 840
-    visibility: Window.Maximized
+//    width: 1040
+//    height: 840
+//    visibility: Window.Maximized
     visible: true
     title: qsTr("Transportation app")
     color: Themes.colors.neutral.neutral0
@@ -29,22 +29,15 @@ Window{
         id: authPageComp
         AuthPage{
             onAuthSuccess: {
+                if(settings.rememberUser){
+                    settings.userId = user.userId
+                }
                 mainLoader.sourceComponent = mainPageComp
                 window.width = 1040
                 window.height = 840
                 window.visibility = Window.Maximized
             }
         }
-        //        LoginPage{
-//            width: 450
-//            height: 650
-//            onLoginSuccessful: {
-//                mainLoader.sourceComponent = mainPageComp
-//                window.width = 1040
-//                window.height = 840
-//                window.visibility = Window.Maximized
-//            }
-//        }
     }
 
     Component{
@@ -52,12 +45,53 @@ Window{
         MainPage{
             width: 1040
             height: 840
+
+            onLogout: {
+                settings.rememberUser = false
+                settings.userId = 0
+                settings.dumpSettings()
+                window.width = 450
+                window.height = 750
+                window.visibility = Window.Windowed
+                mainLoader.sourceComponent = authPageComp
+            }
         }
     }
 
     Loader {
         id: mainLoader
         anchors.fill: parent
-        sourceComponent: mainPageComp //authPageComp
+        //sourceComponent: (setttings.rememberUser && settings.userId !== 0) ?
+        //            mainPageComp : authPageComp //authPageComp
+    }
+
+    Component.onCompleted: {
+        if (settings.darkMode){
+            Themes.currentTheme = Themes.themes.dark
+        }
+        else{
+            Themes.currentTheme = Themes.themes.light
+        }
+
+        if(settings.rememberUser && settings.userId !== 0){
+            user.setUser(settings.userId)
+            mainLoader.sourceComponent = mainPageComp
+            window.width = 1040
+            window.height = 840
+            window.visibility = Window.Maximized
+        }
+        else{
+            mainLoader.sourceComponent = authPageComp
+        }
+    }
+
+    onClosing: {
+        if(Themes.currentTheme.themeId === 0){
+            settings.darkMode = false
+        }
+        else{
+            settings.darkMode = true
+        }
+        settings.dumpSettings()
     }
 }

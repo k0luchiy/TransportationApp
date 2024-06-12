@@ -18,6 +18,8 @@ import Popups
 //Window {
 //ApplicationWindow{
 Rectangle{
+    signal logout
+
     id: window
     width: 1040
     height: 840
@@ -31,6 +33,10 @@ Rectangle{
         id: settingsPopup
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
+
+        onLogout: {
+            window.logout()
+        }
     }
 
     ColumnLayout{

@@ -95,9 +95,10 @@ Rectangle {
             Layout.preferredHeight: 50
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+            horizontalAlignment: Text.AlignHCenter
             font.pointSize: 20
             text: qsTr("Sign up")
-            horizontalAlignment: Text.AlignHCenter
+            color: Themes.colors.neutral.neutral950
         }
 
         ColumnLayout{

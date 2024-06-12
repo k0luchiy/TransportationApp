@@ -22,6 +22,7 @@
 #include "driver.h"
 #include "delivery.h"
 #include "deliveryorderlist.h"
+#include "settings.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,10 +36,21 @@ int main(int argc, char *argv[])
 
     engine.addImportPath(":/TransportationApp.com/qml");
 
-
+    //mysql://TransportationDB_exceptview:0eee07d40b64c05056edc10321cb7dbf90cf6879@b3d.h.filess.io:3307/TransportationDB_exceptview
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    //db.setDatabaseName("mysql://TransportationDB_exceptview:0eee07d40b64c05056edc10321cb7dbf90cf6879@b3d.h.filess.io:3307/TransportationDB_exceptview");
     db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+//    db.setHostName("b3d.h.filess.io");
+//    db.setDatabaseName("TransportationDB_exceptview");
+//    db.setUserName("TransportationDB_exceptview");
+//    db.setPassword("0eee07d40b64c05056edc10321cb7dbf90cf6879");
+//    db.setPort(3307);
+
     db.open();
+
+    Settings* settings = new Settings();
+    settings->loadSettings();
 
     User* user = new User();
     OrderStatusModel* ordersStatusModel = new OrderStatusModel();
@@ -83,6 +95,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("driversFilterModel", driversFilterModel);
     engine.rootContext()->setContextProperty("deliveriesModel", deliveriesModel);
     engine.rootContext()->setContextProperty("deliveriesFilterModel", deliveriesFilterModel);
+    engine.rootContext()->setContextProperty("settings", settings);
 
     //qmlRegisterType<User>("TransportationsApp.Models", 1, 0, "User");
     qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");

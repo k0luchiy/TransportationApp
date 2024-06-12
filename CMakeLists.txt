@@ -46,6 +46,29 @@ set(
 #include(Doxygen)
 #Doxygen(src "docs/html")
 
+#find_library(MYSQL_LIBRARY NAMES mysql PATHS "C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib\\libmysql.lib")
+##include_directories("C:\\Users\\antos\\Documents\\MySQL Server 8.0\\include")
+#target_link_libraries(TransportationApp PRIVATE ${MYSQL_LIBRARY})
+
+##target_link_libraries(TransportationApp PRIVATE "C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib")
+
+#set(MySQL_INCLUDE_DIR "C:/Program Files/MySQL/MySQL Server 8.0/include")
+#set(MySQL_LIBRARY_DIR "C:/Program Files/MySQL/MySQL Server 8.0/lib")
+#set(MySQL_LIBRARIES "C:/Program Files/MySQL/MySQL Server 8.0/libmysql.dll")
+
+## Find MySQL
+#find_path(MySQL_INCLUDE_DIR NAMES mysql.h PATHS ${MySQL_INCLUDE_DIR})
+#find_library(MySQL_LIBRARY NAMES mysqlclient PATHS ${MySQL_LIBRARY_DIR})
+
+#if (MySQL_INCLUDE_DIR AND MySQL_LIBRARY)
+#    include_directories(${MySQL_INCLUDE_DIR})
+#    link_directories(${MySQL_LIBRARY_DIR})
+#    set(EXTRA_LIBS ${EXTRA_LIBS} ${MySQL_LIBRARY})
+#else()
+#    message(FATAL_ERROR "Could not find MySQL")
+#endif()
+
+
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.

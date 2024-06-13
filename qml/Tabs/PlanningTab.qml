@@ -21,11 +21,14 @@ Item {
             driverModel.setRecord(driversModel.findRecord("DriverId", driverId))
         }
         onDeliveryIdChanged: {
-            //deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
             deliveryOrderList.setDelivery(deliveryId);
         }
     }
-    property var deliveryOrderList : DeliveryOrderList{}
+    property var deliveryOrderList : DeliveryOrderList{
+//        onOrderListChanged: {
+//            ordersTableRoot.modelEmpty = deliveryOrderList.orderList.length === 0
+//        }
+    }
 
     signal openCarTab(carId : int)
     signal openDriverTab(driverId : int)
@@ -171,15 +174,13 @@ Item {
         Item{
             Layout.preferredHeight: 85
             Layout.fillWidth: true
-//            CarsTable{
-//                anchors.fill: parent
-//                tableModel: [ carModel ]
-//            }
+
             TableBase{
                 id : carTableRoot
                 anchors.fill: parent
                 tableHeaders :  ["Id", "Type", "Model", "Car number", "Volume", "Weight", "Driving category"]
                 tableModel : carModel
+                modelEmpty : carModel.carId === 0
                 tableRow:
                     Component{
                         TableRow{
@@ -243,6 +244,7 @@ Item {
                 anchors.fill: parent
                 tableHeaders :  ["Id", "Last name", "First name", "Driving category", "Experience"]
                 tableModel : driverModel
+                modelEmpty : driverModel.driverId === 0
                 tableRow:
                     Component{
                         TableRow{
@@ -300,10 +302,11 @@ Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
             TableBase{
-                id : tableRoot
+                id : ordersTableRoot
                 anchors.fill: parent
                 tableHeaders :  ["Id", "Created date", "Delivery date", "Address", "Status", "Cost"]
                 tableModel : deliveryOrderList.orderList
+                modelEmpty : true//deliveryOrderList.orderList.length === 0
                 tableRow:
                     Component{
                         TableRow{
@@ -314,7 +317,7 @@ Item {
                                 rowModel.modelData.askedDeliveryDate.toLocaleDateString("en_US"),
                                 rowModel.modelData.address, rowModel.modelData.statusTitle, rowModel.modelData.cost]
                             onClicked: {
-                                tableRoot.rowClicked(rowModel.orderId)
+                                ordersTableRoot.rowClicked(rowModel.orderId)
                             }
                             onOpenTab: {
                                 pageRoot.openOrderTab(rowModel.modelData.orderId)
@@ -324,6 +327,9 @@ Item {
                             }
                         }
                     }
+                Component.onCompleted: {
+                    console.log("Order list", deliveryOrderList.orderList.length, deliveryOrderList.orderList.length === 0)
+                }
             }
         }
 

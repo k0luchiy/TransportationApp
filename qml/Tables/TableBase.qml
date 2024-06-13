@@ -1,8 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Layouts
 
+import Colors
 
 ColumnLayout {
+    property bool modelEmpty : false
     property var tableHeaders
     property var tableModel
     property var pagination
@@ -28,6 +30,23 @@ ColumnLayout {
         Item{}
     }
 
+    Component{
+        id: emptyTableModel
+        Item{
+            width: 200
+            height: 40
+
+            Text{
+                anchors.fill: parent
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pointSize: 10
+                color: Themes.colors.neutral.neutral700
+                text: "No items found"
+            }
+        }
+    }
+
     Component {
         id: rowComponent
         Loader {
@@ -35,9 +54,14 @@ ColumnLayout {
             anchors.right: parent ? parent.right : undefined
             property var rowModel : model
             property var rowIndex : index
-            sourceComponent: isNaN(pagination) ? tableRow :
+            sourceComponent: tableRoot.modelEmpty ? emptyTableModel :
+                isNaN(pagination) ? tableRow :
                 (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
                                  tableRow : emptyItem
+
+//            Component.onCompleted: {
+//                console.log("Model: ", model)
+//            }
         }
     }
 

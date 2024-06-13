@@ -15,8 +15,6 @@ import Tabs
 import Map
 import Popups
 
-//Window {
-//ApplicationWindow{
 Rectangle{
     signal logout
 
@@ -24,9 +22,7 @@ Rectangle{
     width: 1040
     height: 840
 
-//    visibility: Window.FullScreen
     visible: true
-//    title: qsTr("Hello World")
     color: Themes.colors.neutral.neutral0
 
     Settings{
@@ -72,12 +68,6 @@ Rectangle{
                     iconSource: "qrc:/assets/icons/Outline/cog.svg"
                     onClicked : {
                         settingsPopup.open()
-//                        if (Themes.currentTheme.themeId === 0){
-//                            Themes.currentTheme = Themes.themes.dark
-//                        }
-//                        else{
-//                            Themes.currentTheme = Themes.themes.light
-//                        }
                     }
                 }
                 IconButton{

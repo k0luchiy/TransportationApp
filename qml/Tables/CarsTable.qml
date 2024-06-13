@@ -5,6 +5,7 @@ TableBase{
     id : tableRoot
     tableHeaders :  ["Id", "Type", "Model", "Car number", "Volume", "Weight", "Driving category"]
     tableModel : carsFilterModel
+    modelEmpty : carsFilterModel.rowCount() === 0
     tableRow:
         Component{
             TableRow{

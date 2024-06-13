@@ -15,8 +15,8 @@ import Tabs
 
 Window{
     id: window
-    width: 450
-    height: 750
+    width: settings.rememberUser ? 1040 : 450
+    height: settings.rememberUser ? 840 : 750
 
 //    width: 1040
 //    height: 840

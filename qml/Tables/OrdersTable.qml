@@ -5,6 +5,7 @@ TableBase{
     id : tableRoot
     tableHeaders :  ["Id", "Created date", "Delivery date", "Address", "Status", "Cost"]
     tableModel : ordersFilterModel
+    modelEmpty : ordersFilterModel.rowCount() === 0
     tableRow:
         Component{
             TableRow{

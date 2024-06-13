@@ -22,4 +22,5 @@ qt_add_qml_module(TablesLib
     QML_FILES CarsTable.qml
     QML_FILES DriversTable.qml
     QML_FILES DeliveriesTable.qml
+    QML_FILES AdditionalPannel.qml
 )

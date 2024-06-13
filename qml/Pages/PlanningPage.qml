@@ -10,6 +10,7 @@ import TransportationsApp.Models 1.0
 
 Item {
     property int deliveryId
+    property alias deliveryOrderList : planningTab.deliveryOrderList
 
     id: pageRoot
     height: 800
@@ -17,6 +18,11 @@ Item {
 
     onDeliveryIdChanged: {
         planningTab.deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
+        planningMapTab.orderList = planningTab.deliveryOrderList.orderList
+    }
+
+    onDeliveryOrderListChanged: {
+        console.log("deliveryOrderList changed")
         planningMapTab.orderList = planningTab.deliveryOrderList.orderList
     }
 
@@ -52,6 +58,9 @@ Item {
                 id: planningTab
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+//                onDeliveryOrderListChanged: {
+//                    planningMapTab.orderList = planningTab.deliveryOrderList.orderList
+//                }
             }
 
             PlanningMapTab{
@@ -59,6 +68,7 @@ Item {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 startAddress: "Екатеринбург, улица Репина 15"
+                orderList: pageRoot.deliveryOrderList.orderList //pageRoot.deliveryOrderList.orderList
             }
         }
     }

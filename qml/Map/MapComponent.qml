@@ -251,6 +251,7 @@ Item {
 
     onOrderListChanged: {
         if(mapItemRoot.orderList){
+            console.log("OrderList changed")
             for(var i=0; i < orderList.length; ++i){
                 console.log(orderList[i].address)
             }

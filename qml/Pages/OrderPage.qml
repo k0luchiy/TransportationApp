@@ -9,6 +9,8 @@ import TransportationsApp.Models 1.0
 
 Item {
 
+    signal addToDelivery(recordId : int)
+
     id: pageRoot
     height: 800
     width: 1040
@@ -50,6 +52,7 @@ Item {
             Layout.margins: 10
             currentIndex: orderTabPannel.currentIndex
             OrderTableTab{
+                id: orderTableTab
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 //connectedTabPannel: orderTabPannel
@@ -58,6 +61,12 @@ Item {
                     var orderInfoPage = orderInfoPageComp.createObject(ordersStackView)
                     orderInfoPage.orderModel.setRecord(ordersModel.findRecord("OrderId", recordId))
                     orderInfoPage.parent = ordersStackView;
+                }
+                onOpenTab: (recordId) => {
+                    orderTableTab.rowClicked(recordId)
+                }
+                onAddToDelivery: (recordId) => {
+                    pageRoot.addToDelivery(recordId)
                 }
             }
         }

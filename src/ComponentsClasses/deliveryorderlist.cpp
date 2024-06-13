@@ -69,15 +69,18 @@ void DeliveryOrderList::setDelivery(quint64 deliveryId)
 }
 
 
-void DeliveryOrderList::appendOrderId(quint64 orderId)
+void DeliveryOrderList::appendOrder(const QSqlRecord& record)
 {
-    //m_orderList.append(orderId);
+    Order* order = new Order();
+    order->setRecord(record);
+    m_orderList.append(order);
     orderListChanged();
 }
 
 void DeliveryOrderList::removeByIndex(quint64 index)
 {
-    //m_orderList.remove(index);
+    m_orderList.remove(index);
+    orderListChanged();
 }
 
 void DeliveryOrderList::insertOrderId(quint64 index, quint64 orderId)

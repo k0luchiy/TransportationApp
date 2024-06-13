@@ -179,11 +179,16 @@ Item {
                     Component{
                         TableRow{
                             Layout.fillWidth: true
+                            deleteVisible: true
+                            addToDeliveryVisible: false
                             model: [rowModel.carId, rowModel.carType, rowModel.carModel,
                                     rowModel.carNumber, rowModel.volumeCapacity,
                                     rowModel.weightCapacity, rowModel.drivingCategory]
                             onClicked: {
                                 carTableRoot.rowClicked(rowModel.carId)
+                            }
+                            onDeleteClicked: {
+                                deliveryModel.carId = 0
                             }
                         }
                     }
@@ -234,10 +239,15 @@ Item {
                     Component{
                         TableRow{
                             Layout.fillWidth: true
+                            deleteVisible: true
+                            addToDeliveryVisible: false
                             model: [rowModel.driverId, rowModel.lastName, rowModel.firstName,
                                     rowModel.drivingCategory, rowModel.experience]
                             onClicked: {
                                 driverTableRoot.rowClicked(rowModel.driverId)
+                            }
+                            onDeleteClicked: {
+                                deliveryModel.driverId = 0
                             }
                         }
                     }
@@ -287,11 +297,16 @@ Item {
                     Component{
                         TableRow{
                             Layout.fillWidth: true
+                            addToDeliveryVisible: false
+                            deleteVisible: true
                             model: [rowModel.modelData.orderId, rowModel.modelData.createdDate.toLocaleDateString("en_US"),
                                 rowModel.modelData.askedDeliveryDate.toLocaleDateString("en_US"),
                                 rowModel.modelData.address, rowModel.modelData.statusTitle, rowModel.modelData.cost]
                             onClicked: {
                                 tableRoot.rowClicked(rowModel.orderId)
+                            }
+                            onDeleteClicked: {
+                                deliveryOrderList.removeByIndex(rowIndex)
                             }
                         }
                     }

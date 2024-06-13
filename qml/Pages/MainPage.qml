@@ -121,19 +121,16 @@ Rectangle{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 currentIndex: leftMenuTabPannel.currentIndex
-//                PlanningTab{
-//                    Layout.fillHeight: true
-//                    Layout.fillWidth: true
-//                    Component.onCompleted: {
-//                        deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", 3))
-//                        carModel.setRecord(carsModel.findRecord("CarId", 3))
-//                        driverModel.setRecord(driversModel.findRecord("DriverId", 3))
-//                    }
-//                }
+
                 OrderPage{
                     id: orderPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    onAddToDelivery: (recordId) => {
+                        console.log("Order ", recordId)
+                        palnningPage.deliveryOrderList.appendOrder(ordersModel.findRecord("OrderId",recordId))
+                        palnningPage.deliveryOrderListChanged()
+                    }
                 }
                 CarPage{
                     id: carPage
@@ -159,11 +156,6 @@ Rectangle{
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
-//                MapComponent{
-//                    Layout.fillHeight: true
-//                    Layout.fillWidth: true
-//                    startAddress: "Екатеринбург, улица 8 Марта, 46"
-//                }
             }
         }
     }

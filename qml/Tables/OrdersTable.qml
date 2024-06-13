@@ -15,6 +15,12 @@ TableBase{
                 onClicked: {
                     tableRoot.rowClicked(rowModel.OrderId)
                 }
+                onOpenTab: {
+                    tableRoot.openTab(rowModel.OrderId)
+                }
+                onAddToDelivery: {
+                    tableRoot.addToDelivery(rowModel.OrderId)
+                }
             }
         }
 }

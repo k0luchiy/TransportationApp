@@ -11,12 +11,10 @@ class DeliveryOrderList : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(quint64 deliveryId READ deliveryId WRITE setDeliveryId NOTIFY deliveryIdChanged) //!< delivery's id
-    //Q_PROPERTY(QList<quint64> orderList READ orderList WRITE setOrderList NOTIFY orderListChanged) //!< delivery's id
     Q_PROPERTY(QList<Order*> orderList READ orderList WRITE setOrderList NOTIFY orderListChanged) //!< delivery's id
 
 private:
     quint64 m_deliveryId = 0;
-    //QList<quint64> m_orderList;
     QList<Order*> m_orderList;
 
 public:
@@ -26,8 +24,8 @@ public:
 public Q_SLOTS:
     void setData(quint64 deliveryId, const QList<Order*>& orderList);
     void setDelivery(quint64 deliveryId);
-    void appendOrderId(quint64 orderId);
-    void removeByIndex(quint64 orderId);
+    void appendOrder(const QSqlRecord& record);
+    void removeByIndex(quint64 index);
     void insertOrderId(quint64 index, quint64 orderId);
     void saveOrderList();
 
@@ -36,7 +34,6 @@ public Q_SLOTS:
 //
 public:
     quint64 deliveryId() const;
-    //QList<quint64> orderList() const;
     QList<Order*> orderList() const;
 
 //
@@ -44,7 +41,6 @@ public:
 //
 public:
     void setDeliveryId(quint64 deliveryId);
-    //void setOrderList(const QList<quint64>& orderList);
     void setOrderList(const QList<Order*>& orderList);
 
 //

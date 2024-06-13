@@ -9,6 +9,8 @@ import TabControls
 
 Item {
     signal rowClicked(recordId : int)
+    signal openTab(recordId : int)
+    signal addToDelivery(recordId : int)
 
     id: pageRoot
     height: 800
@@ -133,6 +135,12 @@ Item {
 
             onRowClicked: (recordId) => {
                 pageRoot.rowClicked(recordId)
+            }
+            onOpenTab: (recordId) => {
+                pageRoot.openTab(recordId)
+            }
+            onAddToDelivery: (recordId) => {
+                pageRoot.addToDelivery(recordId)
             }
         }
 

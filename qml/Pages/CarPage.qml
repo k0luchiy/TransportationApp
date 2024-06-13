@@ -21,7 +21,6 @@ Item {
         }
     }
 
-
     ColumnLayout{
         anchors.fill: parent
 

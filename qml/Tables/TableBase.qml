@@ -9,6 +9,9 @@ ColumnLayout {
     property var tableRow
 
     signal rowClicked(recordId : int)
+    signal openTab(recordId : int)
+    signal addToDelivery(recordId : int)
+    signal deleteClicked(recordId : int)
 
     id : tableRoot
     spacing: 0
@@ -31,6 +34,7 @@ ColumnLayout {
             anchors.left: parent ? parent.left : undefined
             anchors.right: parent ? parent.right : undefined
             property var rowModel : model
+            property var rowIndex : index
             sourceComponent: isNaN(pagination) ? tableRow :
                 (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
                                  tableRow : emptyItem
@@ -48,5 +52,6 @@ ColumnLayout {
 
         delegate: rowComponent
     }
+
 }
 

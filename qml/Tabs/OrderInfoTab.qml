@@ -7,6 +7,7 @@ import InputFields
 import Tables
 import TabControls
 import Utils
+import Map
 
 import TransportationsApp.Models 1.0
 
@@ -115,9 +116,11 @@ Item {
                 }
             }
         }
-        Item{
+        MapComponent{
             Layout.fillHeight: true
             Layout.fillWidth: true
+            Layout.topMargin: 10
+            startAddress: "Екатеринбург, улица " + orderModel.address
         }
     }
 

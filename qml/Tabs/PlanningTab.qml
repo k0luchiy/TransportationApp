@@ -306,7 +306,7 @@ Item {
                 anchors.fill: parent
                 tableHeaders :  ["Id", "Created date", "Delivery date", "Address", "Status", "Cost"]
                 tableModel : deliveryOrderList.orderList
-                modelEmpty : true//deliveryOrderList.orderList.length === 0
+                modelEmpty : deliveryOrderList.orderList.length === 0
                 tableRow:
                     Component{
                         TableRow{
@@ -327,9 +327,6 @@ Item {
                             }
                         }
                     }
-                Component.onCompleted: {
-                    console.log("Order list", deliveryOrderList.orderList.length, deliveryOrderList.orderList.length === 0)
-                }
             }
         }
 

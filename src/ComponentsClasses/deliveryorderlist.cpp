@@ -57,14 +57,9 @@ void DeliveryOrderList::setDelivery(quint64 deliveryId)
         QSqlRecord record = query.record();
         Order* order = new Order();
         order->setRecord(record);
-        //quint64 orderId = record.value("OrderId").toInt();
-        //qDebug() << order.orderId() << order.createdDate();
         m_orderList.append(order);
-        //m_orderList.append(orderId);
     }
-    qDebug() << m_orderList.size();
     setDeliveryId(deliveryId);
-    //setOrderList(ordersList);
     orderListChanged();
 }
 

@@ -15,4 +15,6 @@ qt_add_qml_module(MapLib
     VERSION 1.0
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES MapComponent.qml
+    QML_FILES RouteInfoPannel.qml
+    QML_FILES WaypointInfo.qml
 )

@@ -149,7 +149,7 @@ Item {
             Layout.preferredHeight: 40
             Layout.fillWidth: true
             rowCount: ordersFilterModel.rowCount()
-            rowsPerPage : 5
+            rowsPerPage : 10
         }
     }
 }

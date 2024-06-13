@@ -58,10 +58,6 @@ ColumnLayout {
                 isNaN(pagination) ? tableRow :
                 (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
                                  tableRow : emptyItem
-
-//            Component.onCompleted: {
-//                console.log("Model: ", model)
-//            }
         }
     }
 

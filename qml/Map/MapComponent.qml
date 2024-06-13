@@ -2,13 +2,18 @@ import QtQuick 2.15
 import QtLocation 6.7
 import QtPositioning
 
+import Colors
+
 Item {
     property string startAddress
     property var startPoint : QtPositioning.coordinate(56.8285045286533, 60.56644931964543)
     property var orderList : []
     property int currentGeocodeIndex: 0
+    property int currentRouteIndex: 0
     property var routeDetails : []
 
+    property color routeColor: Themes.colors.primary.primary500
+    property color circleColor: Themes.colors.primary.primary500
 
     id: mapItemRoot
 
@@ -40,7 +45,7 @@ Item {
 
         MapItemView {
             z: 2
-            model: routeQuery.waypoints //waypoints//waypointsModel
+            model: routeQuery.waypoints
             delegate: MapQuickItem {
                 z: 2
                 visible: index!==0
@@ -50,10 +55,10 @@ Item {
                 sourceItem: Rectangle {
                     width: 20
                     height: 20
-                    color: "#ffffff"//"transparent"
+                    color: Colors.elementary.white
                     border.width: 3
                     z: 2
-                    border.color: "#427AFF"
+                    border.color: circleColor
                     //opacity: 0.7
                     radius: 10
                     Text{
@@ -71,7 +76,7 @@ Item {
             model: routeModel
             delegate: MapRoute {
                 route: routeData
-                line.color: "#427AFF"//"#3cb200"
+                line.color: routeColor
                 line.width: 4
             }
         }
@@ -141,35 +146,6 @@ Item {
         id: routeModel
         plugin: mapPlugin
         query: routeQuery
-
-//        onRoutesChanged: {
-//            if (routeQuery.status === RouteQuery.Ready) {
-//                //routeItem.route = routeQuery.route
-
-//                // Extract and store route details
-//                mapItemRoot.routeDetails = []
-//                console.log("Model count", routeModel.count)
-//                var route = routeModel.get(0)
-//                //var routeSegments = routeModel.get(0).legs //routeQuery.route.segments
-//                for (var i = 0; i < routeModel.count; ++i) {
-//                    var segment = routeModel.get(i)
-//                    var distance = segment.distance
-//                    var travelTime = segment.travelTime
-//                    var startCoordinate = segment.path[0]
-//                    var endCoordinate = segment.path[segment.path.length - 1]
-//                    console.log("Distance ", i, distance)
-
-//                    mapItemRoot.routeDetails.push({
-//                        start: {latitude: startCoordinate.latitude, longitude: startCoordinate.longitude},
-//                        end: {latitude: endCoordinate.latitude, longitude: endCoordinate.longitude},
-//                        distance: distance,
-//                        travelTime: travelTime
-//                    })
-//                }
-//                console.log("Route Details: ", JSON.stringify(mapItemRoot.routeDetails, null, 2))
-//                fillRouteInfo()
-//            }
-//        }
     }
 
     GeocodeModel {
@@ -178,14 +154,15 @@ Item {
 
          onLocationsChanged: {
              if (routeGeocodeModel.count > 0) {
-                 routeQuery.addWaypoint(routeGeocodeModel.get(0).coordinate)
-                 ++currentGeocodeIndex
-                 if (currentGeocodeIndex < orderList.length) {
-                     routeGeocodeModel.query = "Екатеринбург, улица " + orderList[currentGeocodeIndex].address
-                     routeGeocodeModel.update()
-                 } else {
-                     routeModel.update()
-                 }
+                routeQuery.addWaypoint(routeGeocodeModel.get(0).coordinate)
+                ++currentGeocodeIndex
+                if (currentGeocodeIndex < orderList.length) {
+                    routeGeocodeModel.query = "Екатеринбург, улица " + orderList[currentGeocodeIndex].address
+                    routeGeocodeModel.update()
+                } else {
+                    routeModel.update()
+                    fillRouteInfo()
+                }
              }
          }
      }
@@ -209,19 +186,31 @@ Item {
             var travelTime = route.travelTime
             var startCoordinate = route.path[0]
             var endCoordinate = route.path[route.path.length - 1]
-            console.log("Distance ", distance)
+            var orderId = orderList[currentRouteIndex].orderId
+            var address = orderList[currentRouteIndex].address
+            var status = orderList[currentRouteIndex].statusTitle
+            var nextStatus = orderList.length < currentRouteIndex ? orderList[currentRouteIndex+1].statusTitle : ""
+
+            ++currentRouteIndex
 
             mapItemRoot.routeDetails.push({
                 start: {latitude: startCoordinate.latitude, longitude: startCoordinate.longitude},
                 end: {latitude: endCoordinate.latitude, longitude: endCoordinate.longitude},
                 distance: distance,
-                travelTime: travelTime
+                travelTime: travelTime,
+                orderId: orderId,
+                address: address,
+                status: status,
+                nextStatus: nextStatus
             })
+            mapItemRoot.routeDetailsChanged()
         }
     }
 
     function updateRoute() {
         routeQuery.clearWaypoints()
+        mapItemRoot.routeDetails = []
+        currentRouteIndex = 0
         currentGeocodeIndex = 0
         if (startPoint) {
             routeQuery.addWaypoint(startPoint)
@@ -233,15 +222,12 @@ Item {
     }
 
     function fillRouteInfo(){
-        var waypoints =  routeQuery.waypointObjects()
-        console.log("FillRouteInfo", waypoints.length)
-        for(var i=0; i < routeQuery.waypoints.length - 1; ++i){
+        for(var i=0; i < routeQuery.waypoints.length-1; ++i){
             routeDetailsQuery.clearWaypoints()
             routeDetailsQuery.addWaypoint(routeQuery.waypoints[i])
             routeDetailsQuery.addWaypoint(routeQuery.waypoints[i+1])
             routeDetailsModel.update()
         }
-        console.log("Details count", mapItemRoot.routeDetails.length)
     }
 
     onStartAddressChanged: {
@@ -251,12 +237,7 @@ Item {
 
     onOrderListChanged: {
         if(mapItemRoot.orderList){
-            console.log("OrderList changed")
-            for(var i=0; i < orderList.length; ++i){
-                console.log(orderList[i].address)
-            }
             updateRoute()
-            fillRouteInfo()
         }
     }
 

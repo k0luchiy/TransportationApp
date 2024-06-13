@@ -9,6 +9,8 @@ import Map
 import TransportationsApp.Models 1.0
 
 Item {
+    property alias tabIndex : deliveriesTabPannel.currentIndex
+
     signal openDelivery(deliveryId : int)
 
     id: pageRoot

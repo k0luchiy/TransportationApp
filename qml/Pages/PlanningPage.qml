@@ -9,12 +9,10 @@ import Map
 import TransportationsApp.Models 1.0
 
 Item {
+    property alias tabIndex : deliveryTabPannel.currentIndex
+
     property alias deliveryOrderList : planningTab.deliveryOrderList
     property alias deliveryModel : planningTab.deliveryModel
-
-    signal openCarTab(carId : int)
-    signal openDriverTab(driverId : int)
-    signal openOrderTab(orderId : int)
 
     id: pageRoot
     height: 800
@@ -58,15 +56,6 @@ Item {
                 id: planningTab
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                onOpenCarTab: (carId) => {
-                    pageRoot.openCarTab(carId)
-                }
-                onOpenDriverTab: (driverId) => {
-                    pageRoot.openDriverTab(driverId)
-                }
-                onOpenOrderTab: (orderId) => {
-                    pageRoot.openOrderTab(orderId)
-                }
 //                onDeliveryOrderListChanged: {
 //                    planningMapTab.orderList = planningTab.deliveryOrderList.orderList
 //                }

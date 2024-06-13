@@ -153,37 +153,17 @@ Rectangle{
                     id: palnningPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    onOpenCarTab: (carId) => {
-                        carPage.addInfoTab(carId)
-                        leftMenuTabPannel.currentIndex = 1
-                    }
-                    onOpenDriverTab: (driverId) => {
-                        driverPage.addInfoTab(driverId)
-                        leftMenuTabPannel.currentIndex = 2
-                    }
-                    onOpenOrderTab: (orderId) => {
-                        orderPage.addInfoTab(orderId)
-                        leftMenuTabPannel.currentIndex = 0
-                    }
                 }
             }
         }
     }
 
-//    Item{
-//        anchors.fill: parent
-//        visible: true
-//        enabled: false
-        //color: "red"
-        //z: -1
-
-        NotificationManager{
-            id: notificationManager
-            anchors.fill: parent
-            enabled: false
-            //z: 5
-        }
-    //}
+    NotificationManager{
+        id: notificationManager
+        anchors.fill: parent
+        enabled: false
+        //z: 5
+    }
 
     ColumnLayout{
         visible: false

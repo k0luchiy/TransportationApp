@@ -8,6 +8,8 @@ import Tabs
 import TransportationsApp.Models 1.0
 
 Item {
+    property alias tabIndex : carTabPannel.currentIndex
+
     signal addToDelivery(recordId : int)
 
     id: pageRoot

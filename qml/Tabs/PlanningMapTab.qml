@@ -18,6 +18,7 @@ Item {
         RouteInfoPannel{
             Layout.fillHeight: true
             Layout.preferredWidth: 270
+            visible: routeDetails.length > 0
             routeDetails: pageRoot.routeDetails
         }
 

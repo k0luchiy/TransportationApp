@@ -24,15 +24,7 @@ Item {
             deliveryOrderList.setDelivery(deliveryId);
         }
     }
-    property var deliveryOrderList : DeliveryOrderList{
-//        onOrderListChanged: {
-//            ordersTableRoot.modelEmpty = deliveryOrderList.orderList.length === 0
-//        }
-    }
-
-    signal openCarTab(carId : int)
-    signal openDriverTab(driverId : int)
-    signal openOrderTab(orderId : int)
+    property var deliveryOrderList : DeliveryOrderList{ }
 
     id: pageRoot
     height: 800
@@ -150,7 +142,7 @@ Item {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
-                text: qsTr("Car ")
+                text: qsTr("Car")
             }
 
             SecondaryButton{
@@ -160,6 +152,10 @@ Item {
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/book-open.svg"
                 btnText: qsTr("Watch all")
+                onClicked: {
+                    carPage.tabIndex = 0
+                    leftMenuTabPannel.currentIndex = 1
+                }
             }
             SecondaryButton{
                 Layout.preferredHeight: 30
@@ -168,6 +164,9 @@ Item {
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
                 btnText: qsTr("Add automaticly")
+                onClicked: {
+                    deliveryModel.carId = ((deliveryModel.deliveryId + 5) % carsModel.rowCount()) + 1
+                }
             }
         }
 
@@ -194,7 +193,8 @@ Item {
                                 carTableRoot.rowClicked(rowModel.carId)
                             }
                             onOpenTab: {
-                                pageRoot.openCarTab(rowModel.carId)
+                                carPage.addInfoTab(rowModel.carId)
+                                leftMenuTabPannel.currentIndex = 1
                             }
                             onDeleteClicked: {
                                 deliveryModel.carId = 0
@@ -225,6 +225,10 @@ Item {
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/book-open.svg"
                 btnText: qsTr("Watch all")
+                onClicked: {
+                    driverPage.tabIndex = 0
+                    leftMenuTabPannel.currentIndex = 2
+                }
             }
             SecondaryButton{
                 Layout.preferredHeight: 30
@@ -233,6 +237,9 @@ Item {
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
                 btnText: qsTr("Add automaticly")
+                onClicked: {
+                    deliveryModel.driverId = ((deliveryModel.deliveryId + 5) % driversModel.rowCount()) + 1
+                }
             }
         }
 
@@ -257,7 +264,8 @@ Item {
                                 driverTableRoot.rowClicked(rowModel.driverId)
                             }
                             onOpenTab: {
-                                pageRoot.openDriverTab(rowModel.driverId)
+                                driverPage.addInfoTab(rowModel.driverId)
+                                leftMenuTabPannel.currentIndex = 2
                             }
                             onDeleteClicked: {
                                 deliveryModel.driverId = 0
@@ -287,14 +295,10 @@ Item {
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/book-open.svg"
                 btnText: qsTr("Watch all")
-            }
-            SecondaryButton{
-                Layout.preferredHeight: 30
-                Layout.preferredWidth: 155
-                fontSize: 10
-                iconLeftVisible: true
-                iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
-                btnText: qsTr("Add automaticly")
+                onClicked: {
+                    orderPage.tabIndex = 0
+                    leftMenuTabPannel.currentIndex = 0
+                }
             }
         }
 
@@ -320,7 +324,8 @@ Item {
                                 ordersTableRoot.rowClicked(rowModel.orderId)
                             }
                             onOpenTab: {
-                                pageRoot.openOrderTab(rowModel.modelData.orderId)
+                                orderPage.addInfoTab(rowModel.modelData.orderId)
+                                leftMenuTabPannel.currentIndex = 0
                             }
                             onDeleteClicked: {
                                 deliveryOrderList.removeByIndex(rowIndex)

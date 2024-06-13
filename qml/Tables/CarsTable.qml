@@ -16,6 +16,12 @@ TableBase{
                 onClicked: {
                     tableRoot.rowClicked(rowModel.CarId)
                 }
+                onOpenTab: {
+                    tableRoot.openTab(rowModel.CarId)
+                }
+                onAddToDelivery: {
+                    tableRoot.addToDelivery(rowModel.CarId)
+                }
             }
         }
 }

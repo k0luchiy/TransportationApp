@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QDebug>
 #include <QSqlDatabase>
+#include <QIcon>
 
 #include "abstractsqlquerymodel.h"
 #include "carsfiltermodel.h"
@@ -36,10 +37,23 @@ int main(int argc, char *argv[])
 
     engine.addImportPath(":/TransportationApp.com/qml");
 
-    //mysql://TransportationDB_exceptview:0eee07d40b64c05056edc10321cb7dbf90cf6879@b3d.h.filess.io:3307/TransportationDB_exceptview
-    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    //db.setDatabaseName("mysql://TransportationDB_exceptview:0eee07d40b64c05056edc10321cb7dbf90cf6879@b3d.h.filess.io:3307/TransportationDB_exceptview");
-    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
+    QSettings *configIniRead = new QSettings("settings/databaseConfig.ini", QSettings::IniFormat);
+    QString driver = configIniRead->value("/database/driver").toString();
+    QString hostname = configIniRead->value("/database/hostname").toString();
+    int port = configIniRead->value("/database/port").toInt();
+    QString databaseName = configIniRead->value("/database/databaseName").toString();
+    QString username = configIniRead->value("/database/username").toString();
+    QString password = configIniRead->value("/database/password").toString();
+
+    QSqlDatabase db = QSqlDatabase::addDatabase(driver);
+    db.setHostName(hostname);
+    db.setDatabaseName(databaseName);
+    db.setUserName(username);
+    db.setPassword(password);
+    db.setPort(port);
+
+    //QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    //db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
 //    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 //    db.setHostName("b3d.h.filess.io");
 //    db.setDatabaseName("TransportationDB_exceptview");
@@ -97,13 +111,13 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("deliveriesFilterModel", deliveriesFilterModel);
     engine.rootContext()->setContextProperty("settings", settings);
 
-    //qmlRegisterType<User>("TransportationsApp.Models", 1, 0, "User");
     qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");
     qmlRegisterType<Car>("TransportationsApp.Models", 1, 0, "Car");
     qmlRegisterType<Driver>("TransportationsApp.Models", 1, 0, "Driver");
     qmlRegisterType<Delivery>("TransportationsApp.Models", 1, 0, "Delivery");
     qmlRegisterType<DeliveryOrderList>("TransportationsApp.Models", 1, 0, "DeliveryOrderList");
 
+    app.setWindowIcon(QIcon(":/assets/icons/Essentials/app-icon.png"));
     engine.loadFromModule("TransportationApp", "Main");
 
 //    if(db.isOpen()){

@@ -19,7 +19,8 @@ Popup {
     signal deleteClicked
 
     id: popupRoot
-    height: popupRoot.deleteVisible && popupRoot.addToDeliveryVisible ? 105 : 70
+    height: popupRoot.deleteVisible && popupRoot.addToDeliveryVisible ? 105 :
+            popupRoot.deleteVisible || popupRoot.addToDeliveryVisible ? 70 : 35
     width: 120
 
     modal: false

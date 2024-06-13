@@ -329,6 +329,7 @@ Item {
                             }
                             onDeleteClicked: {
                                 deliveryOrderList.removeByIndex(rowIndex)
+                                deliveryOrderListChanged()
                             }
                         }
                     }

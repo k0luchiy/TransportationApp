@@ -22,7 +22,7 @@ Window{
 //    height: 840
 //    visibility: Window.Maximized
     visible: true
-    title: qsTr("Transportation app")
+    title: settings.rememberUser ? qsTr("Transportation app") : qsTr("Login page")
     color: Themes.colors.neutral.neutral0
 
     Component{
@@ -35,6 +35,7 @@ Window{
                 mainLoader.sourceComponent = mainPageComp
                 window.width = 1040
                 window.height = 840
+                window.title = qsTr("Transportation app")
                 window.visibility = Window.Maximized
             }
         }
@@ -53,6 +54,7 @@ Window{
                 window.width = 450
                 window.height = 750
                 window.visibility = Window.Windowed
+                window.title =  qsTr("Login page")
                 mainLoader.sourceComponent = authPageComp
             }
         }
@@ -78,6 +80,7 @@ Window{
             mainLoader.sourceComponent = mainPageComp
             window.width = 1040
             window.height = 840
+            window.title = qsTr("Transportation app")
             window.visibility = Window.Maximized
         }
         else{

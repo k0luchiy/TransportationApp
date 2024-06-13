@@ -9,6 +9,7 @@ TableBase{
         Component{
             TableRow{
                 Layout.fillWidth: true
+                addToDeliveryVisible: false
                 model: [rowModel.DeliveryId, rowModel.CarNumber, rowModel.DriverName,
                         rowModel.DepartureDate.toLocaleDateString("en_US"),
                         rowModel.ReturnDate.toLocaleDateString("en_US"),

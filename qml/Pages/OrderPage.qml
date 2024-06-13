@@ -8,12 +8,19 @@ import Tabs
 import TransportationsApp.Models 1.0
 
 Item {
-
     signal addToDelivery(recordId : int)
 
     id: pageRoot
     height: 800
     width: 1040
+
+    function addInfoTab(recordId){
+        orderTabPannel.addTab("Order " + recordId)
+        var orderInfoPage = orderInfoPageComp.createObject(ordersStackView)
+        orderInfoPage.orderModel.setRecord(ordersModel.findRecord("OrderId", recordId))
+        orderInfoPage.parent = ordersStackView;
+        orderTabPannel.currentIndex = orderTabPannel.tabs.length - 1
+    }
 
     Component{
         id: orderInfoPageComp
@@ -55,15 +62,11 @@ Item {
                 id: orderTableTab
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                //connectedTabPannel: orderTabPannel
                 onRowClicked: (recordId) => {
-                    orderTabPannel.addTab("Order " + recordId)
-                    var orderInfoPage = orderInfoPageComp.createObject(ordersStackView)
-                    orderInfoPage.orderModel.setRecord(ordersModel.findRecord("OrderId", recordId))
-                    orderInfoPage.parent = ordersStackView;
+                    pageRoot.addInfoTab(recordId)
                 }
                 onOpenTab: (recordId) => {
-                    orderTableTab.rowClicked(recordId)
+                    pageRoot.addInfoTab(recordId)
                 }
                 onAddToDelivery: (recordId) => {
                     pageRoot.addToDelivery(recordId)

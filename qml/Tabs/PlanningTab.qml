@@ -21,10 +21,15 @@ Item {
             driverModel.setRecord(driversModel.findRecord("DriverId", driverId))
         }
         onDeliveryIdChanged: {
+            //deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
             deliveryOrderList.setDelivery(deliveryId);
         }
     }
     property var deliveryOrderList : DeliveryOrderList{}
+
+    signal openCarTab(carId : int)
+    signal openDriverTab(driverId : int)
+    signal openOrderTab(orderId : int)
 
     id: pageRoot
     height: 800
@@ -187,6 +192,9 @@ Item {
                             onClicked: {
                                 carTableRoot.rowClicked(rowModel.carId)
                             }
+                            onOpenTab: {
+                                pageRoot.openCarTab(rowModel.carId)
+                            }
                             onDeleteClicked: {
                                 deliveryModel.carId = 0
                             }
@@ -246,6 +254,9 @@ Item {
                             onClicked: {
                                 driverTableRoot.rowClicked(rowModel.driverId)
                             }
+                            onOpenTab: {
+                                pageRoot.openDriverTab(rowModel.driverId)
+                            }
                             onDeleteClicked: {
                                 deliveryModel.driverId = 0
                             }
@@ -304,6 +315,9 @@ Item {
                                 rowModel.modelData.address, rowModel.modelData.statusTitle, rowModel.modelData.cost]
                             onClicked: {
                                 tableRoot.rowClicked(rowModel.orderId)
+                            }
+                            onOpenTab: {
+                                pageRoot.openOrderTab(rowModel.modelData.orderId)
                             }
                             onDeleteClicked: {
                                 deliveryOrderList.removeByIndex(rowIndex)

@@ -127,27 +127,35 @@ Rectangle{
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onAddToDelivery: (recordId) => {
-                        console.log("Order ", recordId)
                         palnningPage.deliveryOrderList.appendOrder(ordersModel.findRecord("OrderId",recordId))
                         palnningPage.deliveryOrderListChanged()
+                        leftMenuTabPannel.currentIndex = 4
                     }
                 }
                 CarPage{
                     id: carPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    onAddToDelivery: (recordId) => {
+                        palnningPage.deliveryModel.carId = recordId
+                        leftMenuTabPannel.currentIndex = 4
+                    }
                 }
                 DriverPage{
                     id: driverPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    onAddToDelivery: (recordId) => {
+                        palnningPage.deliveryModel.driverId = recordId
+                        leftMenuTabPannel.currentIndex = 4
+                    }
                 }
                 DeliveriesPage{
                     id: deliveriesPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onOpenDelivery : (deliveryId)=>{
-                        palnningPage.deliveryId = deliveryId
+                        palnningPage.deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
                         leftMenuTabPannel.currentIndex = 4
                     }
                 }
@@ -155,6 +163,18 @@ Rectangle{
                     id: palnningPage
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    onOpenCarTab: (carId) => {
+                        carPage.addInfoTab(carId)
+                        leftMenuTabPannel.currentIndex = 1
+                    }
+                    onOpenDriverTab: (driverId) => {
+                        driverPage.addInfoTab(driverId)
+                        leftMenuTabPannel.currentIndex = 2
+                    }
+                    onOpenOrderTab: (orderId) => {
+                        orderPage.addInfoTab(orderId)
+                        leftMenuTabPannel.currentIndex = 0
+                    }
                 }
             }
         }

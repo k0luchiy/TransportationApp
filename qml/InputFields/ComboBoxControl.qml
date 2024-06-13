@@ -33,7 +33,7 @@ ComboBox {
         anchors.fill: parent
         color: comboBox.bgColor
         border.width: comboBox.borderSize
-        border.color: comboBox.borderColor
+        border.color: comboBox.isError ? comboBox.errorColor : comboBox.borderColor
         radius: 5
     }
 

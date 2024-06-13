@@ -8,6 +8,7 @@ import Tables
 import TabControls
 import Utils
 import Map
+import Notifications
 
 import TransportationsApp.Models 1.0
 
@@ -46,9 +47,43 @@ Item {
                     var weight = Number(weightField.text)
                     var address = addressField.text
                     var cost = Number(costField.text)
+                    var updateSuccess = true
+                    if(askedDeliveryDateField.text === ""){
+                        askedDeliveryDateField.isError = true
+                        updateSuccess = false
+                    } else{
+                        askedDeliveryDateField.isError = false
+                    }
+                    if(statusId===0){
+                        statusField.isError = true
+                        updateSuccess = false
+                    } else{
+                        statusField.isError = false
+                    }
+                    if(address === ""){
+                        addressField.isError = true
+                        updateSuccess = false
+                    } else{
+                        addressField.isError = false
+                    }
 
-                    ordersModel.updateOrder(orderId, askedDeliveryDate, statusId,
+                    if(!updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.failure,
+                            qsTr("Failed to update database")
+                        );
+                        return;
+                    }
+
+                    updateSuccess = ordersModel.updateOrder(orderId, askedDeliveryDate, statusId,
                                             address, volume, weight, cost);
+
+                    if(updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.success,
+                            qsTr("Database record successfully updated")
+                        );
+                    }
                 }
             }
         }
@@ -56,6 +91,7 @@ Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
             spacing: 10
+            z: 2
             ColumnLayout{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -69,6 +105,7 @@ Item {
                 DateInputField{
                     id: createdDateField
                     Layout.fillWidth: true
+                    readOnly: true
                     title:  qsTr("Created date:")
                     text: DateUtils.formatDate(orderModel.createdDate)
                 }
@@ -120,6 +157,7 @@ Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.topMargin: 10
+            z: 1
             startAddress: "Екатеринбург, улица " + orderModel.address
         }
     }

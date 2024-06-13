@@ -170,17 +170,20 @@ Rectangle{
         }
     }
 
-    Item{
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        width: 400
-        visible: false
+//    Item{
+//        anchors.fill: parent
+//        visible: true
+//        enabled: false
+        //color: "red"
+        //z: -1
 
         NotificationManager{
             id: notificationManager
             anchors.fill: parent
+            enabled: false
+            //z: 5
         }
-    }
+    //}
 
     ColumnLayout{
         visible: false

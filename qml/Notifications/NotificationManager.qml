@@ -11,24 +11,29 @@ Item {
     ListView {
         id: listView
         anchors.fill: parent
+        anchors.margins: 10
+        verticalLayoutDirection: ListView.BottomToTop
+        orientation: ListView.Vertical
         spacing: 10
         model: manager.notifications
 
         delegate: Notification {
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            enabled: true
+
             notificationType: modelData.notificationType
             message: modelData.message
             duration: modelData.duration
             onDismissed: {
-                console.log(manager.notifications[index].notificationType, manager.notifications[index].notificationType.titleText)
                 manager.notifications.splice(index, 1)
-                //manager.notifications = manager.notifications
                 listView.model = manager.notifications;
             }
         }
     }
 
 
-    function showNotification(notificationType, message, duration = 2000) {
+    function showNotification(notificationType, message, duration = 3500) {
         manager.notifications.push({
            notificationType: notificationType,
            message: message,

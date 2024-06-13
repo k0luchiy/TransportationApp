@@ -11,11 +11,14 @@ Item {
     property color borderColor :
         fieldRoot.enabled ? Themes.colors.neutral.neutral100 :
             Themes.colors.neutral.neutral300
+    property color errorColor : Themes.colors.red.red500
     property string title : qsTr("Title:")
     property bool titleVisible : true
     property bool enabled : true
     property int titleFontSize : 10
     property int contentFontSize : 12
+    property bool isError : false
+    property bool readOnly : true
 
     property alias currentText: comboBox.currentText
     property alias currentIndex: comboBox.currentIndex
@@ -54,18 +57,18 @@ Item {
                 text : fieldRoot.title
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize : fieldRoot.titleFontSize
-                color: fieldRoot.titleColor
+                color: fieldRoot.isError ? fieldRoot.errorColor : fieldRoot.titleColor
             }
         }
 
         ComboBoxControl{
             id : comboBox
-            enabled: fieldRoot.enabled
+            enabled: fieldRoot.enabled && fieldRoot.readOnly
             Layout.fillHeight: true
             Layout.fillWidth: true
             selectedColor: Themes.colors.neutral.neutral100
             contentColor: fieldRoot.contentColor
-            borderColor : fieldRoot.borderColor
+            borderColor : fieldRoot.isError ? fieldRoot.errorColor : fieldRoot.borderColor
             fontSize : fieldRoot.titleFontSize
             itemHeight : 30
             itemCount : 3

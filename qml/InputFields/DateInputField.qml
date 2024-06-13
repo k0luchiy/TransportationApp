@@ -56,6 +56,7 @@ TextInputField {
         cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
         focus: true
         activeFocusOnTab: true
+        enabled: !readOnly
         onClicked : {
             calendar.visible = !calendar.visible
         }

@@ -26,6 +26,8 @@ Rectangle {
     border.width: 1
     border.color: Themes.colors.neutral.neutral100
     color: notificationRoot.bgColor
+    enabled: true
+    z: 5
 
     RowLayout{
         anchors.fill: parent
@@ -62,7 +64,6 @@ Rectangle {
                     iconSource: "qrc:/assets/icons/Outline/close.svg"
                     onClicked: {
                         notificationRoot.dismissed()
-                        //notificationRoot.visible = !notificationRoot.visible
                     }
                 }
             }

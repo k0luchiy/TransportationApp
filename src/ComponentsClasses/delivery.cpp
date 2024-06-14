@@ -1,4 +1,5 @@
 #include "delivery.h"
+#include <QDebug>
 
 Delivery::Delivery(QObject *parent)
     : QObject{parent}
@@ -54,4 +55,74 @@ void Delivery::setRecord(const QSqlRecord& record)
         departureDate, returnDate,
         statusId, statusTitle
     );
+}
+
+
+quint64 Delivery::findCar(const QDate& departureDate) const
+{
+    QString query_str =
+        "select c.CarId \
+        from deliveries dv \
+        join cars c on dv.CarId = c.CarId \
+        where :departureDate not between dv.DepartureDate and dv.ReturnDate ";
+
+    QSqlQuery query;
+    query.prepare(query_str);
+    query.bindValue(":departureDate", departureDate);
+    query.exec();
+    if(!query.next()){
+        return 0;
+    }
+    quint64 carId = query.value("CarId").toInt();
+    return carId;
+}
+
+quint64 Delivery::findDriver(const QDate& departureDate) const
+{
+    QString query_str =
+        "select d.DriverId \
+        from drivers d \
+        join Schedules sch on d.ScheduleId = sch.ScheduleId \
+        join ScheduleByDay sd on sch.ScheduleId = sd.ScheduleId \
+        join ScheduleEvents se on sd.EventId = se.EventId \
+        where sd.DayOfWeek = DayOfWeek(:departureDate) and se.IsWorking = 1 \
+        order by d.DriverId ";
+
+    QSqlQuery query;
+    query.prepare(query_str);
+    query.bindValue(":departureDate", departureDate);
+    query.exec();
+    if(!query.next()){
+        return 0;
+    }
+    quint64 driverId = query.value("DriverId").toInt();
+    return driverId;
+}
+
+bool Delivery::save()
+{
+    if(m_deliveryId==0 || m_carId==0 ||
+        m_driverId==0 || m_statusId==0)
+    {
+        return false;
+    }
+
+    QString query_str =
+        "Update deliveries set \
+            carId = :carId, driverId = :driverId, \
+            departureDate = :departureDate, returnDate = :returnDate, \
+            statusId = :statusId \
+        where deliveryId = :deliveryId;";
+
+    QSqlQuery query;
+    query.prepare(query_str);
+    query.bindValue(":carId", m_carId);
+    query.bindValue(":driverId", m_driverId);
+    query.bindValue(":departureDate", m_departureDate);
+    query.bindValue(":returnDate", m_returnDate);
+    query.bindValue(":statusId", m_statusId);
+    query.bindValue(":deliveryId", m_deliveryId);
+    bool execSuccess = query.exec();
+
+    return execSuccess;
 }

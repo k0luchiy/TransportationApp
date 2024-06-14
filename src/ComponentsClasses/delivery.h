@@ -5,6 +5,7 @@
 #include <QDate>
 #include <QString>
 #include <QSqlRecord>
+#include <QSqlQuery>
 
 class Delivery : public QObject
 {
@@ -38,6 +39,9 @@ public Q_SLOTS:
         quint64 statusId, const QString& statusTitle
     );
     void setRecord(const QSqlRecord& record);
+    quint64 findCar(const QDate& departureDate) const;
+    quint64 findDriver(const QDate& departureDate) const;
+    bool save();
 
 //
 // Getters

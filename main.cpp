@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
 
     engine.addImportPath(":/TransportationApp.com/qml");
-
+/*
     QSettings *configIniRead = new QSettings("settings/databaseConfig.ini", QSettings::IniFormat);
     QString driver = configIniRead->value("/database/driver").toString();
     QString hostname = configIniRead->value("/database/hostname").toString();
@@ -51,9 +51,10 @@ int main(int argc, char *argv[])
     db.setUserName(username);
     db.setPassword(password);
     db.setPort(port);
+*/
 
-    //QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    //db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
 //    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 //    db.setHostName("b3d.h.filess.io");
 //    db.setDatabaseName("TransportationDB_exceptview");

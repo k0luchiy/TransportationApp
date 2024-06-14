@@ -31,7 +31,7 @@ TextInputField {
         y: fieldRoot.height + 10
         x: (Window.width >= fieldRoot.x + calendar.width) ? 0 :
                fieldRoot.width - calendar.width - 5
-        z: 5
+        z: 10
         visible: false
 
         onClearClicked: {

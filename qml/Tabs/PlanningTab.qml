@@ -52,18 +52,8 @@ Item {
                 contentColor: Themes.colors.primary.primary500
                 btnText: "Save"
                 onClicked: {
-                    pageRoot.displayMap()
-//                    var carId = Number(carIdField.text)
-//                    var carType = carTypeField.text
-//                    var carModel = carModelField.text
-//                    var carNumber = carNumberField.text
-//                    var volumeCapacity = Number(volumeCapacityField.text)
-//                    var weightCapacity = Number(weightCapacityField.text)
-//                    var drivingCategory = drivingCategoryField.currentText
-
-//                    carsModel.updateCar(carId, carType, carModel,
-//                                        carNumber, volumeCapacity,
-//                                        weightCapacity, drivingCategory);
+                    deliveryModel.save()
+                    deliveryOrderList.save()
                 }
             }
         }
@@ -72,6 +62,7 @@ Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
             spacing: 10
+            z: 5
             ColumnLayout{
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.fillHeight: true
@@ -86,9 +77,12 @@ Item {
                 DateInputField{
                     id: departureDateField
                     Layout.fillWidth: true
-                    z: 5
+                    z: 10
                     title: qsTr("Departure date:")
                     text: DateUtils.formatDate(deliveryModel.departureDate)
+                    onSelectedDateChanged: {
+                        deliveryModel.departureDate = departureDateField.selectedDate
+                    }
                 }
                 DateInputField{
                     id: returnDateField
@@ -96,6 +90,9 @@ Item {
                     z: 5
                     title: qsTr("Return date:")
                     text: DateUtils.formatDate(deliveryModel.returnDate)
+                    onSelectedDateChanged: {
+                        deliveryModel.returnDate = returnDateField.selectedDate
+                    }
                 }
             }
             ColumnLayout{
@@ -109,7 +106,7 @@ Item {
                     text: deliveryModel.carId
                     onEditingFinished: {
                         var carId = carIdField.text ? Number(carIdField.text) : 0
-                        carModel.setRecord(carsModel.findRecord("CarId", carId))
+                        deliveryModel.carId = carId
                     }
                 }
                 NumberInputField{
@@ -119,7 +116,7 @@ Item {
                     text: deliveryModel.driverId
                     onEditingFinished: {
                         var driverId = driverIdField.text ? Number(driverIdField.text) : 0
-                        driverModel.setRecord(driversModel.findRecord("DriverId", driverId))
+                        deliveryModel.driverId = driverId
                     }
                 }
                 ComboBoxInputField{
@@ -129,6 +126,10 @@ Item {
                     model: ordersStatusModel
                     textRole: "StatusTitle"
                     currentIndex: deliveryModel.statusId
+                    onCurrentIndexChanged: {
+                        deliveryModel.statusId = statusField.currentIndex
+                        deliveryModel.statusTitle = statusField.currentText
+                    }
                 }
             }
         }
@@ -165,7 +166,8 @@ Item {
                 iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
                 btnText: qsTr("Add automaticly")
                 onClicked: {
-                    deliveryModel.carId = ((deliveryModel.deliveryId + 5) % carsModel.rowCount()) + 1
+                    var departureDate = departureDateField.selectedDate
+                    deliveryModel.carId = deliveryModel.findCar(departureDate)
                 }
             }
         }
@@ -238,7 +240,8 @@ Item {
                 iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
                 btnText: qsTr("Add automaticly")
                 onClicked: {
-                    deliveryModel.driverId = ((deliveryModel.deliveryId + 5) % driversModel.rowCount()) + 1
+                    var departureDate = departureDateField.selectedDate
+                    deliveryModel.driverId = deliveryModel.findCar(departureDate)
                 }
             }
         }

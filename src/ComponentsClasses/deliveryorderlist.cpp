@@ -32,9 +32,6 @@ void DeliveryOrderList::setData(quint64 deliveryId, const QList<Order*>& orderLi
 void DeliveryOrderList::setDelivery(quint64 deliveryId)
 {
     QString query_str =
-//        "Select DeliveryId, OrderId, SequenceNum \
-//        From DeliveryOrders \
-//        Where DeliveryId=:deliveryId";
         "select \
             o.OrderId, o.CreatedDate, o.AskedDeliveryDate,  \
             s.StatusId, s.StatusTitle, o.Cost,  \
@@ -84,7 +81,26 @@ void DeliveryOrderList::insertOrderId(quint64 index, quint64 orderId)
     orderListChanged();
 }
 
-void DeliveryOrderList::saveOrderList()
+bool DeliveryOrderList::save()
 {
+    QSqlQuery query;
 
+    QString delete_str =
+        "delete from DeliveryOrders where deliveryId = :deliveryId;";
+    query.prepare(delete_str);
+    query.bindValue(":deliveryId", m_deliveryId);
+    query.exec();
+
+    QString insert_str =
+        "Insert into DeliveryOrders(DeliveryId, OrderId, SequenceNum) \
+        values(:deliveryId, :orderId, :sequenceNum);";
+
+    query.prepare(insert_str);
+    for(quint64 i = 0; i<m_orderList.size(); ++i){
+        query.bindValue(":deliveryId", m_deliveryId);
+        query.bindValue(":orderId", m_orderList[i]->orderId());
+        query.bindValue(":sequenceNum", i + 1);
+        query.exec();
+    }
+    return true;
 }

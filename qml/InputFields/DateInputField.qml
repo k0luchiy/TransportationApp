@@ -15,7 +15,7 @@ TextInputField {
     iconRightVisible: true
     placeholderText: "dd.mm.yyyy"
     text: ""
-    z: 5
+    z: 10
     focusField : false
     focusOnTab: false
 

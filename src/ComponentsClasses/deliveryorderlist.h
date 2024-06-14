@@ -27,7 +27,7 @@ public Q_SLOTS:
     void appendOrder(const QSqlRecord& record);
     void removeByIndex(quint64 index);
     void insertOrderId(quint64 index, quint64 orderId);
-    void saveOrderList();
+    bool save();
 
 //
 // Getters

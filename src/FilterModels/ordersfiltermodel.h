@@ -29,6 +29,7 @@ protected:
     ) const;
 
 public Q_SLOTS: //Getters
+    void changeSort(quint64 index);
     quint64 filterOrderId() const;
     QDate filterMinCreatedDate() const;
     QDate filterMaxCreatedDate() const;

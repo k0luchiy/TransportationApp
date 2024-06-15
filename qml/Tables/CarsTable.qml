@@ -24,5 +24,9 @@ TableBase{
                 }
             }
         }
+
+    onHeaderClicked: (index) => {
+        carsFilterModel.changeSort(index)
+    }
 }
 

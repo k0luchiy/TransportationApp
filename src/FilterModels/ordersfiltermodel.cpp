@@ -19,6 +19,25 @@ void OrdersFilterModel::setSourceModel(AbstractSqlQueryModel* sourceModel)
     this->QSortFilterProxyModel::setSourceModel(sourceModel);
 }
 
+/*!
+ * \brief Changes sorting by column index
+ * \param index Column index to sort by
+ */
+void OrdersFilterModel::changeSort(quint64 index)
+{
+    if(this->sortColumn() == index){
+        if(this->sortOrder() == Qt::AscendingOrder){
+            this->sort(index, Qt::DescendingOrder);
+        }
+        else{
+            this->sort(index, Qt::AscendingOrder);
+        }
+    }
+    else{
+        this->sort(index, Qt::AscendingOrder);
+    }
+}
+
 
 //! Getter for order id field
 quint64 OrdersFilterModel::filterOrderId() const { return m_orderId; }

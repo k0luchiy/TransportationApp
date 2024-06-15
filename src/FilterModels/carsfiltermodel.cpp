@@ -27,6 +27,25 @@ void CarsFilterModel::setSourceModel(AbstractSqlQueryModel* sourceModel)
     this->QSortFilterProxyModel::setSourceModel(sourceModel);
 }
 
+/*!
+ * \brief Changes sorting by column index
+ * \param index Column index to sort by
+ */
+void CarsFilterModel::changeSort(quint64 index)
+{
+    if(this->sortColumn() == index){
+        if(this->sortOrder() == Qt::AscendingOrder){
+            this->sort(index, Qt::DescendingOrder);
+        }
+        else{
+            this->sort(index, Qt::AscendingOrder);
+        }
+    }
+    else{
+        this->sort(index, Qt::AscendingOrder);
+    }
+}
+
 //! Getter for car id fitler.
 quint64 CarsFilterModel::filterCarId() const { return m_carId; }
 

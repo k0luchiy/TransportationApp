@@ -3,6 +3,10 @@ import QtQuick.Layouts
 
 Item {
     property var headersModel : ["Код", "Дата создания", "Дата доставки", "Улица", "Статус", "Стоимость"]
+    property bool iconVisible : true
+    property bool enabled: true
+
+    signal headerClicked(index : int)
 
     id: headersRoot
     width: 200
@@ -18,6 +22,11 @@ Item {
             TableHeaderCell {
                 Layout.fillWidth: true
                 text: modelData
+                iconVisible: headersRoot.iconVisible
+                enabled: headersRoot.enabled
+                onClicked: {
+                    headersRoot.headerClicked(index)
+                }
             }
         }
         TableHeaderCell {

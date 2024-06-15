@@ -27,6 +27,7 @@ public Q_SLOTS: // Getters
 
 
 public Q_SLOTS: // Setters
+    void changeSort(quint64 index);
     void setFilterDriverId(quint64 driverId);
     void setFilterFirstName(const QString& firstName);
     void setFilterLastName(const QString& lastName);

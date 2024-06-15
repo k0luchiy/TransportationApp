@@ -261,6 +261,8 @@ Item {
                 tableHeaders :  ["Id", "Type", "Model", "Car number", "Volume", "Weight", "Driving category"]
                 tableModel : carModel
                 modelEmpty : carModel.carId === 0
+                headerIconVisible: false
+                headerEnabled: false
                 tableRow:
                     Component{
                         TableRow{
@@ -332,6 +334,8 @@ Item {
                 id : driverTableRoot
                 anchors.fill: parent
                 tableHeaders :  ["Id", "Last name", "First name", "Driving category", "Experience"]
+                headerIconVisible: false
+                headerEnabled: false
                 tableModel : driverModel
                 modelEmpty : driverModel.driverId === 0
                 tableRow:
@@ -391,6 +395,8 @@ Item {
                 id : ordersTableRoot
                 anchors.fill: parent
                 tableHeaders :  ["Id", "Created date", "Delivery date", "Address", "Status", "Cost"]
+                headerIconVisible: false
+                headerEnabled: false
                 tableModel : deliveryOrderList.orderList
                 modelEmpty : deliveryOrderList.orderList.length === 0
                 tableRow:

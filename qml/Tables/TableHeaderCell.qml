@@ -13,6 +13,7 @@ Rectangle {
     property string text : "Id"
     property int fontSize : 9
     property int iconSize : 10
+    property bool enabled : true
 
     signal clicked
 
@@ -55,11 +56,7 @@ Rectangle {
                 visible: headerCellRoot.iconVisible
             }
         }
-//        Rectangle{
-//            color: "red"
-//            Layout.fillHeight: true
-//            Layout.fillWidth: true
-//        }
+
         Item{
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -71,6 +68,7 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        enabled: headerCellRoot.enabled
         onClicked: {
             headerCellRoot.clicked();
         }

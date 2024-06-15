@@ -23,5 +23,9 @@ TableBase{
                 }
             }
         }
+
+    onHeaderClicked: (index) => {
+        driversFilterModel.changeSort(index)
+    }
 }
 

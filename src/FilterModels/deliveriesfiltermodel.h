@@ -21,6 +21,7 @@ protected:
         ) const;
 
 public Q_SLOTS: // Getters
+    void changeSort(quint64 index);
     quint64 filterDeliveryId() const;
     QString filterCarNumber() const;
     QString filterDriverName() const;

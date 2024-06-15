@@ -4,12 +4,16 @@ import QtQuick.Layouts
 import Colors
 
 ColumnLayout {
+    property bool headerIconVisible: true
+    property bool headerEnabled: true
+
     property bool modelEmpty : false
     property var tableHeaders
     property var tableModel
     property var pagination
     property var tableRow
 
+    signal headerClicked(index : int)
     signal rowClicked(recordId : int)
     signal openTab(recordId : int)
     signal addToDelivery(recordId : int)
@@ -23,6 +27,11 @@ ColumnLayout {
         Layout.preferredHeight: 35
         Layout.fillWidth: true
         headersModel: tableRoot.tableHeaders
+        iconVisible: tableRoot.headerIconVisible
+        enabled: tableRoot.headerEnabled
+        onHeaderClicked: (index) => {
+            tableRoot.headerClicked(index)
+        }
     }
 
     Component{

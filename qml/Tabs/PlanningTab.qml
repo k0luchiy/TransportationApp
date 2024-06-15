@@ -7,6 +7,7 @@ import InputFields
 import Tables
 import TabControls
 import Utils
+import Notifications
 
 import TransportationsApp.Models 1.0
 
@@ -23,6 +24,14 @@ Item {
         onDeliveryIdChanged: {
             deliveryOrderList.setDelivery(deliveryId);
         }
+        onDepartureDateChanged: {
+            departureDateField.text = DateUtils.formatDate(deliveryModel.departureDate)
+            departureDateField.isError = false
+        }
+        onReturnDateChanged: {
+            returnDateField.text = DateUtils.formatDate(deliveryModel.returnDate)
+            returnDateField.isError = false
+        }
     }
     property var deliveryOrderList : DeliveryOrderList{ }
 
@@ -37,13 +46,27 @@ Item {
         RowLayout{
             Layout.preferredHeight: 30
             Layout.fillWidth: true
+            spacing: 10
 
             Text{
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
-                text: qsTr("Delivery ") + deliveryModel.deliveryId
+                text: (deliveryModel.deliveryId ?
+                           qsTr("Delivery ") + deliveryModel.deliveryId :
+                           qsTr("None deliveries selected"))
+            }
+
+            SecondaryButton{
+                Layout.preferredHeight: 30
+                Layout.preferredWidth: 60
+                contentColor: Themes.colors.primary.primary500
+                btnText: "+ New"
+                onClicked: {
+                    var deliveryId = deliveriesModel.createDelivery(user.userId)
+                    deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
+                }
             }
 
             SecondaryButton{
@@ -52,8 +75,56 @@ Item {
                 contentColor: Themes.colors.primary.primary500
                 btnText: "Save"
                 onClicked: {
-                    deliveryModel.save()
-                    deliveryOrderList.save()
+                    var updateSuccess = true
+                    if(deliveryModel.carId===0){
+                        carIdField.isError = true
+                        updateSuccess = false
+                    } else{
+                        carIdField.isError = false
+                    }
+                    if(deliveryModel.driverId===0){
+                        driverIdField.isError = true
+                        updateSuccess = false
+                    } else{
+                        driverIdField.isError = false
+                    }
+                    if(departureDateField.text===""){
+                        departureDateField.isError = true
+                        updateSuccess = false
+                    } else{
+                        departureDateField.isError = false
+                    }
+                    if(returnDateField.text===""){
+                        returnDateField.isError = true
+                        updateSuccess = false
+                    } else{
+                        returnDateField.isError = false
+                    }
+                    if(statusField.currentIndex===0){
+                        statusField.isError = true
+                        updateSuccess = false
+                    } else{
+                        statusField.isError = false
+                    }
+
+
+                    if(!updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.failure,
+                            qsTr("Failed to update database")
+                        );
+                        return;
+                    }
+
+                    updateSuccess &= deliveryModel.save()
+                    updateSuccess &= deliveryOrderList.save()
+
+                    if(updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.success,
+                            qsTr("Database record successfully updated")
+                        );
+                    }
                 }
             }
         }
@@ -72,7 +143,8 @@ Item {
                     Layout.fillWidth: true
                     readOnly: true
                     title: qsTr("Id:")
-                    text: "1"
+                    placeholderText: ""
+                    text: deliveryModel.deliveryId === 0 ? "" : deliveryModel.deliveryId
                 }
                 DateInputField{
                     id: departureDateField
@@ -82,6 +154,7 @@ Item {
                     text: DateUtils.formatDate(deliveryModel.departureDate)
                     onSelectedDateChanged: {
                         deliveryModel.departureDate = departureDateField.selectedDate
+                        departureDateField.isError = false
                     }
                 }
                 DateInputField{
@@ -92,6 +165,7 @@ Item {
                     text: DateUtils.formatDate(deliveryModel.returnDate)
                     onSelectedDateChanged: {
                         deliveryModel.returnDate = returnDateField.selectedDate
+                        returnDateField.isError = false
                     }
                 }
             }
@@ -103,20 +177,24 @@ Item {
                     id: carIdField
                     Layout.fillWidth: true
                     title:  qsTr("Car id:")
-                    text: deliveryModel.carId
+                    placeholderText: ""
+                    text: deliveryModel.carId === 0 ? "" : deliveryModel.carId
                     onEditingFinished: {
                         var carId = carIdField.text ? Number(carIdField.text) : 0
                         deliveryModel.carId = carId
+                        carIdField.isError = false
                     }
                 }
                 NumberInputField{
                     id: driverIdField
                     Layout.fillWidth: true
                     title:  qsTr("Driver id:")
-                    text: deliveryModel.driverId
+                    placeholderText: ""
+                    text: deliveryModel.driverId === 0 ? "" : deliveryModel.driverId
                     onEditingFinished: {
                         var driverId = driverIdField.text ? Number(driverIdField.text) : 0
                         deliveryModel.driverId = driverId
+                        driverIdField.isError = false
                     }
                 }
                 ComboBoxInputField{
@@ -129,6 +207,7 @@ Item {
                     onCurrentIndexChanged: {
                         deliveryModel.statusId = statusField.currentIndex
                         deliveryModel.statusTitle = statusField.currentText
+                        statusField.isError = false
                     }
                 }
             }

@@ -17,6 +17,7 @@ public Q_SLOTS:
         const QDate& departureDate, const QDate& returnDate, quint64 statusId,
         quint64 userId
     );
+    quint64 createDelivery(quint64 userId);
 
 private:
     const static char* SELECT_QUERY;

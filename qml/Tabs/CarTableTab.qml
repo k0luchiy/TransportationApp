@@ -154,6 +154,7 @@ Item {
             Layout.preferredHeight: 40
             Layout.fillWidth: true
             rowCount: carsFilterModel.rowCount()
+            rowsPerPage : 15
         }
     }
 }

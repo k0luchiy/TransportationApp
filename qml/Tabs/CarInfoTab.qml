@@ -7,6 +7,7 @@ import InputFields
 import Tables
 import TabControls
 import Utils
+import Notifications
 
 import TransportationsApp.Models 1.0
 
@@ -46,9 +47,38 @@ Item {
                     var weightCapacity = Number(weightCapacityField.text)
                     var drivingCategory = drivingCategoryField.currentText
 
-                    carsModel.updateCar(carId, carType, carModel,
+                    var updateSuccess = true
+                    if(carNumberField.text === ""){
+                        carNumberField.isError = true
+                        updateSuccess = false
+                    } else{
+                        carNumberField.isError = false
+                    }
+                    if(drivingCategoryField.currentIndex===0){
+                        drivingCategoryField.isError = true
+                        updateSuccess = false
+                    } else{
+                        drivingCategoryField.isError = false
+                    }
+
+                    if(!updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.failure,
+                            qsTr("Failed to update database")
+                        );
+                        return;
+                    }
+
+                    updateSuccess = carsModel.updateCar(carId, carType, carModel,
                                         carNumber, volumeCapacity,
                                         weightCapacity, drivingCategory);
+
+                    if(updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.success,
+                            qsTr("Database record successfully updated")
+                        );
+                    }
                 }
             }
         }

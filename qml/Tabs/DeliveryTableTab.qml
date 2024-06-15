@@ -141,7 +141,7 @@ Item {
             Layout.preferredHeight: 40
             Layout.fillWidth: true
             rowCount: deliveriesFilterModel.rowCount()
-            rowsPerPage : 5
+            rowsPerPage : 15
         }
     }
 }

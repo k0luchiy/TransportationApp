@@ -25,3 +25,18 @@ bool DeliveriesModel::updateDelivery(
 {
 
 }
+
+quint64 DeliveriesModel::createDelivery(quint64 userId)
+{
+    QSqlQuery query;
+    const QString reg_query =
+        "Insert into Deliveries(CarId, DriverId, DepartureDate, ReturnDate, StatusId, CreatedBy) \
+        values(1, 1, NOW(), NOW(), 1, :createdBy)";
+
+    query.prepare(reg_query);
+    query.bindValue(":createdBy", userId);
+    query.exec();
+    quint64 lastId = query.lastInsertId().toUInt();
+    updateModel();
+    return lastId;
+}

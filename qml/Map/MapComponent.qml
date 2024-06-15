@@ -10,6 +10,7 @@ Item {
     property var orderList : []
     property int currentGeocodeIndex: 0
     property int currentRouteIndex: 0
+    property int currentFillRouteIndex: 0
     property var routeDetails : []
 
     property color routeColor: Themes.colors.primary.primary500
@@ -177,10 +178,15 @@ Item {
     RouteModel {
         id: routeDetailsModel
         plugin: mapPlugin
+        autoUpdate: true
         query: routeDetailsQuery
 
-
         onRoutesChanged: {
+            console.log("Routes changed")
+            if (routeDetailsModel.count <= 0) {
+                return
+            }
+
             var route = routeDetailsModel.get(0)
             var distance = route.distance
             var travelTime = route.travelTime
@@ -192,6 +198,7 @@ Item {
             var nextStatus = orderList.length < currentRouteIndex ? orderList[currentRouteIndex+1].statusTitle : ""
 
             ++currentRouteIndex
+            console.log("Info", distance, address)
 
             mapItemRoot.routeDetails.push({
                 start: {latitude: startCoordinate.latitude, longitude: startCoordinate.longitude},
@@ -204,14 +211,17 @@ Item {
                 nextStatus: nextStatus
             })
             mapItemRoot.routeDetailsChanged()
+            continueFillRouteInfo()
         }
     }
 
     function updateRoute() {
         routeQuery.clearWaypoints()
+        routeDetailsQuery.clearWaypoints()
         mapItemRoot.routeDetails = []
         currentRouteIndex = 0
         currentGeocodeIndex = 0
+        currentFillRouteIndex = 0
         if (startPoint) {
             routeQuery.addWaypoint(startPoint)
         }
@@ -221,14 +231,32 @@ Item {
         }
     }
 
-    function fillRouteInfo(){
-        for(var i=0; i < routeQuery.waypoints.length-1; ++i){
+    function fillRouteInfo() {
+        console.log("Fill route")
+        currentFillRouteIndex = 0
+        continueFillRouteInfo()
+    }
+
+    function continueFillRouteInfo() {
+        if (currentFillRouteIndex < routeQuery.waypoints.length - 1) {
+            console.log("add point", currentFillRouteIndex)
             routeDetailsQuery.clearWaypoints()
-            routeDetailsQuery.addWaypoint(routeQuery.waypoints[i])
-            routeDetailsQuery.addWaypoint(routeQuery.waypoints[i+1])
+            routeDetailsQuery.addWaypoint(routeQuery.waypoints[currentFillRouteIndex])
+            routeDetailsQuery.addWaypoint(routeQuery.waypoints[currentFillRouteIndex + 1])
             routeDetailsModel.update()
+            currentFillRouteIndex++
         }
     }
+//    function fillRouteInfo(){
+//        console.log("Fill route")
+//        for(var i=0; i < routeQuery.waypoints.length-1; ++i){
+//            console.log("add point", i)
+//            routeDetailsQuery.clearWaypoints()
+//            routeDetailsQuery.addWaypoint(routeQuery.waypoints[i])
+//            routeDetailsQuery.addWaypoint(routeQuery.waypoints[i+1])
+//            routeDetailsModel.update()
+//        }
+//    }
 
     onStartAddressChanged: {
         geocodeModel.query = mapItemRoot.startAddress
@@ -236,8 +264,17 @@ Item {
     }
 
     onOrderListChanged: {
-        if(mapItemRoot.orderList){
+        if(mapItemRoot.orderList.length > 0){
             updateRoute()
+        }
+        else{
+            console.log("Order list empty")
+            routeQuery.clearWaypoints()
+            routeDetailsQuery.clearWaypoints()
+            mapItemRoot.routeDetails = []
+            routeModel.update()
+            routeDetailsModel.update()
+            routeGeocodeModel.update()
         }
     }
 

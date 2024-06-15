@@ -6,6 +6,7 @@ import Buttons
 import InputFields
 import Tables
 import TabControls
+import Notifications
 
 import TransportationsApp.Models 1.0
 
@@ -45,9 +46,45 @@ Item {
                     var salary = Number(salaryField.text)
                     var drivingCategory = drivingCategoryField.currentText
 
-                    driversModel.updateDriver(driverId, personId, lastName,
+                    var updateSuccess = true
+                    if(lastName.text === ""){
+                        lastName.isError = true
+                        updateSuccess = false
+                    } else{
+                        lastName.isError = false
+                    }
+                    if(firstName.text === ""){
+                        firstName.isError = true
+                        updateSuccess = false
+                    } else{
+                        firstName.isError = false
+                    }
+                    if(drivingCategoryField.currentIndex===0){
+                        drivingCategoryField.isError = true
+                        updateSuccess = false
+                    } else{
+                        drivingCategoryField.isError = false
+                    }
+
+                    if(!updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.failure,
+                            qsTr("Failed to update database")
+                        );
+                        return;
+                    }
+
+                    updateSuccess = driversModel.updateDriver(driverId, personId, lastName,
                                         firstName, experience,
                                         salary, drivingCategory);
+
+                    if(updateSuccess){
+                        notificationManager.showNotification(
+                            NotificationTypes.success,
+                            qsTr("Database record successfully updated")
+                        );
+                    }
+
                 }
             }
         }

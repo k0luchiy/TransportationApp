@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Positioning Location Test)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Positioning Location Test LinguistTools)
 
 enable_testing(true)
 
@@ -34,6 +34,7 @@ add_subdirectory(qml)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(docs)
+add_subdirectory(translations)
 
 list(APPEND QML_DIRS "${CMAKE_BINARY_DIR}/qml")
 set(
@@ -41,6 +42,8 @@ set(
     CACHE STRING "Qt Creator 4.1 extra qml import paths"
     FORCE
 )
+
+add_dependencies(TransportationApp release_translations)
 
 #list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 #include(Doxygen)

@@ -2,7 +2,8 @@ import QtQuick 2.15
 import QtQuick.Layouts
 
 Item {
-    property var headersModel : ["Код", "Дата создания", "Дата доставки", "Улица", "Статус", "Стоимость"]
+    property var headersModel : [qsTr("Id"), qsTr("Created date"), qsTr("Delivery date"),
+        qsTr("Address"), qsTr("Status"), qsTr("Cost")]
     property bool iconVisible : true
     property bool enabled: true
 

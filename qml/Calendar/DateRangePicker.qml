@@ -48,7 +48,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                text: "Today"
+                text: qsTr("Today")
                 onClicked: {
                     var currentDate = DateUtils.getPureDate(new Date(Date.now()))
                     //calendar.selectedDate = currentDate
@@ -62,7 +62,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                text: "Last 7 days"
+                text: qsTr("Last 7 days")
                 onClicked: {
                     var currentDate = DateUtils.getPureDate(new Date(Date.now()))
                     calendar.startDate = new Date(currentDate - 7 * 24 * 60 * 60 * 1000);
@@ -75,7 +75,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                text: "Last 14 days"
+                text: qsTr("Last 14 days")
                 onClicked: {
                     var currentDate = DateUtils.getPureDate(new Date(Date.now()))
                     calendar.startDate = new Date(currentDate - 7 * 24 * 60 * 60 * 1000 * 2);
@@ -88,7 +88,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                text: "This month"
+                text: qsTr("This month")
                 onClicked: {
                     calendar.startDate = new Date(calendar.year, calendar.month, 1);
                     calendar.endDate = new Date(calendar.year, calendar.month + 1, 0);
@@ -100,7 +100,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 Layout.preferredHeight: 30
                 Layout.fillWidth: true
-                text: "This year"
+                text: qsTr("This year")
                 onClicked: {
                     calendar.startDate = new Date(calendar.year, 0, 1);
                     calendar.endDate = new Date(calendar.year, 11, 31);
@@ -130,7 +130,7 @@ Rectangle {
                     buttonSize: ButtonSizes.smallSize
                     iconLeftVisible: false
                     iconRightVisible: false
-                    btnText: "Clear"
+                    btnText: qsTr("Clear")
                     onClicked: {
                         calendarRoot.clearClicked()
                         calendarRoot.selectedDate = null
@@ -145,7 +145,7 @@ Rectangle {
                     buttonSize: ButtonSizes.smallSize
                     iconLeftVisible: false
                     iconRightVisible: false
-                    btnText: "Apply"
+                    btnText: qsTr("Apply")
                     onClicked: {
                         applyClicked()
                         calendarRoot.visible = false

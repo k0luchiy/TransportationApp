@@ -31,7 +31,7 @@ Rectangle {
             emailField.isError = true
             passwordField.isError = true
             loginPage.authError = true
-            loginPage.authErrorMsg = "Wrong credentials were provided"
+            loginPage.authErrorMsg = qsTr("Wrong credentials were provided")
         }
     }
 
@@ -50,7 +50,7 @@ Rectangle {
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 80
-                btnText: "Sign up"
+                btnText: qsTr("Sign up")
                 borderSize: 0
                 contentColor: Themes.colors.primary.primary600
                 onClicked: {
@@ -69,7 +69,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 20
             color: Themes.colors.neutral.neutral950
-            text: "Login"
+            text: qsTr("Login")
         }
 
         ColumnLayout{
@@ -95,8 +95,8 @@ Rectangle {
                 Layout.fillWidth: true
                 titleFontSize: 12
                 titleColor: Themes.colors.neutral.neutral950
-                title: "Email"
-                placeholderText: "email..."
+                title: qsTr("Email")
+                placeholderText: qsTr("email...")
             }
             TextInputField{
                 id: passwordField
@@ -105,8 +105,8 @@ Rectangle {
                 Layout.fillWidth: true
                 titleFontSize: 12
                 titleColor: Themes.colors.neutral.neutral950
-                title: "Password"
-                placeholderText: "password..."
+                title: qsTr("Password")
+                placeholderText: qsTr("password...")
                 fieldEchoMode: TextInput.Password
                 iconRightVisible: true
                 iconRightSource: "qrc:/assets/icons/Outline/eye.svg"
@@ -130,7 +130,7 @@ Rectangle {
                 Layout.preferredHeight: 35
                 Layout.fillWidth: true
                 iconLeftVisible: false
-                btnText: "Login"
+                btnText: qsTr("Login")
 
                 onClicked: {
                     var email = emailField.text

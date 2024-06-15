@@ -33,19 +33,6 @@ TabBar {
         tabBarRoot.tabs = tabBarRoot.tabs
     }
 
-//    function addTab(title, iconVisible = true, checked = false){
-//        var component = Qt.createComponent("TabButtonBase.qml")
-//        var tab = tabButton.createObject(tabBarRoot)
-//        tab.text = title
-//        tab.iconVisible = iconVisible
-//        tab.checked = checked
-//        tab.closed.connect( ()=>{
-//            tabBarRoot.removeItem(tab)
-//            tabBarRoot.tabClosed(tabBarRoot.count - 1)
-//        })
-//        tabBarRoot.addItem(tab)
-//    }
-
     contentItem:
         Item{
         anchors.fill: parent

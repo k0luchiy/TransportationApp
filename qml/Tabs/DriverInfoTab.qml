@@ -29,14 +29,14 @@ Item {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
-                text: qsTr("Driver ") + driverModel.driverId
+                text: qsTr("Driver") + " " + driverModel.driverId
             }
 
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
                 contentColor: Themes.colors.primary.primary500
-                btnText: "Save"
+                btnText: qsTr("Save")
                 onClicked: {
                     var driverId = Number(driverIdField.text)
                     var personId = Number(driverModel.personId)

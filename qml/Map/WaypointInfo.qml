@@ -35,7 +35,7 @@ Rectangle {
 
             Text {
                 id: orderText
-                text: "Order " + compRoot.orderId
+                text: qsTr("Order") + " " + compRoot.orderId
                 fontSizeMode: Text.Fit
                 font.pointSize: compRoot.titleSize
                 color: compRoot.titleColor
@@ -51,10 +51,10 @@ Rectangle {
                     id: distanceText
                     color: compRoot.fontColor
                     font.pointSize: compRoot.fontSize
-                    text: "Distance: "+ (
+                    text: qsTr("Distance:") + " " + (
                               compRoot.distance>1000 ?
-                                  compRoot.distance/1000 + " km" :
-                                  compRoot.distance + " m")
+                                  compRoot.distance/1000 + " " + qsTr("km") :
+                                  compRoot.distance + " " + qsTr("m"))
                 }
             }
             RowLayout {
@@ -62,7 +62,7 @@ Rectangle {
                     id: timeText
                     color: compRoot.fontColor
                     font.pointSize: compRoot.fontSize
-                    text: "Travel time: "+  (travelTime / 60).toFixed(0) + " m"
+                    text: qsTr("Travel time:") + " " +  (travelTime / 60).toFixed(0) + " " +qsTr("m")
 
                 }
             }
@@ -72,7 +72,7 @@ Rectangle {
                     id: addressText
                     color: compRoot.fontColor
                     font.pointSize: compRoot.fontSize
-                    text: "Address: "+ compRoot.address
+                    text: qsTr("Address:") + " " + compRoot.address
                 }
             }
         }

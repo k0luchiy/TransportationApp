@@ -20,7 +20,6 @@ Item {
 
 
     onDeliveryOrderListChanged: {
-        console.log("deliveryOrderList changed")
         planningMapTab.orderList = planningTab.deliveryOrderList.orderList
     }
 
@@ -41,8 +40,8 @@ Item {
             Layout.preferredHeight: 40
             Layout.fillWidth: true
             tabs: [
-                {text: "Delivery", checked: true, iconVisible: false},
-                {text: "Map", checked: true, iconVisible: false}
+                {text: qsTr("Delivery"), checked: true, iconVisible: false},
+                {text: qsTr("Map"), checked: true, iconVisible: false}
             ]
         }
 

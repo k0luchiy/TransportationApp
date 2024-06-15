@@ -23,7 +23,7 @@ TabButton {
     height: 40
     implicitHeight: 40
     implicitWidth: 105
-    text: "Order"
+    text: qsTr("Order")
     z: 2
 
     background: Rectangle{

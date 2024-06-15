@@ -17,7 +17,7 @@ Item {
     width: 1040
 
     function addInfoTab(recordId){
-        carTabPannel.addTab("Car " + recordId)
+        carTabPannel.addTab(qsTr("Car") + " " + recordId)
         var carInfoPage = carInfoPageComp.createObject(carsStackView)
         carInfoPage.carModel.setRecord(carsModel.findRecord("CarId", recordId))
         carInfoPage.parent = carsStackView;
@@ -39,7 +39,7 @@ Item {
             id: carTabPannel
             Layout.preferredHeight: 40
             Layout.fillWidth: true
-            tabs: [{text: "Cars", checked: true, iconVisible: false}]
+            tabs: [{text: qsTr("Cars"), checked: true, iconVisible: false}]
             onTabClosed: (index) => {
                 carsStackView.children[index].destroy()
                 //orderTabPannel.currentIndexChanged()

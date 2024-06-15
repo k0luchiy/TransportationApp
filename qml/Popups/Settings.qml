@@ -11,7 +11,7 @@ Popup {
     property color borderColor : Themes.colors.neutral.neutral0
     property color titleColor : Themes.colors.neutral.neutral950
 
-    property string titleText : "Settings"
+    property string titleText : qsTr("Settings")
     property int borderWidth : 1
 
     signal logout
@@ -82,28 +82,28 @@ Popup {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: popupRoot.titleColor
-                text: "Personal info"
+                text: qsTr("Personal info")
             }
             TextInputField{
                 id: lastNameField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
-                title: "Last name"
+                title: qsTr("Last name")
                 text: user.lastName ? user.lastName : ""
             }
             TextInputField{
                 id: firstNameField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
-                title: "First name"
+                title: qsTr("First name")
                 text: user.firstName ? user.firstName : ""
             }
             TextInputField{
                 id: emailField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
-                title: "Email"
-                placeholderText: "email..."
+                title: qsTr("Email")
+                placeholderText: qsTr("email...")
                 text: user.email ? user.email : ""
             }
         }
@@ -117,14 +117,14 @@ Popup {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: popupRoot.titleColor
-                text: "Reset password"
+                text: qsTr("Reset password")
             }
             TextInputField{
                 id: oldPasswordField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
-                title: "Password"
-                placeholderText: "password..."
+                title: qsTr("Password")
+                placeholderText: qsTr("password...")
                 fieldEchoMode: TextInput.Password
                 iconRightVisible: true
                 iconRightSource: "qrc:/assets/icons/Outline/eye.svg"
@@ -141,8 +141,8 @@ Popup {
                 id: newPasswordField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
-                title: "Password"
-                placeholderText: "password..."
+                title: qsTr("Password")
+                placeholderText: qsTr("password...")
                 fieldEchoMode: TextInput.Password
                 iconRightVisible: true
                 iconRightSource: "qrc:/assets/icons/Outline/eye.svg"
@@ -165,7 +165,7 @@ Popup {
                 id: darkModeSwitch
                 Layout.preferredHeight: 25
                 Layout.fillWidth: true
-                text: "Dark mode"
+                text: qsTr("Dark mode")
                 checked: Themes.currentTheme.themeId === 1
 
                 onCheckedChanged: {
@@ -193,7 +193,7 @@ Popup {
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize: 14
                 color: Themes.colors.red.red500
-                text: "Log out"
+                text: qsTr("Log out")
                 MouseArea{
                     id: logoutMouse
                     anchors.fill: parent
@@ -221,7 +221,7 @@ Popup {
                 SecondaryButton{
                     Layout.preferredHeight: 30
                     Layout.preferredWidth: 80
-                    btnText: "Cancel"
+                    btnText: qsTr("Cancel")
                     onClicked: {
                         popupRoot.close()
                     }
@@ -234,7 +234,7 @@ Popup {
                     Layout.preferredHeight: 30
                     Layout.preferredWidth: 80
                     iconLeftVisible: false
-                    btnText: "Save"
+                    btnText: qsTr("Save")
                     onClicked: {
                         var lastName = lastNameField.text
                         var firstName = firstNameField.text

@@ -17,7 +17,7 @@ Item {
     width: 1040
 
     function addInfoTab(recordId){
-        driverTabPannel.addTab("Driver " + recordId)
+        driverTabPannel.addTab(qsTr("Driver") + " " + recordId)
         var driverInfoTab = driverInfoTabComp.createObject(driversStackView)
         driverInfoTab.driverModel.setRecord(driversModel.findRecord("DriverId", recordId))
         driverInfoTab.parent = driversStackView;
@@ -40,7 +40,7 @@ Item {
             id: driverTabPannel
             Layout.preferredHeight: 40
             Layout.fillWidth: true
-            tabs: [{text: "Drivers", checked: true, iconVisible: false}]
+            tabs: [{text: qsTr("Drivers"), checked: true, iconVisible: false}]
             onTabClosed: (index) => {
                 driversStackView.children[index].destroy()
             }

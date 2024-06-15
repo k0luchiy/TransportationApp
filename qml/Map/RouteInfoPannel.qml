@@ -19,7 +19,7 @@ Item {
             Layout.preferredWidth: 270
             color: Themes.colors.neutral.neutral950
             font.pointSize: 18
-            text: "Orders"
+            text: qsTr("Orders")
         }
 
         ListView{

@@ -182,7 +182,6 @@ Item {
         query: routeDetailsQuery
 
         onRoutesChanged: {
-            console.log("Routes changed")
             if (routeDetailsModel.count <= 0) {
                 return
             }
@@ -198,7 +197,6 @@ Item {
             var nextStatus = orderList.length < currentRouteIndex ? orderList[currentRouteIndex+1].statusTitle : ""
 
             ++currentRouteIndex
-            console.log("Info", distance, address)
 
             mapItemRoot.routeDetails.push({
                 start: {latitude: startCoordinate.latitude, longitude: startCoordinate.longitude},
@@ -232,14 +230,12 @@ Item {
     }
 
     function fillRouteInfo() {
-        console.log("Fill route")
         currentFillRouteIndex = 0
         continueFillRouteInfo()
     }
 
     function continueFillRouteInfo() {
         if (currentFillRouteIndex < routeQuery.waypoints.length - 1) {
-            console.log("add point", currentFillRouteIndex)
             routeDetailsQuery.clearWaypoints()
             routeDetailsQuery.addWaypoint(routeQuery.waypoints[currentFillRouteIndex])
             routeDetailsQuery.addWaypoint(routeQuery.waypoints[currentFillRouteIndex + 1])
@@ -268,7 +264,6 @@ Item {
             updateRoute()
         }
         else{
-            console.log("Order list empty")
             routeQuery.clearWaypoints()
             routeDetailsQuery.clearWaypoints()
             mapItemRoot.routeDetails = []

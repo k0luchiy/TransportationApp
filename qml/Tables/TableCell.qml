@@ -15,7 +15,7 @@ Rectangle {
 
     property color bgColor: Themes.colors.elementary.transparent
     property color contentColor: Themes.colors.neutral.neutral700
-    property string text : "Id"
+    property string text : ""
     property int fontSize : 9
     property bool enabled : false
 

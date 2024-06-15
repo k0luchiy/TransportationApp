@@ -30,14 +30,14 @@ Item {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
-                text: qsTr("Car ") + carModel.carNumber
+                text: qsTr("Car") + " " + carModel.carNumber
             }
 
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
                 contentColor: Themes.colors.primary.primary500
-                btnText: "Save"
+                btnText: qsTr("Save")
                 onClicked: {
                     var carId = Number(carIdField.text)
                     var carType = carTypeField.text

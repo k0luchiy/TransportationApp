@@ -22,9 +22,9 @@ Rectangle {
     function registerUser(lastName, firstName, email, password, repeatPassword){
         if(user.isUserExist(email)){
             emailField.isError = true
-            emailField.errorMsg = "User with this email already exists"
+            emailField.errorMsg = qsTr("User with this email already exists")
             signUpPage.regError = true
-            signUpPage.regErrorMsg = "User with this email already exists"
+            signUpPage.regErrorMsg = qsTr("User with this email already exists")
             return;
         }
         else{
@@ -35,12 +35,12 @@ Rectangle {
         }
         if(password !== repeatPassword){
             passwordField.isError = true
-            passwordField.errorMsg = "Password do not match"
+            passwordField.errorMsg = qsTr("Password do not match")
             repeatPasswordField.isError = true
-            repeatPasswordField.errorMsg = "Password do not match"
+            repeatPasswordField.errorMsg = qsTr("Password do not match")
 
             signUpPage.regError = true
-            signUpPage.regErrorMsg = "Password do not match"
+            signUpPage.regErrorMsg = qsTr("Password do not match")
             return;
         }
         else {
@@ -54,13 +54,11 @@ Rectangle {
 
         var registerSuceess = user.registration(email, password, firstName, lastName)
         if(registerSuceess){
-            console.log("Registration success")
             signUpPage.regError = false
             signUpPage.regErrorMsg = ""
             signUpPage.registerSuccess()
         }
         else{
-            console.log("Registration failed")
         }
     }
 

@@ -24,7 +24,7 @@ Item {
             id: deliveriesTabPannel
             Layout.preferredHeight: 40
             Layout.fillWidth: true
-            tabs: [{text: "Deliveies", checked: true, iconVisible: false}]
+            tabs: [{text: qsTr("Deliveies"), checked: true, iconVisible: false}]
             onTabClosed: (index) => {
                 deliveiesStackView.children[index].destroy()
             }

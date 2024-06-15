@@ -31,14 +31,14 @@ Item {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
-                text: qsTr("Order ") + orderModel.orderId
+                text: qsTr("Order") + " " + orderModel.orderId
             }
 
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
                 contentColor: Themes.colors.primary.primary500
-                btnText: "Save"
+                btnText: qsTr("Save")
                 onClicked: {
                     var orderId = Number(orderIdField.text)
                     var askedDeliveryDate = DateUtils.strToDate(askedDeliveryDateField.text)

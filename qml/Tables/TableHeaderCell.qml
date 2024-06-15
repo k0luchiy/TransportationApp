@@ -10,7 +10,7 @@ Rectangle {
     property color bgColor: Themes.colors.neutral.neutral50
     property color contentColor: Themes.colors.neutral.neutral700
     property bool iconVisible : true
-    property string text : "Id"
+    property string text : qsTr("Id")
     property int fontSize : 9
     property int iconSize : 10
     property bool enabled : true

@@ -15,35 +15,35 @@ TabBar {
     }
 
     LeftMenuTabButton{
-        text: "Orders"
+        text: qsTr("Orders")
         anchors.left: parent.left
         anchors.right: parent.right
         iconSource: "qrc:/assets/icons/Outline/clipboard-list.svg"
     }
 
     LeftMenuTabButton{
-        text: "Cars"
+        text: qsTr("Cars")
         anchors.left: parent.left
         anchors.right: parent.right
         iconSource: "qrc:/assets/icons/Outline/truck.svg"
     }
 
     LeftMenuTabButton{
-        text: "Drivers"
+        text: qsTr("Drivers")
         anchors.left: parent.left
         anchors.right: parent.right
         iconSource: "qrc:/assets/icons/Outline/identification.svg"
     }
 
     LeftMenuTabButton{
-        text: "Deliveries"
+        text: qsTr("Deliveries")
         anchors.left: parent.left
         anchors.right: parent.right
         iconSource: "qrc:/assets/icons/Outline/cube.svg"
     }
 
     LeftMenuTabButton{
-        text: "Planning"
+        text: qsTr("Planning")
         anchors.left: parent.left
         anchors.right: parent.right
         iconSource: "qrc:/assets/icons/Outline/pencil-alt.svg"

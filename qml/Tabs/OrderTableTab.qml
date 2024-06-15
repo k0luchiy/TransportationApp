@@ -28,7 +28,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 35
                 titleVisible: false
-                placeholderText: "Search..."
+                placeholderText: qsTr("Search...")
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
 
@@ -41,7 +41,7 @@ Item {
             PrimaryButton{
                 Layout.preferredWidth: 95
                 Layout.preferredHeight: 35
-                btnText: "Filter"
+                btnText: qsTr("Filter")
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/filter.svg"
 

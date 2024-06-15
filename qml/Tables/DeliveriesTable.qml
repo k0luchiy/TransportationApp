@@ -3,7 +3,8 @@ import QtQuick.Layouts
 
 TableBase{
     id : tableRoot
-    tableHeaders :  ["Id", "Car number", "Driver name", "Departure date", "Return date", "Status"]
+    tableHeaders :  [qsTr("Id"), qsTr("Car number"), qsTr("Driver name"),
+        qsTr("Departure date"), qsTr("Return date"), qsTr("Status")]
     tableModel : deliveriesFilterModel
     modelEmpty : deliveriesFilterModel.rowCount() === 0
     tableRow:

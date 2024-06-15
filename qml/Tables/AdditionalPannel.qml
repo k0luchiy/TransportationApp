@@ -56,7 +56,7 @@ Popup {
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize: popupRoot.fontSize
                 color: popupRoot.fontColor
-                text: "Open in tab"
+                text: qsTr("Open in tab")
             }
             MouseArea{
                 id: mouseArea
@@ -82,7 +82,7 @@ Popup {
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize: popupRoot.fontSize
                 color: popupRoot.fontColor
-                text: "Add to delivery"
+                text: qsTr("Add to delivery")
             }
             MouseArea{
                 id: addMouseArea
@@ -109,7 +109,7 @@ Popup {
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize: popupRoot.fontSize
                 color: Themes.colors.red.red500
-                text: "Delete"
+                text: qsTr("Delete")
             }
             MouseArea{
                 id: deleteMouseArea

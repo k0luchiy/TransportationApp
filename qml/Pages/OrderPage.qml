@@ -17,7 +17,7 @@ Item {
     width: 1040
 
     function addInfoTab(recordId){
-        orderTabPannel.addTab("Order " + recordId)
+        orderTabPannel.addTab(qsTr("Order") + " " + recordId)
         var orderInfoPage = orderInfoPageComp.createObject(ordersStackView)
         orderInfoPage.orderModel.setRecord(ordersModel.findRecord("OrderId", recordId))
         orderInfoPage.parent = ordersStackView;
@@ -40,7 +40,7 @@ Item {
             id: orderTabPannel
             Layout.preferredHeight: 40
             Layout.fillWidth: true
-            tabs: [{text: "Order", checked: true, iconVisible: false}]
+            tabs: [{text: qsTr("Orders"), checked: true, iconVisible: false}]
             onTabClosed: (index) => {
                 ordersStackView.children[index].destroy()
                 //orderTabPannel.currentIndexChanged()

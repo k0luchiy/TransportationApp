@@ -14,7 +14,7 @@ Rectangle {
     property color  contentColor    : Themes.colors.neutral.neutral900
     property color  titleColor      : Themes.colors.neutral.neutral950
     property string titleText       //: notificationRoot.notificationType.titleText
-    property string message         : "Success notification content"
+    property string message         : qsTr("Success notification content")
     property int    duration        : 2000
 
     signal dismissed

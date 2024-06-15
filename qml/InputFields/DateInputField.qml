@@ -13,7 +13,7 @@ TextInputField {
     id: fieldRoot
     iconRightSource : "qrc:/assets/icons/Outline/calendar.svg"
     iconRightVisible: true
-    placeholderText: "dd.mm.yyyy"
+    placeholderText: qsTr("dd.mm.yyyy")
     text: ""
     z: 10
     focusField : false

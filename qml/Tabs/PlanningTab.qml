@@ -54,7 +54,7 @@ Item {
                 font.pointSize: 14
                 color: Themes.colors.neutral.neutral950
                 text: (deliveryModel.deliveryId ?
-                           qsTr("Delivery ") + deliveryModel.deliveryId :
+                           qsTr("Delivery") + " " + deliveryModel.deliveryId :
                            qsTr("None deliveries selected"))
             }
 
@@ -62,7 +62,7 @@ Item {
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
                 contentColor: Themes.colors.primary.primary500
-                btnText: "+ New"
+                btnText: qsTr("+ New")
                 onClicked: {
                     var deliveryId = deliveriesModel.createDelivery(user.userId)
                     deliveryModel.setRecord(deliveriesModel.findRecord("DeliveryId", deliveryId))
@@ -73,7 +73,7 @@ Item {
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
                 contentColor: Themes.colors.primary.primary500
-                btnText: "Save"
+                btnText: qsTr("Save")
                 onClicked: {
                     var updateSuccess = true
                     if(deliveryModel.carId===0){
@@ -258,7 +258,8 @@ Item {
             TableBase{
                 id : carTableRoot
                 anchors.fill: parent
-                tableHeaders :  ["Id", "Type", "Model", "Car number", "Volume", "Weight", "Driving category"]
+                tableHeaders :  [qsTr("Id"), qsTr("Type"), qsTr("Model"),
+                    qsTr("Car number"), qsTr("Volume"), qsTr("Weight"), qsTr("Driving category")]
                 tableModel : carModel
                 modelEmpty : carModel.carId === 0
                 headerIconVisible: false
@@ -333,7 +334,8 @@ Item {
             TableBase{
                 id : driverTableRoot
                 anchors.fill: parent
-                tableHeaders :  ["Id", "Last name", "First name", "Driving category", "Experience"]
+                tableHeaders :  [qsTr("Id"), qsTr("Last name"), qsTr("First name"),
+                    qsTr("Driving category"), qsTr("Experience")]
                 headerIconVisible: false
                 headerEnabled: false
                 tableModel : driverModel
@@ -394,7 +396,8 @@ Item {
             TableBase{
                 id : ordersTableRoot
                 anchors.fill: parent
-                tableHeaders :  ["Id", "Created date", "Delivery date", "Address", "Status", "Cost"]
+                tableHeaders :  [qsTr("Id"), qsTr("Created date"), qsTr("Delivery date"),
+                    qsTr("Address"), qsTr("Status"), qsTr("Cost")]
                 headerIconVisible: false
                 headerEnabled: false
                 tableModel : deliveryOrderList.orderList

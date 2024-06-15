@@ -46,7 +46,7 @@ Rectangle {
                 buttonSize: ButtonSizes.smallSize
                 iconLeftVisible: false
                 iconRightVisible: false
-                btnText: "Clear"
+                btnText: qsTr("Clear")
                 onClicked: {
                     calendarRoot.clearClicked()
                     calendarRoot.selectedDate = null
@@ -61,7 +61,7 @@ Rectangle {
                 buttonSize: ButtonSizes.smallSize
                 iconLeftVisible: false
                 iconRightVisible: false
-                btnText: "Apply"
+                btnText: qsTr("Apply")
                 onClicked: {
                     calendarRoot.applyClicked()
                     calendarRoot.visible = false

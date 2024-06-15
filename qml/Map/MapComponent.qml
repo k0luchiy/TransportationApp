@@ -177,7 +177,9 @@ Item {
 
     RouteModel {
         id: routeDetailsModel
-        plugin: mapPlugin
+        plugin: Plugin {
+            name: "osm"
+        }
         autoUpdate: true
         query: routeDetailsQuery
 

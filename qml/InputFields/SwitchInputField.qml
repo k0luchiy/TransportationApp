@@ -4,7 +4,7 @@ import QtQuick.Controls 2.12
 import Colors
 
 Switch {
-    property color bgColor : Colors.elementary.tranparent
+    property color bgColor : Colors.elementary.transparent
     property color indicatorActiveColor : Themes.colors.primary.primary500
     property color indicatorDefaultColor : Themes.colors.neutral.neutral400
     property color indicatorBorderColor : Themes.colors.neutral.neutral700
@@ -20,12 +20,6 @@ Switch {
     id: fieldRoot
     text: qsTr("Switch")
 
-//    background: Rectangle{
-//        color: fieldRoot.bgColor
-//    }
-//
-//    anchors.verticalCenter: parent.verticalCenter
-//    anchors.horizontalCenter: parent.horizontalCenter
     indicator: Rectangle {
         id: rectangle
         implicitWidth: 48
@@ -38,7 +32,6 @@ Switch {
         border.color: indicatorBorderColor
         border.width: indicatorBorderWidth
 
-        // small round point
         Rectangle {
             id : smallRect
             height: circleSize
@@ -51,14 +44,12 @@ Switch {
             border.color: indicatorBorderColor
             border.width: indicatorBorderWidth
 
-            // Change the position of the small dot
             NumberAnimation on x{
                 to: smallRect.width + 5
                 running: fieldRoot.checked ? true : false
                 duration: 200
             }
 
-            // Change the position of the small dot
             NumberAnimation on x{
                 to: 3
                 running: fieldRoot.checked ? false : true
@@ -67,7 +58,6 @@ Switch {
         }
     }
 
-    // The text to be displayed
     contentItem: Text {
         color: fieldRoot.checked ? textActiveColor : textDefaultColor
         verticalAlignment: Text.AlignVCenter

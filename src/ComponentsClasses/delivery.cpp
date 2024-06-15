@@ -62,8 +62,8 @@ quint64 Delivery::findCar(const QDate& departureDate) const
 {
     QString query_str =
         "select c.CarId \
-        from deliveries dv \
-        join cars c on dv.CarId = c.CarId \
+        from Deliveries dv \
+        join Cars c on dv.CarId = c.CarId \
         where :departureDate not between dv.DepartureDate and dv.ReturnDate ";
 
     QSqlQuery query;
@@ -81,7 +81,7 @@ quint64 Delivery::findDriver(const QDate& departureDate) const
 {
     QString query_str =
         "select d.DriverId \
-        from drivers d \
+        from Drivers d \
         join Schedules sch on d.ScheduleId = sch.ScheduleId \
         join ScheduleByDay sd on sch.ScheduleId = sd.ScheduleId \
         join ScheduleEvents se on sd.EventId = se.EventId \
@@ -108,7 +108,7 @@ bool Delivery::save()
     }
 
     QString query_str =
-        "Update deliveries set \
+        "Update Deliveries set \
             carId = :carId, driverId = :driverId, \
             departureDate = :departureDate, returnDate = :returnDate, \
             statusId = :statusId \

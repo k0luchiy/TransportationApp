@@ -236,5 +236,6 @@
         <file>assets/icons/Essentials/Warning.svg</file>
         <file>assets/icons/Essentials/map-marker.png</file>
         <file>assets/icons/Essentials/app-icon.png</file>
+        <file>assets/icons/Essentials/cat_icon.png</file>
     </qresource>
 </RCC>

@@ -2,6 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>AboutPopup</name>
+    <message>
+        <location filename="../qml/Popups/AboutPopup.qml" line="14"/>
+        <source>About program</source>
+        <translation>О программе</translation>
+    </message>
+    <message>
+        <location filename="../qml/Popups/AboutPopup.qml" line="81"/>
+        <source>Application created as diploma project and designed for transportation managment.
+Developer: Osipov Anton - &lt;a href=&apos;https://github.com/k0luchiy&apos;&gt;github.com/k0luchiy&lt;/a&gt;</source>
+        <translation>Приложение создано в качестве дипломной работы для управления перевозками.
+Разработчик: Осипов Антон - &lt;a href=&apos;https://github.com/k0luchiy&apos;&gt;github.com/k0luchiy&lt;/a&gt;</translation>
+    </message>
+</context>
+<context>
     <name>AdditionalPannel</name>
     <message>
         <location filename="../qml/Tables/AdditionalPannel.qml" line="59"/>
@@ -921,7 +936,7 @@
         <location filename="../qml/Tabs/PlanningTab.qml" line="246"/>
         <location filename="../qml/Tabs/PlanningTab.qml" line="323"/>
         <source>Add automaticly</source>
-        <translation>Добавить</translation>
+        <translation>Подобрать</translation>
     </message>
     <message>
         <location filename="../qml/Tabs/PlanningTab.qml" line="261"/>
@@ -1067,9 +1082,12 @@
     </message>
     <message>
         <location filename="../qml/Popups/Settings.qml" line="136"/>
-        <location filename="../qml/Popups/Settings.qml" line="154"/>
+        <source>Old password</source>
+        <translation>Старый пароль</translation>
+    </message>
+    <message>
         <source>Password</source>
-        <translation>Пароль</translation>
+        <translation type="vanished">Пароль</translation>
     </message>
     <message>
         <location filename="../qml/Popups/Settings.qml" line="137"/>
@@ -1078,27 +1096,32 @@
         <translation>password...</translation>
     </message>
     <message>
-        <location filename="../qml/Popups/Settings.qml" line="181"/>
+        <location filename="../qml/Popups/Settings.qml" line="154"/>
+        <source>New password</source>
+        <translation>Новый пароль</translation>
+    </message>
+    <message>
+        <location filename="../qml/Popups/Settings.qml" line="182"/>
         <source>Dark mode</source>
         <translation>Ночной режим</translation>
     </message>
     <message>
-        <location filename="../qml/Popups/Settings.qml" line="197"/>
+        <location filename="../qml/Popups/Settings.qml" line="198"/>
         <source>Language:</source>
         <translation>Язык:</translation>
     </message>
     <message>
-        <location filename="../qml/Popups/Settings.qml" line="223"/>
+        <location filename="../qml/Popups/Settings.qml" line="225"/>
         <source>Log out</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../qml/Popups/Settings.qml" line="251"/>
+        <location filename="../qml/Popups/Settings.qml" line="253"/>
         <source>Cancel</source>
         <translation>Очистить</translation>
     </message>
     <message>
-        <location filename="../qml/Popups/Settings.qml" line="264"/>
+        <location filename="../qml/Popups/Settings.qml" line="266"/>
         <source>Save</source>
         <translation>Save</translation>
     </message>

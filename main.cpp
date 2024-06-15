@@ -42,22 +42,17 @@ int main(int argc, char *argv[])
     Settings* settings = new Settings();
     settings->loadSettings();
 
-//    QTranslator translator;
-//    QString translation_path = "translations/TransportationApp_%1.qm";
-//    if (translator.load(translation_path.arg(settings->language()))) {
-//        app.installTranslator(&translator);
-//    }
     TranslationHandler* translationHandler = new TranslationHandler();
     translationHandler->setLanguage(settings->language());
     QObject::connect(translationHandler, &TranslationHandler::languageChanged, &engine, &QQmlEngine::retranslate);
-/*
-    QSettings *configIniRead = new QSettings("settings/databaseConfig.ini", QSettings::IniFormat);
-    QString driver = configIniRead->value("/database/driver").toString();
-    QString hostname = configIniRead->value("/database/hostname").toString();
-    int port = configIniRead->value("/database/port").toInt();
-    QString databaseName = configIniRead->value("/database/databaseName").toString();
-    QString username = configIniRead->value("/database/username").toString();
-    QString password = configIniRead->value("/database/password").toString();
+
+    QSettings *databaseIniRead = new QSettings("settings/databaseConfig.ini", QSettings::IniFormat);
+    QString driver = databaseIniRead->value("/database/driver").toString();
+    QString hostname = databaseIniRead->value("/database/hostname").toString();
+    int port = databaseIniRead->value("/database/port").toInt();
+    QString databaseName = databaseIniRead->value("/database/databaseName").toString();
+    QString username = databaseIniRead->value("/database/username").toString();
+    QString password = databaseIniRead->value("/database/password").toString();
 
     QSqlDatabase db = QSqlDatabase::addDatabase(driver);
     db.setHostName(hostname);
@@ -65,16 +60,6 @@ int main(int argc, char *argv[])
     db.setUserName(username);
     db.setPassword(password);
     db.setPort(port);
-*/
-
-    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};Server=localhost;Database=TransportationDB;Uid=root;Port=3306;Pwd=5555472Ao&;");
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-//    db.setHostName("b3d.h.filess.io");
-//    db.setDatabaseName("TransportationDB_exceptview");
-//    db.setUserName("TransportationDB_exceptview");
-//    db.setPassword("0eee07d40b64c05056edc10321cb7dbf90cf6879");
-//    db.setPort(3307);
 
     db.open();
 

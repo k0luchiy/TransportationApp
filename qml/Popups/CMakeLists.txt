@@ -14,4 +14,5 @@ qt_add_qml_module(PopupsLib
     VERSION 1.0
     RESOURCE_PREFIX /TransportationApp.com/qml
     QML_FILES Settings.qml
+    QML_FILES AboutPopup.qml
 )

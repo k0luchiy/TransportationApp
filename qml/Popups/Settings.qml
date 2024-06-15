@@ -133,7 +133,7 @@ Popup {
                 id: oldPasswordField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
-                title: qsTr("Password")
+                title: qsTr("Old password")
                 placeholderText: qsTr("password...")
                 fieldEchoMode: TextInput.Password
                 iconRightVisible: true
@@ -151,7 +151,7 @@ Popup {
                 id: newPasswordField
                 Layout.preferredHeight: 60
                 Layout.fillWidth: true
-                title: qsTr("Password")
+                title: qsTr("New password")
                 placeholderText: qsTr("password...")
                 fieldEchoMode: TextInput.Password
                 iconRightVisible: true

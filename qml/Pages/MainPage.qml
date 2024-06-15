@@ -18,7 +18,7 @@ import Popups
 Rectangle{
     signal logout
 
-    id: window
+    id: mainPageRoot
     width: 1040
     height: 840
 
@@ -31,8 +31,13 @@ Rectangle{
         y: (parent.height - height) / 2
 
         onLogout: {
-            window.logout()
+            mainPageRoot.logout()
         }
+    }
+    AboutPopup{
+        id: aboutPopup
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
     }
 
     ColumnLayout{
@@ -73,10 +78,14 @@ Rectangle{
                 IconButton{
                     iconSize: 18
                     iconSource: "qrc:/assets/icons/Outline/information-circle.svg"
+                    onClicked: {
+                        aboutPopup.open()
+                    }
                 }
                 IconButton{
                     iconSize: 18
                     iconSource: "qrc:/assets/icons/Outline/question-mark-circle.svg"
+                    onClicked: Qt.openUrlExternally("https://github.com/k0luchiy/TransportationApp")
                 }
                 Button{
                     Layout.fillHeight: true
@@ -92,6 +101,7 @@ Rectangle{
                 IconButton{
                     iconSize: 18
                     iconSource: "qrc:/assets/icons/Outline/logout.svg"
+                    onClicked: window.close()
                 }
             }
         }

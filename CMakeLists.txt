@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.16)
 
 project(TransportationApp VERSION 0.1 LANGUAGES CXX)
 
-#set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_AUTORCC ON)
@@ -14,8 +13,6 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql Positioning Location Test Lin
 enable_testing(true)
 
 qt_standard_project_setup()
-
-#qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(TransportationApp
     main.cpp
@@ -34,7 +31,6 @@ add_subdirectory(qml)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(docs)
-add_subdirectory(translations)
 
 list(APPEND QML_DIRS "${CMAKE_BINARY_DIR}/qml")
 set(
@@ -43,33 +39,25 @@ set(
     FORCE
 )
 
-add_dependencies(TransportationApp release_translations)
+
+set(TS_FILES
+    translations/TransportationApp_en.ts
+    translations/TransportationApp_ru.ts
+)
+
+set_source_files_properties(
+    ${TS_FILES}
+    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/translations"
+)
+
+qt_add_translations(TransportationApp
+    TS_FILES ${TS_FILES}
+)
+
 
 #list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 #include(Doxygen)
 #Doxygen(src "docs/html")
-
-#find_library(MYSQL_LIBRARY NAMES mysql PATHS "C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib\\libmysql.lib")
-##include_directories("C:\\Users\\antos\\Documents\\MySQL Server 8.0\\include")
-#target_link_libraries(TransportationApp PRIVATE ${MYSQL_LIBRARY})
-
-##target_link_libraries(TransportationApp PRIVATE "C:\\Program Files\\MySQL\\MySQL Server 8.0\\lib")
-
-#set(MySQL_INCLUDE_DIR "C:/Program Files/MySQL/MySQL Server 8.0/include")
-#set(MySQL_LIBRARY_DIR "C:/Program Files/MySQL/MySQL Server 8.0/lib")
-#set(MySQL_LIBRARIES "C:/Program Files/MySQL/MySQL Server 8.0/libmysql.dll")
-
-## Find MySQL
-#find_path(MySQL_INCLUDE_DIR NAMES mysql.h PATHS ${MySQL_INCLUDE_DIR})
-#find_library(MySQL_LIBRARY NAMES mysqlclient PATHS ${MySQL_LIBRARY_DIR})
-
-#if (MySQL_INCLUDE_DIR AND MySQL_LIBRARY)
-#    include_directories(${MySQL_INCLUDE_DIR})
-#    link_directories(${MySQL_LIBRARY_DIR})
-#    set(EXTRA_LIBS ${EXTRA_LIBS} ${MySQL_LIBRARY})
-#else()
-#    message(FATAL_ERROR "Could not find MySQL")
-#endif()
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

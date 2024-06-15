@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QSqlDatabase>
 #include <QIcon>
+#include <QTranslator>
 
 #include "abstractsqlquerymodel.h"
 #include "carsfiltermodel.h"
@@ -24,6 +25,7 @@
 #include "delivery.h"
 #include "deliveryorderlist.h"
 #include "settings.h"
+#include "translationhandler.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,6 +38,18 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
 
     engine.addImportPath(":/TransportationApp.com/qml");
+
+    Settings* settings = new Settings();
+    settings->loadSettings();
+
+//    QTranslator translator;
+//    QString translation_path = "translations/TransportationApp_%1.qm";
+//    if (translator.load(translation_path.arg(settings->language()))) {
+//        app.installTranslator(&translator);
+//    }
+    TranslationHandler* translationHandler = new TranslationHandler();
+    translationHandler->setLanguage(settings->language());
+    QObject::connect(translationHandler, &TranslationHandler::languageChanged, &engine, &QQmlEngine::retranslate);
 /*
     QSettings *configIniRead = new QSettings("settings/databaseConfig.ini", QSettings::IniFormat);
     QString driver = configIniRead->value("/database/driver").toString();
@@ -63,9 +77,6 @@ int main(int argc, char *argv[])
 //    db.setPort(3307);
 
     db.open();
-
-    Settings* settings = new Settings();
-    settings->loadSettings();
 
     User* user = new User();
     OrderStatusModel* ordersStatusModel = new OrderStatusModel();
@@ -111,6 +122,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("deliveriesModel", deliveriesModel);
     engine.rootContext()->setContextProperty("deliveriesFilterModel", deliveriesFilterModel);
     engine.rootContext()->setContextProperty("settings", settings);
+    engine.rootContext()->setContextProperty("translationHandler", translationHandler);
 
     qmlRegisterType<Order>("TransportationsApp.Models", 1, 0, "Order");
     qmlRegisterType<Car>("TransportationsApp.Models", 1, 0, "Car");

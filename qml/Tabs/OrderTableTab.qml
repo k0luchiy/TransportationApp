@@ -115,7 +115,7 @@ Item {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
                 Layout.preferredHeight: 35
                 Layout.preferredWidth: 60
-                btnText: "Clear"
+                btnText: qsTr("Clear")
                 fontSize: 10
                 onClicked: {
                     searchField.text = ""

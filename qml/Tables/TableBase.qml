@@ -51,7 +51,7 @@ ColumnLayout {
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize: 10
                 color: Themes.colors.neutral.neutral700
-                text: "No items found"
+                text: qsTr("No items found")
             }
         }
     }

@@ -9,6 +9,7 @@ class Settings : public QObject
     Q_OBJECT
     Q_PROPERTY(bool rememberUser READ rememberUser WRITE setRememberUser NOTIFY rememberUserChanged)
     Q_PROPERTY(bool darkMode READ darkMode WRITE setDarkMode NOTIFY darkModeChanged)
+    Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
     Q_PROPERTY(quint64 userId READ userId WRITE setUserId NOTIFY userIdChanged)
 
 private:
@@ -16,6 +17,7 @@ private:
     QString fileName = "settings/settingsConfig.ini";
     bool m_rememberUser = false;
     bool m_darkMode = false;
+    QString m_language = "";
     quint64 m_userId = 0;
 
 public:
@@ -31,6 +33,7 @@ public Q_SLOTS:
 public:
     bool rememberUser() const;
     bool darkMode() const;
+    QString language() const;
     quint64 userId() const;
 
 //
@@ -39,6 +42,7 @@ public:
 public:
     void setRememberUser(bool rememberUser);
     void setDarkMode(bool darkMode);
+    void setLanguage(const QString& language);
     void setUserId(quint64 userId);
 
 //
@@ -47,6 +51,7 @@ public:
 signals:
     void rememberUserChanged(); //!< Emits signal if userId changed
     void darkModeChanged(); //!< Emits signal if userId changed
+    void languageChanged(); //!< Emits signal if language changed
     void userIdChanged(); //!< Emits signal if userId changed
 
 };

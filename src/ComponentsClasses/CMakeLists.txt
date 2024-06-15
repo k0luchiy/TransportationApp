@@ -7,13 +7,16 @@ qt_add_library(
     delivery.h delivery.cpp
     deliveryorderlist.h deliveryorderlist.cpp
     settings.h settings.cpp
+    translationhandler.h translationhandler.cpp
 )
 
+find_package(Qt6 COMPONENTS Core Sql Gui REQUIRED)
 
 target_link_libraries(
     ComponentsClassesLib
     PRIVATE Qt6::Core
     PRIVATE Qt6::Sql
+    PRIVATE Qt6::Gui
 )
 
 target_include_directories(

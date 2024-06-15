@@ -47,6 +47,16 @@ Popup {
         popupRoot.close()
     }
 
+    ListModel{
+        id: languageModel
+        ListElement{
+            text: "en"
+        }
+        ListElement{
+            text: "ru"
+        }
+    }
+
     ColumnLayout{
         anchors.fill: parent
         Layout.margins: 10
@@ -161,34 +171,53 @@ Popup {
             Layout.fillWidth: true
             spacing: 5
 
-            SwitchInputField{
-                id: darkModeSwitch
-                Layout.preferredHeight: 25
+            RowLayout{
+                Layout.fillHeight: true
                 Layout.fillWidth: true
-                text: qsTr("Dark mode")
-                checked: Themes.currentTheme.themeId === 1
+                spacing: 10
+                SwitchInputField{
+                    id: darkModeSwitch
+                    Layout.preferredHeight: 25
+                    Layout.fillWidth: true
+                    text: qsTr("Dark mode")
+                    checked: Themes.currentTheme.themeId === 1
 
-                onCheckedChanged: {
-                    if (darkModeSwitch.checked){
-                        Themes.currentTheme = Themes.themes.dark
+                    onCheckedChanged: {
+                        if (darkModeSwitch.checked){
+                            Themes.currentTheme = Themes.themes.dark
+                        }
+                        else{
+                            Themes.currentTheme = Themes.themes.light
+                        }
                     }
-                    else{
-                        Themes.currentTheme = Themes.themes.light
+                }
+                Text{
+                    Layout.preferredHeight: 30
+                    Layout.preferredWidth: 90
+                    font.pointSize: 12
+                    text: qsTr("Language:")
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.Right
+                    color: popupRoot.titleColor
+                }
+                ComboBoxControl{
+                    id: languageComboBox
+                    Layout.preferredHeight: 30
+                    Layout.preferredWidth: 80
+                    model: languageModel
+                    itemCount: languageModel.count
+                    textRole: "text"
+                    currentIndex: settings.language === "en" ? 0 : 1 // languageComboBox.find(settings.language)
+                    onCurrentTextChanged: {
+                        var language = languageComboBox.currentText
+                        settings.language = language
+                        translationHandler.language = language
                     }
                 }
             }
-//            SecondaryButton{
-//                Layout.preferredHeight: 30
-//                Layout.preferredWidth: 80
-//                btnText: "Log out"
-//                borderSize: 0
-//                contentColor: Themes.colors.red.red500
-//                onClicked: {
-//                }
-//            }
+
             Text{
                 Layout.preferredHeight: 25
-                Layout.fillWidth: true
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize: 14
@@ -220,7 +249,7 @@ Popup {
                 Layout.fillWidth: true
                 SecondaryButton{
                     Layout.preferredHeight: 30
-                    Layout.preferredWidth: 80
+                    Layout.preferredWidth: 85
                     btnText: qsTr("Cancel")
                     onClicked: {
                         popupRoot.close()

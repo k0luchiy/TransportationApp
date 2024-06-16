@@ -61,15 +61,11 @@ TabBar {
                         tabBarRoot.currentIndex = index
                     }
                     onClosed: {
-                        tabBarRoot.tabClosed(index)
-                        if(index!==0 && tabBarRoot.currentIndex === index){
-                            tabBarRoot.currentIndex = index - 1
-                        }
-//                        if(tabBarRoot.currentIndex >= index){
-//                            //tabBarRoot.currentIndex = tabBarRoot.currentIndex
-//                            tabBarRoot.currentIndex = currentIndex - 1
-//                        }
                         tabBarRoot.tabs.splice(index, 1)
+                        if(tabBarRoot.currentIndex >= index){
+                            tabBarRoot.currentIndex -= 1
+                        }
+                        tabBarRoot.tabClosed(index)
                         tabBarRoot.tabs = tabBarRoot.tabs
                     }
                 }

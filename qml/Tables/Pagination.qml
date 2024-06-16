@@ -9,7 +9,7 @@ Item {
     property int currentIndex : 0
     property int rowCount : 150
     property int rowsPerPage: 15
-    property int pageCount : rowCount / rowsPerPage
+    property int pageCount : (rowCount / rowsPerPage) + 1
     property int startRowIndex : currentIndex*rowsPerPage
     property int endRowIndex : currentIndex*rowsPerPage+rowsPerPage
     property int maxPageCount : 8

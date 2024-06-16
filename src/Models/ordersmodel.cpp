@@ -15,7 +15,8 @@ const char* OrdersModel::SELECT_QUERY =
         s.StatusId, s.StatusTitle, o.Cost,  \
         o.Address, o.Volume, o.Weight   \
     from Orders o   \
-    join OrderStatus s on o.StatusId = s.StatusId ";
+    join OrderStatus s on o.StatusId = s.StatusId \
+    order by o.OrderId";
 
 
 OrdersModel::OrdersModel(QObject *parent)

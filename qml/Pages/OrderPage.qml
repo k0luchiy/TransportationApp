@@ -43,14 +43,12 @@ Item {
             tabs: [{text: qsTr("Orders"), checked: true, iconVisible: false}]
             onTabClosed: (index) => {
                 ordersStackView.children[index].destroy()
-                //orderTabPannel.currentIndexChanged()
-                //ordersStackView.currentIndex = ordersStackView.currentIndex
-                //ordersStackView.currentIndex = orderTabPannel.currentIndex
-
-//                if(orderTabPannel.currentIndex >= index){
-//                     //tabBarRoot.currentIndex = tabBarRoot.currentIndex
-//                    ordersStackView.currentIndex -= 1
-//                }
+                if(orderTabPannel.currentIndex >= index){
+                    ordersStackView.currentIndex = orderTabPannel.currentIndex + 1
+                }
+            }
+            onCurrentIndexChanged: {
+                ordersStackView.currentIndex = orderTabPannel.currentIndex
             }
         }
 

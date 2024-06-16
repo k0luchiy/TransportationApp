@@ -43,6 +43,12 @@ Item {
             tabs: [{text: qsTr("Drivers"), checked: true, iconVisible: false}]
             onTabClosed: (index) => {
                 driversStackView.children[index].destroy()
+                if(driverTabPannel.currentIndex >= index){
+                    driversStackView.currentIndex = driverTabPannel.currentIndex + 1
+                }
+            }
+            onCurrentIndexChanged: {
+                driversStackView.currentIndex = driverTabPannel.currentIndex
             }
         }
 

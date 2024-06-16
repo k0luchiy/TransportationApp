@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
     translationHandler->setLanguage(settings->language());
     QObject::connect(translationHandler, &TranslationHandler::languageChanged, &engine, &QQmlEngine::retranslate);
 
+
     QSettings *databaseIniRead = new QSettings("settings/databaseConfig.ini", QSettings::IniFormat);
     QString driver = databaseIniRead->value("/database/driver").toString();
     QString hostname = databaseIniRead->value("/database/hostname").toString();

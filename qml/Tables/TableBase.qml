@@ -64,7 +64,7 @@ ColumnLayout {
             property var rowModel : model
             property var rowIndex : index
             sourceComponent: tableRoot.modelEmpty ? emptyTableModel :
-                isNaN(pagination) ? tableRow :
+                pagination === undefined ? tableRow :
                 (index >= pagination.startRowIndex && index < pagination.endRowIndex) ?
                                  tableRow : emptyItem
         }

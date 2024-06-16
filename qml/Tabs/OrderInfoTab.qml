@@ -14,6 +14,7 @@ import TransportationsApp.Models 1.0
 
 Item {
     property var orderModel : Order{}
+    property bool requeredPremission : user.rolePriority > 1
 
     id: pageRoot
     height: 800
@@ -39,6 +40,7 @@ Item {
                 Layout.preferredWidth: 60
                 contentColor: Themes.colors.primary.primary500
                 btnText: qsTr("Save")
+                visible: pageRoot.requeredPremission
                 onClicked: {
                     var orderId = Number(orderIdField.text)
                     var askedDeliveryDate = DateUtils.strToDate(askedDeliveryDateField.text)
@@ -112,12 +114,14 @@ Item {
                 DateInputField{
                     id: askedDeliveryDateField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Delivery date:")
                     text: DateUtils.formatDate(orderModel.askedDeliveryDate)
                 }
                 ComboBoxInputField{
                     id: statusField
                     Layout.fillWidth: true
+                    readOnly: requeredPremission
                     title:  qsTr("Status:")
                     model: ordersStatusModel
                     textRole: "StatusTitle"
@@ -130,24 +134,28 @@ Item {
                 NumberInputField{
                     id: volumeField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Volume:")
                     text: orderModel.volume
                 }
                 NumberInputField{
                     id: weightField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Weight:")
                     text: orderModel.weight
                 }
                 TextInputField{
                     id: addressField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Address:")
                     text: orderModel.address
                 }
                 NumberInputField{
                     id: costField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Cost:")
                     text: orderModel.cost
                 }

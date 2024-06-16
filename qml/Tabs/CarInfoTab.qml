@@ -13,6 +13,7 @@ import TransportationsApp.Models 1.0
 
 Item {
     property var carModel : Car{}
+    property bool requeredPremission : user.rolePriority > 1
 
     id: pageRoot
     height: 800
@@ -38,6 +39,7 @@ Item {
                 Layout.preferredWidth: 60
                 contentColor: Themes.colors.primary.primary500
                 btnText: qsTr("Save")
+                visible: pageRoot.requeredPremission
                 onClicked: {
                     var carId = Number(carIdField.text)
                     var carType = carTypeField.text
@@ -101,18 +103,21 @@ Item {
                 TextInputField{
                     id: carTypeField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title: qsTr("Type:")
                     text: carModel.carType
                 }
                 TextInputField{
                     id: carModelField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title: qsTr("Model:")
                     text: carModel.carModel
                 }
                 TextInputField{
                     id: carNumberField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title: qsTr("Car number:")
                     text: carModel.carNumber
                 }
@@ -124,18 +129,21 @@ Item {
                 NumberInputField{
                     id: volumeCapacityField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Volume capacity:")
                     text: carModel.volumeCapacity
                 }
                 NumberInputField{
                     id: weightCapacityField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Weight capacity:")
                     text: carModel.weightCapacity
                 }
                 ComboBoxInputField{
                     id: drivingCategoryField
                     Layout.fillWidth: true
+                    readOnly: requeredPremission
                     title:  qsTr("Driving category:")
                     model: drivingCatefories
                     textRole: "CategoryName"

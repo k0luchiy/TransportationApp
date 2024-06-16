@@ -12,6 +12,7 @@ import TransportationsApp.Models 1.0
 
 Item {
     property var driverModel : Driver{}
+    property bool requeredPremission : user.rolePriority > 1
 
     id: pageRoot
     height: 800
@@ -35,6 +36,7 @@ Item {
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
+                visible: pageRoot.requeredPremission
                 contentColor: Themes.colors.primary.primary500
                 btnText: qsTr("Save")
                 onClicked: {
@@ -107,12 +109,14 @@ Item {
                 TextInputField{
                     id: lastNameField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title: qsTr("Last name:")
                     text: driverModel.lastName
                 }
                 TextInputField{
                     id: firstNameField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title: qsTr("First name:")
                     text: driverModel.firstName
                 }
@@ -124,18 +128,21 @@ Item {
                 NumberInputField{
                     id: experienceField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Experience:")
                     text: driverModel.experience
                 }
                 NumberInputField{
                     id: salaryField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Salary:")
                     text: driverModel.salary
                 }
                 ComboBoxInputField{
                     id: drivingCategoryField
                     Layout.fillWidth: true
+                    readOnly: requeredPremission
                     title:  qsTr("Driving category:")
                     model: drivingCatefories
                     textRole: "CategoryName"

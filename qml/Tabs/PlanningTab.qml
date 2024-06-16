@@ -12,6 +12,7 @@ import Notifications
 import TransportationsApp.Models 1.0
 
 Item {
+    property bool requeredPremission : user.rolePriority > 1
     property var carModel : Car{}
     property var driverModel : Driver{}
     property var deliveryModel : Delivery{
@@ -61,6 +62,7 @@ Item {
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
+                visible: pageRoot.requeredPremission
                 contentColor: Themes.colors.primary.primary500
                 btnText: qsTr("+ New")
                 onClicked: {
@@ -72,6 +74,7 @@ Item {
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 60
+                visible: pageRoot.requeredPremission
                 contentColor: Themes.colors.primary.primary500
                 btnText: qsTr("Save")
                 onClicked: {
@@ -149,6 +152,7 @@ Item {
                 DateInputField{
                     id: departureDateField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     z: 10
                     title: qsTr("Departure date:")
                     text: DateUtils.formatDate(deliveryModel.departureDate)
@@ -160,6 +164,7 @@ Item {
                 DateInputField{
                     id: returnDateField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     z: 5
                     title: qsTr("Return date:")
                     text: DateUtils.formatDate(deliveryModel.returnDate)
@@ -176,6 +181,7 @@ Item {
                 NumberInputField{
                     id: carIdField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Car id:")
                     placeholderText: ""
                     text: deliveryModel.carId === 0 ? "" : deliveryModel.carId
@@ -188,6 +194,7 @@ Item {
                 NumberInputField{
                     id: driverIdField
                     Layout.fillWidth: true
+                    readOnly: !requeredPremission
                     title:  qsTr("Driver id:")
                     placeholderText: ""
                     text: deliveryModel.driverId === 0 ? "" : deliveryModel.driverId
@@ -200,6 +207,7 @@ Item {
                 ComboBoxInputField{
                     id: statusField
                     Layout.fillWidth: true
+                    readOnly: requeredPremission
                     title:  qsTr("Status:")
                     model: ordersStatusModel
                     textRole: "StatusTitle"
@@ -240,6 +248,7 @@ Item {
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 155
+                visible: pageRoot.requeredPremission
                 fontSize: 10
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
@@ -268,7 +277,7 @@ Item {
                     Component{
                         TableRow{
                             Layout.fillWidth: true
-                            deleteVisible: true
+                            deleteVisible: pageRoot.requeredPremission
                             addToDeliveryVisible: false
                             model: [rowModel.carId, rowModel.carType, rowModel.carModel,
                                     rowModel.carNumber, rowModel.volumeCapacity,
@@ -317,6 +326,7 @@ Item {
             SecondaryButton{
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 155
+                visible: pageRoot.requeredPremission
                 fontSize: 10
                 iconLeftVisible: true
                 iconLeftSource: "qrc:/assets/icons/Outline/search.svg"
@@ -344,7 +354,7 @@ Item {
                     Component{
                         TableRow{
                             Layout.fillWidth: true
-                            deleteVisible: true
+                            deleteVisible: pageRoot.requeredPremission
                             addToDeliveryVisible: false
                             model: [rowModel.driverId, rowModel.lastName, rowModel.firstName,
                                     rowModel.drivingCategory, rowModel.experience]
@@ -407,7 +417,7 @@ Item {
                         TableRow{
                             Layout.fillWidth: true
                             addToDeliveryVisible: false
-                            deleteVisible: true
+                            deleteVisible: pageRoot.requeredPremission
                             model: [rowModel.modelData.orderId, rowModel.modelData.createdDate.toLocaleDateString("en_US"),
                                 rowModel.modelData.askedDeliveryDate.toLocaleDateString("en_US"),
                                 rowModel.modelData.address, rowModel.modelData.statusTitle, rowModel.modelData.cost]

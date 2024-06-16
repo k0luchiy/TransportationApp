@@ -8,6 +8,8 @@ import Tables
 import TabControls
 
 Item {
+    property bool requeredPremission : user.rolePriority > 1
+
     signal rowClicked(recordId : int)
     signal openTab(recordId : int)
     signal addToDelivery(recordId : int)

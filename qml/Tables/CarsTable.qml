@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Layouts
 
 TableBase{
+    property bool requeredPremission : user.rolePriority > 1
+
     id : tableRoot
     tableHeaders :  [qsTr("Id"), qsTr("Type"), qsTr("Model"),
         qsTr("Car number"), qsTr("Volume"), qsTr("Weight"), qsTr("Driving category")]
@@ -11,6 +13,7 @@ TableBase{
         Component{
             TableRow{
                 Layout.fillWidth: true
+                addToDeliveryVisible: requeredPremission
                 model: [rowModel.CarId, rowModel.CarType, rowModel.CarModel,
                         rowModel.CarNumber, rowModel.VolumeCapacity,
                         rowModel.WeightCapacity, rowModel.DrivingCategory]

@@ -105,7 +105,7 @@ void User::setRecord(const QSqlRecord& record)
 void User::setUser(quint64 userId)
 {
     const QString select_query =
-        " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle  "
+        " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle, ur.RolePriority  "
         " from Users u  "
         " join UserRoles ur on u.roleId = ur.roleId "
         " where u.userId = :userId ";
@@ -147,7 +147,7 @@ bool User::isUserExist(const QString &email) const
 bool User::authenticate(const QString& email, const QString& password)
 {
     const QString auth_query =
-        " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle  "
+        " SELECT u.UserId, u.Email, u.FirstName, u.LastName, u.RoleId, ur.RoleTitle, ur.RolePriority  "
         " from Users u  "
         " join UserRoles ur on u.roleId = ur.roleId "
         " where u.email = :email and u.pwd = md5(:password); ";
@@ -183,7 +183,7 @@ bool User::registration(const QString& email, const QString& password,
 
     //RolesModel roles;
     //quint32 roleId = roles.get_minPriority_roleId();
-    quint32 roleId = 1;
+    quint32 roleId = 2;
     QSqlQuery query;
     const QString reg_query =
         " Insert into Users(email, pwd, firstName, lastName, roleId) "

@@ -34,14 +34,26 @@ Database contatins multiple tables main of witch: users, orders, deliveries, car
 ### Authorization
 First thing that user sees is authorization page, with possibility to open registration page. 
 
-![Screenshot of the authorization page.](https://github.com/k0luchiy/TransportationApp/assets/83074096/9b77415e-5a9f-48d6-bb9f-608f6887cc4c)
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="https://github.com/k0luchiy/TransportationApp/assets/83074096/e27578e2-0847-4e64-9a95-ccbb2d281588">
+ <source media="(prefers-color-scheme: light)" srcset="https://github.com/k0luchiy/TransportationApp/assets/83074096/fbed1fe2-1c52-403d-aa58-4d1057504d5a">
+ <img alt="Screenshot of the authorization page." src="https://github.com/k0luchiy/TransportationApp/assets/83074096/e27578e2-0847-4e64-9a95-ccbb2d281588">
+</picture>
 
 ### Main page
 Main page of applicaiton contains multiple pages, such as: orders, cars, drivers, deliveries and planning. Most pages consists of table with basic filters, pagination and top menu.
 
-![Screenshot of the main page.](https://github.com/k0luchiy/TransportationApp/assets/83074096/cd77087d-c9a6-4c48-a2bd-92a61cf2ea76)
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="https://github.com/k0luchiy/TransportationApp/assets/83074096/d911f122-0ee5-4fcd-9036-5d5039194897">
+ <source media="(prefers-color-scheme: light)" srcset="https://github.com/k0luchiy/TransportationApp/assets/83074096/aeaee3b1-5c48-43a4-a29e-088d7c6b8ed3">
+ <img alt="Screenshot of the main page." src="https://github.com/k0luchiy/TransportationApp/assets/83074096/d911f122-0ee5-4fcd-9036-5d5039194897">
+</picture>
 
 ### Settings 
 The application also contains settings that allows user information editing, password reset, changind theme and language.
 
-![Screenshot of the settings.](https://github.com/k0luchiy/TransportationApp/assets/83074096/23f06147-1489-498f-8650-bd579a984706)
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="https://github.com/k0luchiy/TransportationApp/assets/83074096/e4288be6-c798-4dcd-8cf1-4c0d5ecbff12">
+ <source media="(prefers-color-scheme: light)" srcset="https://github.com/k0luchiy/TransportationApp/assets/83074096/687bde1f-d04b-4d2c-a9e8-623a9671ebba">
+ <img alt="Screenshot of the settings." src="https://github.com/k0luchiy/TransportationApp/assets/83074096/e4288be6-c798-4dcd-8cf1-4c0d5ecbff12">
+</picture>

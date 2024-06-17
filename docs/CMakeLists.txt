@@ -8,6 +8,6 @@ endif()
 
 doxygen_add_docs(doxygen
     ${PROJECT_SOURCE_DIR}/${input}
-    CONFIG_FILE "${PROJECT_SOURCE_DIR}/docs/config/Doxygen"
+    CONFIG_FILE "${PROJECT_SOURCE_DIR}/docs/config/Doxyfile"
     COMMENT "Generate HTML documentation"
 )
